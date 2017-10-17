@@ -1,0 +1,8 @@
+Comment ko luu do KH ko enable ddate
+them 1 doan code sau khi check ddate
+else {
+					/*fixcode: not ddate not save comment*/
+					$delivery_infor = array($data_customercomment, "", "", "");
+                    Mage::getSingleton('core/session')->setDeliveryInforOrder($delivery_infor);
+                    Mage::getSingleton('core/session')->setDeliveryInforEmail($delivery_infor);
+				}

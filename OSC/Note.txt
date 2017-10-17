@@ -1,0 +1,24 @@
+﻿không lưu được Colum:
+
+File Layout.php: 
+Dòng 27-28:
+$this->_multi_path_js[$store->getCode()] = $this->baseDir.DS."media".DS."mw_onestepcheckout".DS."js".DS.$_SERVER['SERVER_NAME']."-onestep-config-".$store->getCode().".js";
+$this->_multi_path_after_css[$store->getCode()] = $this->baseDir.DS."media".DS."mw_onestepcheckout".DS."css".DS.$_SERVER['SERVER_NAME']."-customcss.new-".$store->getCode().".css";
+-------------------
+TS#1016166: Tao Discount vs payment method ko chay
+	Vao file view.js them doan code: view_onestep_init.update({"updatepaymentmethod":true}); LINE 66
+
+- Loi jquery: TypeError: e.easing[g.animatedProperties[this.prop]] is not a function
+ 
+	copy new file: jquery.plugins.min(1) ghi de len file cu
+
+Xoa infor Payment: comment dong 1738,view.js=> //window.OneStep.$('#'+osc_block_loader.updatepaymentmethod).autosave();
+
+Problem load TAX:
+Goto config.xml: comment: quote-totals-giftwrap-class (line 120)
+
+Mot vai truong hop load session cham (click 2 lan moi thay doi cac ket qua nen thay doi thu tu phan update trong index controller)
+
+Truong Hop Ton tai TAX ID, click vao Shiping to Same address se ko chay.view.js - 80-81 remove 2 the </li> </div>
+
+Tax problem: http://prntscr.com/5xly3w

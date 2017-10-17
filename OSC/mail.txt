@@ -1,0 +1,60 @@
+<table cellspacing="0" cellpadding="0" class="message-container">
+				{{if order.getMwDeliverydateDate()}}
+                <tr>
+					<td>Delivery Date</td>
+                    <td>{{var order.getMwDeliverydateDate()}}</td>
+                </tr>
+				{{/if}}
+				{{if order.getMwDeliverydateTime()}}
+				<tr>
+					<td>Delivery Time</td>
+                    <td>{{var order.getMwDeliverydateTime()}}</td>
+                </tr>
+				{{/if}}
+				{{if order.getMwCustomercommentInfo()}}
+				<tr>
+					<td>Customer Comment</td>
+                    <td>{{var order.getMwCustomercommentInfo()}}</td>
+                </tr>
+				{{/if}}
+            </table>
+
+
+OSC + DDate
+
+<table cellspacing="0" cellpadding="0" class="message-container">
+				{{if order.getMwdeliverydate()}}
+                <tr>
+					<td>Delivery Date</td>
+                    <td>{{var order.getMwdeliverydate()}}</td>
+                </tr>
+				{{/if}}
+				{{if order.getMwdeliverytime()}}
+				<tr>
+					<td>Delivery Time</td>
+                    <td>{{var order.getMwdeliverytime()}}</td>
+                </tr>
+				{{/if}}
+				{{if order.getMwCustomercommentInfo()}}
+				<tr>
+					<td>Customer Comment</td>
+                    <td>{{var order.getMwCustomercommentInfo()}}</td>
+                </tr>
+				{{/if}}
+            </table>
+
+
+
+For add "Comment Customer" and "DeliveryDate" into confirm email. You add variables:
+
+{{var order.getMwCustomercommentInfo()}}
+
+Date:{{var order.getMwdeliverydate()}} <br/>
+Time: {{var order.getMwdeliverytime()}}
+
+into template:
+
+app\locale\en_US\template\email\sales\order_new.html
+app\locale\en_US\template\email\sales\order_new_guest.html
+
+Regards,

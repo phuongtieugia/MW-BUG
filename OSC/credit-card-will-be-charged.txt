@@ -1,0 +1,13 @@
+MW_Onestepcheckout_IndexController
+Line 230:
+
+$total_html = $this->getLayout()->createBlock('checkout/cart_totals')->setTemplate('mw_onestepcheckout/daskboard/onepage/review/totals.phtml')->toHtml();
+				$total_html = str_replace('<tfoot>','',$total_html);
+				$total_html = str_replace('</tfoot>','',$total_html);
+
+view.js - 1022
+if(typeof data.totals != 'undefined'){
+                        window.OneStep.$("#"+osc_block_loader.updatecart).find("tfoot").html(data.totals);
+                        //window.OneStep.$("#"+osc_block_loader.updatecart).find("tfoot").append(data.totals_footer);
+                        window.OneStep.$("#"+osc_block_loader.updatecart).find("tfoot").find(".first").after(data.earn_points);
+                    }

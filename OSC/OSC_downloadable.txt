@@ -1,0 +1,21 @@
+Hien tai, downloadable product ko hien thi day du thuoc tinh trong OSC
+Ly do:
+template cua OSC ko the hien thi tat ca option cua downloadable product.
+
+Cach fix:
+
+IndexController.php line 204:
+case 'downloadable':
+	$block_render = 'downloadable/checkout_cart_item_renderer';
+	$template_render = "mw_onestepcheckout/daskboard/onepage/review/downloadable/item.phtml";
+	break;
+
+Set lai $template_render cho downloadable product
+
+trong file mw_onestepcheckout.xml
+
+them dong 
+
+<action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>mw_onestepcheckout/daskboard/onepage/review/downloadable/item.phtml</template></action>
+
+vao cac block checkout/onepage_review_info

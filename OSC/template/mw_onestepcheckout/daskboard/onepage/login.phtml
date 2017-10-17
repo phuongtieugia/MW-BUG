@@ -1,0 +1,80 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<script type="text/javascript">
+    Translator.add('Close','<?php echo $this->__('Close')?>');
+</script>
+<div class="col2-set">
+	<?php echo $this->getChildHtml('login_before')?>
+	<div class="col-2">
+		<div class="mw-osc-title-login">
+		    <h1><?php echo $this->__('Login') ?></h1>
+		</div>
+		<!--<h2 style="font-size:12px;">Please login with your email address and password.</h2>-->
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<form id="mw-login-form" method="post">
+		<fieldset>
+			<div class="fieldset">
+				<p style="color:black; font-weight:bold;"><?php echo $this->__('If you have an account with us, please log in.') ?></p>
+				<div id="errorlogin"><p style="color:red; font-weight:bold;"><?php echo $this->__('Invalid email or password!');?></p></div>
+				<ul class="form-list">
+					<li>
+						<label for="mw-login-email" class="required" ><?php echo $this->__('Email Address') ?><em>*</em></label>
+						<div class="input-box">
+							<input type="text" class="input-text required-entry validate-email" id="mw-login-email" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" />
+						</div>
+					</li>
+					<li>
+						<label for="mw-login-password" class="required" ><?php echo $this->__('Password') ?><em style="position:static;float:none;color:#EB340A;font-style:normal;right:-8px;top:0;">*</em></label>
+						<div class="input-box">
+							<input type="password"  class="input-text required-entry" id="mw-login-password" name="login[password]" />
+						</div>
+					</li>
+				</ul>
+			</div>
+            <div class="clear"></div>
+                <div class="other_login">
+                <span class="ol_text"><?php echo $this->__('Or Login via') ?></span>
+                <div class="ol-img" id="login_fb"></div>
+            </div>
+			<div class="col-2" style="float:none;">
+				<div class="buttons-set">
+					<p class="required"><?php echo $this->__('* Required Fields') ?></p>
+					<a id="forgotpassword" href="#inline3" class="f-left"><?php echo $this->__('Forgot your password?') ?></a>
+                    <div class="clear"></div>
+					<span  id="mw-login-please-wait" class="please-wait">
+						<img  class="v-middle" title="Loading next step..." alt="Loading next step..." src="<?php echo $this->getSkinUrl('/mw_onestepcheckout/images/opc-ajax-loader.gif') ?>"><?php echo $this->__(' Loading...') ?>        
+					</span>
+					<button type="button" class="button btn-login"><span ><span ><?php echo $this->__('Login') ?></span></span></button>
+				</div>
+			</div>
+		</fieldset>
+		</form>
+	</div>
+    <!-- end.col2-set -->
+    <div class="clear"></div>
+    <div id="fb-root"></div>
+</div>

@@ -1,0 +1,24 @@
+public function getDefaultAddress($type)
+        {
+            $addressId = "";
+            $customer  = Mage::getSingleton('customer/session')->getCustomer();
+            if($type == "billing") {
+				$customerAddressId = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling();
+				if ($customerAddressId){
+					$address = Mage::getModel('customer/address')->load($customerAddressId);
+					$addressId = $address->getEntityId();
+				}
+                /* $address   = $customer->getDefaultBillingAddress();
+                $addressId = $address->getEntityId(); */
+            } else {
+                /* $address   = $customer->getDefaultShippingAddress();
+                $addressId = $address->getEntityId(); */
+				$customerAddressId = Mage::getSingleton('customer/session')->getCustomer()->getDefaultShipping();
+				if ($customerAddressId){
+					$address = Mage::getModel('customer/address')->load($customerAddressId);
+					$addressId = $address->getEntityId();
+				}
+            }
+
+            return $addressId;
+        }

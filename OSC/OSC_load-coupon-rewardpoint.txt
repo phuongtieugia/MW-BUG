@@ -1,0 +1,19 @@
+Trong file controller (MW_Onestepcheckout_IndexController)
+ if(isset($updates->updatecouponcode)) {
+                $html['coupon'] = $this->_updatecoupon();
+		$html['oscrewardpoints'] = $layout->createBlock('rewardpoints/checkout_cart_rewardpoints')->setTemplate('mw_rewardpoints/checkout/onepage/rewardpoints_osc.phtml')->toHtml();
+               }
+http://prntscr.com/5xzsnh
+
+Them doan 
+
+'oscrewardpoints'      => (isset($html['oscrewardpoints'])) ? $html['oscrewardpoints'] : "",
+khi load xong $html : http://prntscr.com/5xzsjn
+
+
+File view.js them doan 
+
+if(typeof data.oscrewardpoints != 'undefined' && data.oscrewardpoints != ""){
+                        window.OneStep.$("#mw-checkout-payment-rewardpoints").html(data.oscrewardpoints);
+                    }
+vao hinh http://prntscr.com/5xzs51

@@ -1,0 +1,15 @@
+MW_Onestepcheckout_IndexController
+
+194
+
+// Check cart available
+			if(!$dis){
+				echo json_encode(array("rel"=> $dis, "href" => Mage::helper('checkout/cart')->getCartUrl()));
+				exit;
+			
+view.js
+
+1014 
+if(typeof data.rel != 'undefined'){
+						window.location.href = data.href;
+					}
