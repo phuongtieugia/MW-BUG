@@ -1,0 +1,17 @@
+
+<script type="text/javascript">
+//<![CDATA[
+    function removeMwRewardPoint(code) {
+        var data = {};
+        data['mw_rewardpoint_remove'] = code;
+        order.loadArea(['totals', 'billing_method', 'items'], true, data);
+    }
+
+    function applyMwRewardPoint() {
+        var code = $('mw_rewardpoint_add_input').value;
+        var data = {};
+        data['mw_rewardpoint_add'] = code;
+        order.loadArea(['totals', 'billing_method', 'items'], true, data);
+    }
+//]]>
+</script>

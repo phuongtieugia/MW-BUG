@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<layout>
+	<default>
+		<reference name="head">
+            <action method="addCss"><script>mw_rewardpoints/css/style.css</script></action>
+    	 	<action method="addJs"><script>mw_rewardpoints/lib/validate.js</script></action>
+    	 	<action method="addJs"><script>mw_rewardpoints/adminhtml/head.main.js</script></action>
+    	 </reference>
+	</default>
+	<adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <block type="rewardpoints/adminhtml_customer_edit_tab_rewardpoints" name="mw_customer_edit_tab_rewardpoints" template="mw_rewardpoints/customer/rewardpoints.phtml">
+                <block type="rewardpoints/adminhtml_customer_edit_tab_form" name="mw_rewardpoints_form"/>
+            </block>
+            <action method="addTab"><name>mw_customer_edit_tab_rewardpoints</name><block>mw_customer_edit_tab_rewardpoints</block></action>
+        </reference>
+       <!--  <reference name="customer_edit_tab_view">
+            <block type="enterprise_reward/adminhtml_customer_edit_tab_reward_management_balance" name="reward.points.balance" before="-"/>
+        </reference> -->
+    </adminhtml_customer_edit>
+
+    <adminhtml_rewardpoints_rewardpoints_index>
+	    <reference name="content">
+	    	<block type="rewardpoints/adminhtml_rewardpoints"></block>
+	    </reference>
+    </adminhtml_rewardpoints_rewardpoints_index>
+    
+    <adminhtml_rewardpoints_catalogrules_index>
+	    <reference name="content">
+	    	<block type="rewardpoints/adminhtml_catalogrules"></block>
+	    </reference>
+    </adminhtml_rewardpoints_catalogrules_index>
+    
+    <adminhtml_rewardpoints_catalogrules_edit>
+    	<reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+    </adminhtml_rewardpoints_catalogrules_edit>
+    
+    <adminhtml_rewardpoints_cartrules_index>
+	    <reference name="content">
+	    	<block type="rewardpoints/adminhtml_cartrules"></block>
+	    </reference>
+    </adminhtml_rewardpoints_cartrules_index>
+    
+    <adminhtml_rewardpoints_cartrules_edit>
+    	<reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+    </adminhtml_rewardpoints_cartrules_edit>
+    
+    <adminhtml_rewardpoints_activerules_index>
+	    <reference name="content">
+	    	<block type="rewardpoints/adminhtml_activerules"></block>
+	    </reference>
+    </adminhtml_rewardpoints_activerules_index>
+    
+    <adminhtml_rewardpoints_spendcartrules_index>
+	    <reference name="content">
+	    	<block type="rewardpoints/adminhtml_spendcartrules"></block>
+	    </reference>
+    </adminhtml_rewardpoints_spendcartrules_index>
+    
+    <adminhtml_rewardpoints_spendcartrules_edit>
+    	<reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+    </adminhtml_rewardpoints_spendcartrules_edit>
+    
+    <adminhtml_rewardpoints_history_index>
+	    <reference name="content">
+	    	<block type="rewardpoints/adminhtml_history"></block>
+	    </reference>
+    </adminhtml_rewardpoints_history_index>
+    
+    <adminhtml_rewardpoints_report_dashboard>
+        <reference name="head">
+            <action method="addJs"><script>mw_rewardpoints/adminhtml/lib/prototype-adapter.js</script></action>
+            <action method="addJs"><script>mw_rewardpoints/adminhtml/lib/highcharts.js</script></action>
+            <action method="addJs"><script>mw_rewardpoints/adminhtml/lib/exporting.js</script></action>
+
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params></params></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
+            <block type="core/html_calendar" name="head.calendar" as="calendar" template="page/js/calendar.phtml"></block>
+
+        </reference>
+    </adminhtml_rewardpoints_report_dashboard>
+    <adminhtml_rewardpoints_member_index>
+        <reference name="content">
+            <block type="rewardpoints/adminhtml_member"></block>
+        </reference>
+    </adminhtml_rewardpoints_member_index>
+    
+    <adminhtml_sales_order_create_load_block_items>
+    	<reference name="head">
+    		<action method="addJs"><script>mw_rewardpoints/lib/accordion.js</script></action>
+    	</reference>
+        <reference name="items_grid">
+            <block type="rewardpoints/adminhtml_sales_order_create_payment" template="mw_rewardpoints/sales/order/create/items.phtml" name="mw_admin_rewardpoints" after="-" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+
+    <adminhtml_sales_order_create_load_block_data>
+    	<reference name="head">
+    		<action method="addJs"><script>mw_rewardpoints/lib/accordion.js</script></action>
+    	</reference>
+	    <reference name="items_grid">
+            <block type="rewardpoints/adminhtml_sales_order_create_payment" template="mw_rewardpoints/sales/order/create/items.phtml" name="mw_admin_rewardpoints" after="-" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    
+
+    <adminhtml_sales_order_create_index>
+    
+    	<reference name="head">
+    		<action method="addJs"><script>mw_rewardpoints/lib/accordion.js</script></action>
+    	</reference>
+        <reference name="js">
+            <block type="adminhtml/template" template="mw_rewardpoints/sales/order/create/js.phtml" name="mw_admin_rewardpoints_js" />
+        </reference>
+        <reference name="items_grid">
+            <block type="rewardpoints/adminhtml_sales_order_create_payment" template="mw_rewardpoints/sales/order/create/items.phtml" name="mw_admin_rewardpoints" after="-" />
+        </reference>
+    </adminhtml_sales_order_create_index>
+    
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_view>
+    
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_earn" template="mw_rewardpoints/sales/order/earn_points.phtml">
+                <action method="setBeforeCondition"><condition>subtotal</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item" name="mw_reward_points_redeemed" template="mw_rewardpoints/sales/order/redeemed_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+            <block type="adminhtml/sales_order_totals_item"
+                   name="mw_reward_points_totals_points" template="mw_rewardpoints/sales/order/totals_points.phtml">
+                <action method="setAfterCondition"><condition>discount</condition></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+</layout>

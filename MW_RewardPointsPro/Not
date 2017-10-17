@@ -1,0 +1,1 @@
+Khi gift cart cua MageStore khong luu Khi update thì xóa các hàm save() trong after và before

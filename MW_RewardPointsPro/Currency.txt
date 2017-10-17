@@ -1,0 +1,24 @@
+//Mage::log("totalDiscountAmount Before ".$totalDiscountAmount,null,"ptg.log");
+					
+					$CurrentCurrencyRate = Mage::app()->getStore()->getCurrentCurrencyRate();
+					if($CurrentCurrencyRate == "" || $CurrentCurrencyRate == null)
+						$CurrentCurrencyRate = 1;
+					//Mage::log("CurrentCurrencyRate ".$CurrentCurrencyRate,null,"ptg.log");
+					$totalDiscountAmount = Mage::helper('core')->currency($totalDiscountAmount, false, false);
+					$totalDiscountAmount = $totalDiscountAmount/$CurrentCurrencyRate;
+					//Mage::log("PTG price: ".$ptg,null,"ptg.log");
+					//Mage::log("totalDiscountAmount After ".$totalDiscountAmount,null,"ptg.log");
+
+
+Tinh Base currency 
+
+public function processRule
+
+$baseCurrencyCode = Mage::app()->getStore()->getBaseCurrencyCode();
+		$currentCurrencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
+		// Allowed currencies
+		$allowedCurrencies = Mage::getModel('directory/currency')->getConfigAllowCurrencies();
+		$rates = Mage::getModel('directory/currency')->getCurrencyRates($baseCurrencyCode, array_values($allowedCurrencies));
+		// the price converted
+		$price= $price/$rates[$currentCurrencyCode];
+		$baseSubtotalWithDiscount= $baseSubtotalWithDiscount/$rates[$currentCurrencyCode];

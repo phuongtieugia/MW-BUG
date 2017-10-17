@@ -1,0 +1,12 @@
+remove <checkout_submit_all_after>
+               
+
+<sales_order_place_after>
+			 <observers>
+				<rewardpoints>
+					<type>singleton</type>
+					<class>rewardpoints/checkout</class>
+					<method>placeAfter</method>
+				</rewardpoints>
+			</observers>
+		   </sales_order_place_after>

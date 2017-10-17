@@ -1,0 +1,59 @@
+Message session reward point ghi de len message cua default
+From line 140
+MW_RewardPoints_Model_Quote
+
+if(!Mage::getSingleton('customer/session')->isLoggedIn())
+                    {
+						//Mage::log($_SESSION['checkout']['messages']);
+						$smessages = Mage::getSingleton('checkout/session')->getMessages()->getItems();
+						$i = 1;
+						 foreach ($smessages as $smessage) {
+							if(!is_array($smessage))
+							  {
+								if($smessage->getText() =="For using points to checkout order, please login!"){
+									$i++;
+								}
+							  }
+						 }
+						 if($i <= 1){
+							Mage::getSingleton('checkout/session')->getMessages(true);
+							Mage::getSingleton('checkout/session')->addNotice(Mage::helper('rewardpoints')->__('For using points to checkout order, please login!'));
+						 }
+                        
+                    }
+
+
+
+
+
+
+
+
+
+
+
+L?i âm points trong tru?ng h?p S? d?ng “Sell Product In Points” KH chua loggin ho?c không d? points nhung v?n checkout du?c
+Cách kh?c ph?c: s? d?ng do?n code này trong checkout page:
+<?php 
+	//var_dump(Mage::getSingleton('core/session')->getProSellPoint());die;
+	$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+	$checkoutUrl = Mage::getUrl('checkout/onepage', array('_secure'=>true));
+	$cartUrl = Mage::getUrl('checkout/cart', array('_secure'=>true));
+	if(strcmp($currentUrl,$checkoutUrl)==0 
+&& Mage::getSingleton('core/session')->getProSellPoint()==0)
+	{
+	Mage::app()->getFrontController()->getResponse()->setRedirect($cartUrl);
+	}
+?>
+
+Credit card number mismatch with credit card type.
+
+Plese check on after and before and add code if($customer_id) when save quote
+
+if($customer_id){
+					$quote->setEarnRewardpoint($earn_reward_point)->save();
+					$quote->setEarnRewardpointCart($earn_reward_point_cart)->save();
+					$quote->setMwRewardpointSellProduct($product_sell_point)->save();
+					$quote->setMwRewardpointDetail(serialize($reward_point_detail))->save();
+					$quote->setMwRewardpointRuleMessage(serialize($array_rule_show))->save();
+				}

@@ -1,0 +1,45 @@
+/home/lifenutrition/www/app/code/local/MW/RewardPoints/Model/Quote/Address/Total/Rewardpoints.php
+
+$_isRestrict = Mage::helper("rewardpoints")->getRestrictCounpon();
+		if($_isRestrict){
+			$earn_reward_point = 0;
+			$earn_reward_point_cart = 0;
+			$reward_point_detail = array ();
+		}
+
+/home/lifenutrition/www/app/code/local/MW/RewardPoints/Helper/Data.php
+
+public function getRestrictCounpon(){
+		$store_id = Mage::app()->getStore()->getStoreId();
+		$counpons = Mage::getStoreConfig('rewardpoints/rewardpoints_disable_counpon/rewardpoint_restrict_couponcode',$store_id);
+		$current_couponCode = Mage::getSingleton('checkout/session')->getQuote()->getCouponCode();
+		if($current_couponCode){
+			$_counpons = explode(';', $counpons);
+			if (in_array($current_couponCode, $_counpons)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+/home/lifenutrition/www/app/code/local/MW/RewardPoints/etc/system.xml
+
+<rewardpoints_disable_counpon translate="label">
+					<label>Rewardpoints counpon code restrict earning points</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <rewardpoint_restrict_couponcode translate="label">
+							<label>Counpon list restrict earning points</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Example: COUNPON1;COUNPON2;COUNPON3;</comment>
+                        </rewardpoint_restrict_couponcode>
+					</fields>
+				</rewardpoints_disable_counpon>

@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * GoMage LightCheckout Extension
+ *
+ * @category     Extension
+ * @copyright    Copyright (c) 2010-2015 GoMage (http://www.gomage.com)
+ * @author       GoMage
+ * @license      http://www.gomage.com/license-agreement/  Single domain license
+ * @terms of use http://www.gomage.com/terms-of-use
+ * @version      Release: 5.9
+ * @since        Class available since Release 1.0
+ */ 
+ -->
+<layout version="0.1.0">
+
+	<gomage_checkout_onepage_index>
+		<label>Checkout</label>
+
+		<remove name="right"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="head">
+            <action method="addJs"><script>mage/centinel.js</script></action>
+
+			<action method="addJs"><script>gomage/validator.js</script></action>
+        	<action method="addJs"><script>gomage/lightcheckout.js</script></action>
+            <action method="addItem"><type>skin_css</type><name>css/gomage/lightcheckout.css</name><params/></action>
+            <action method="addJs"><file>gomage/directpost.js</file></action>
+            <action method="addJs"><file>varien/accordion.js</file></action>
+
+            <action method="addCss" ifconfig="rewards/general/layoutsactive"><stylesheet>css/rewards/checkout/minicart.css</stylesheet></action>
+            <action method="addCss" ifconfig="rewards/general/layoutsactive"><stylesheet>css/rewards/slider.css</stylesheet></action>
+            <action method="addJs" ifconfig="rewards/general/layoutsactive"><script>tbt/scriptaculous/SmoothSlider.js</script></action>
+            <action method="addJs" ifconfig="rewards/general/layoutsactive"><script>tbt/rewards/points/RedemptionSlider.js</script></action>
+			<action method="addJs"><script>mw_rewardpoints/lib/mw.reward.slider.js</script></action>
+			<action method="addCss"><stylesheet>mw_rewardpoints/css/mw_reward_slider.css</stylesheet></action>
+
+        </reference>
+
+        <reference name="after_body_start">
+			<block type="core/template" template="gomage/checkout/styles.phtml" />
+		</reference>
+
+        <reference name="content" >
+        	<action method="unsetChildren" />
+
+        	<block type="gomage_checkout/onepage" name="checkout.onepage" template="gomage/checkout/onepage.phtml">
+        		<block type="page/html_wrapper" name="checkout.onepage.login.before" as="login_before" translate="label">
+                    <label>Login/Registration Before</label>
+                    <action method="setMayBeInvisible"><value>1</value></action>
+                </block>
+        		<block type="paypal/express_shortcut" name="gomage.methods.paypal_express" template="paypal/express/shortcut.phtml">
+	                <action method="setIsQuoteAllowed"><value>1</value></action>
+	            </block>
+                <block type="gomage_checkout/config_block" name="gomage.methods.google_checkout">
+                    <action method="setConfigBlock"><config_block>googlecheckout/link</config_block></action>
+                    <action method="setCallMethod"><method>setTemplate</method><params><template>googlecheckout/link.phtml</template></params></action>
+                </block>
+                <block type="core/template" name="checkout.onepage.address" as="address" template="gomage/checkout/onepage/address.phtml">
+	        		<block type="gomage_checkout/onepage_billing" name="checkout.onepage.address.billing" as="billing" template="gomage/checkout/html/address-billing.phtml">
+	        			<action method="setCountryIdTemplate"><template>gomage/checkout/html/address/field/country.phtml</template></action>
+	        			<action method="setRegionTemplate"><template>gomage/checkout/html/address/field/region.phtml</template></action>
+	        			<action method="setStreetTemplate"><template>gomage/checkout/html/address/field/street.phtml</template></action>
+	        		</block>
+	        		<block type="gomage_checkout/onepage_shipping" name="checkout.onepage.address.shipping" as="shipping" template="gomage/checkout/html/address-shipping.phtml">
+	        			<action method="setCountryIdTemplate"><template>gomage/checkout/html/address/field/country.phtml</template></action>
+	        			<action method="setRegionTemplate"><template>gomage/checkout/html/address/field/region.phtml</template></action>
+	        			<action method="setStreetTemplate"><template>gomage/checkout/html/address/field/street.phtml</template></action>
+	        		</block>
+        		</block>
+
+        		<block type="core/template" name="checkout.onepage.methods" as="methods" template="gomage/checkout/onepage/methods.phtml">
+        			<block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method" as="shipping_method" template="gomage/checkout/html/shipping-method.phtml">
+	                    <block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="checkout/onepage/shipping_method/available.phtml"/>
+	                    <block type="checkout/onepage_shipping_method_additional" name="checkout.onepage.shipping_method.additional" as="additional" template="gomage/checkout/html/shipping-method/additional.phtml"/>
+	                    <block type="core/text_list" name="checkout.onepage.shipping_method.advanced" as="advanced"/>
+	                </block>
+	        		<block type="checkout/onepage_payment" name="checkout.onepage.payment" as="payment" template="gomage/checkout/html/payment-method.phtml">
+	                    <block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods" template="gomage/checkout/html/payment-method/methods.phtml">
+	                        <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+	                    </block>
+	                    <block type="core/text_list" name="checkout.onepage.payment.advanced" as="advanced"/>
+	                </block>
+        		</block>
+
+        		<block type="gomage_checkout/onepage_review" name="checkout.onepage.review" as="review" template="gomage/checkout/onepage/review.phtml">
+        			<block type="checkout/onepage_review_info" name="info" template="gomage/checkout/onepage/review/info.phtml">
+			            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+			            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+			            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+            			<action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>gomage/checkout/onepage/review/downloadable_item.phtml</template></action>
+            			<action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+
+			            <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="gomage/checkout/onepage/review/totals.phtml"/>
+			            <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before"/>
+			            <block type="checkout/cart_coupon" name="checkout.onepage.review.discount" as="discount" template="gomage/checkout/onepage/review/discount.phtml"/>
+			            <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+			                <label>Items After</label>
+				            <block type="gomage_checkout/config_block" name="payment.form.directpost">
+				            	<action method="setConfigBlock"><config_block>gomage_checkout/authorizenet_directpost_form</config_block></action>
+				    			<action method="setIfConfig"><ifconfig>payment/authorizenet_directpost/active</ifconfig></action>
+				    			<action method="setCallMethod"><method>setMethodInfo</method></action>
+				    			<action method="setCallMethod"><method>setTemplate</method><params><template>authorizenet/directpost/form.phtml</template></params></action>
+				            </block>
+				            <block type="gomage_checkout/config_block" name="paypal.iframe">
+				            	<action method="setConfigBlock"><config_block>paypal/iframe</config_block></action>
+				    			<action method="setIfConfig"><ifconfig>payment/authorizenet_directpost/active</ifconfig></action>
+				            </block>
+			            </block>
+			        </block>
+			        <block type="core/text_list" name="gomage.rewards.points">
+					    <block type="core/template" name="rewards_js_points_captions" as="rewards_cartpoints_spender_js">
+					    	<action method="setTemplate" ifconfig="rewards/general/layoutsactive"><template>rewards/js/captions.phtml</template></action>
+					    </block>
+					    <block type="gomage_checkout/config_block" name="rewards_points_cart_minibox" as="rewards_cartpoints_spender">
+					    	<action method="setConfigBlock"><config_block>rewards/checkout_cart</config_block></action>
+					    	<action method="setIfConfig"><ifconfig>rewards/general/layoutsactive</ifconfig></action>
+					    	<action method="setCallMethod"><method>setTemplate</method><params><template>rewards/checkout/cartmini.phtml</template></params></action>
+                            <block type="core/template" name="points_cart_box.js" as="minicart_js">
+                                <action method="setTemplate" ifconfig="rewards/general/layoutsactive"><template>gomage/checkout/rewards/minicart_js.phtml</template></action>
+                            </block>
+                            <block type="gomage_checkout/config_block" name="points_cart_box.slider" as="points_slider">
+                                <action method="setConfigBlock"><config_block>rewards/checkout_cart_slider</config_block></action>
+                                <action method="setIfConfig"><ifconfig>rewards/general/layoutsactive</ifconfig></action>
+                                <action method="setCallMethod"><method>setTemplate</method><params><template>rewards/checkout/cart/slider.phtml</template></params></action>
+                            </block>
+					    </block>
+					</block>
+        		</block>
+        		<block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="gomage/checkout/onepage/agreements.phtml"/>
+        		<block type="gomage_checkout/onepage_poll" name="checkout.onepage.poll" as="poll" template="gomage/checkout/onepage/poll.phtml"/>
+        		<block type="core/text_list" name="form.additional.info">
+				    <block type="gomage_checkout/config_block" name="captcha.gomage.checkout">
+				    	<reference name="head">
+				            <action ifconfig="customer/captcha/enable" method="addJs"><file>mage/captcha.js</file></action>
+				        </reference>
+				    	<action method="setConfigBlock"><config_block>captcha/captcha</config_block></action>
+				    	<action method="setIfConfig"><ifconfig>customer/captcha/enable</ifconfig></action>
+				    	<action method="setCallMethod"><method>setFormId</method><params><formId>gcheckout_onepage</formId></params></action>
+				    	<action method="setCallMethod"><method>setImgWidth</method><params><width>230</width></params></action>
+				    	<action method="setCallMethod"><method>setImgHeight</method><params><height>50</height></params></action>
+				    </block>
+        		</block>
+        	</block>
+        </reference>
+	</gomage_checkout_onepage_index>
+
+	<gomage_checkout_onepage_review>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="checkout/onepage_review_info" name="root" output="toHtml" template="gomage/checkout/onepage/review/info.phtml">
+            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+			<action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>gomage/checkout/onepage/review/downloadable_item.phtml</template></action>
+			<action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>gomage/checkout/onepage/review/item.phtml</template></action>
+			<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="gomage/checkout/onepage/review/totals.phtml"/>
+            <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before"/>
+            <block type="checkout/cart_coupon" name="checkout.onepage.review.discount" as="discount" template="gomage/checkout/onepage/review/discount.phtml"/>
+            <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+                <label>Items After</label>
+	            <block type="gomage_checkout/config_block" name="payment.form.directpost">
+	            	<action method="setConfigBlock"><config_block>gomage_checkout/authorizenet_directpost_form</config_block></action>
+	    			<action method="setIfConfig"><ifconfig>payment/authorizenet_directpost/active</ifconfig></action>
+	    			<action method="setCallMethod"><method>setMethodInfo</method></action>
+	    			<action method="setCallMethod"><method>setTemplate</method><params><template>authorizenet/directpost/form.phtml</template></params></action>
+	            </block>
+	            <block type="gomage_checkout/config_block" name="paypal.iframe">
+	            	<action method="setConfigBlock"><config_block>paypal/iframe</config_block></action>
+	    			<action method="setIfConfig"><ifconfig>payment/authorizenet_directpost/active</ifconfig></action>
+	            </block>
+            </block>
+        </block>
+    </gomage_checkout_onepage_review>
+
+    <gomage_checkout_onepage_methods>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="core/template" name="root" output="toHtml" template="gomage/checkout/onepage/methods.phtml">
+			<block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method" as="shipping_method" template="gomage/checkout/html/shipping-method.phtml">
+	            <block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="checkout/onepage/shipping_method/available.phtml"/>
+	            <block type="checkout/onepage_shipping_method_additional" name="checkout.onepage.shipping_method.additional" as="additional" template="gomage/checkout/html/shipping-method/additional.phtml"/>
+	            <block type="core/text_list" name="checkout.onepage.shipping_method.advanced" as="advanced"/>
+	        </block>
+			<block type="checkout/onepage_payment" name="checkout.onepage.payment" as="payment" template="gomage/checkout/html/payment-method.phtml">
+	            <block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods" template="gomage/checkout/html/payment-method/methods.phtml">
+	                <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+	            </block>
+	            <block type="core/text_list" name="checkout.onepage.payment.advanced" as="advanced"/>
+	        </block>
+		</block>
+    </gomage_checkout_onepage_methods>
+
+    <gomage_checkout_onepage_paymentmethod>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="checkout/onepage_payment_methods" name="root" output="toHtml" template="gomage/checkout/html/payment-method/methods.phtml">
+            <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+        </block>
+    </gomage_checkout_onepage_paymentmethod>
+
+    <gomage_checkout_onepage_centinel>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="centinel/authentication" output="toHtml" name="centinel.frame" template="centinel/authentication.phtml">
+            <action method="addRelatedBlock"><blockId>checkout-review-submit</blockId></action>
+            <action method="addRelatedBlock"><blockId>gcheckout-payment-methods-available</blockId></action>
+            <action method="addRelatedBlock"><blockId>gcheckout-payment-centinel</blockId></action>
+            <action method="setAuthenticationStartMode"><mode>instant</mode></action>
+        </block>
+    </gomage_checkout_onepage_centinel>
+
+    <checkout_onepage_success>
+     	<reference name="checkout.success">
+            <block type="core/text_list" name="additional.product.info">
+                <block type="gomage_checkout/checkout_success_additional" template="gomage/checkout/success/additional.phtml" name="gomage.checkout.additional.product.info" />
+            </block>
+     		<action method="setTemplate"><template>gomage/checkout/success.phtml</template></action>
+     		<block type="gomage_checkout/checkout_success_summary" name="gomage.checkout.success.summary">
+                <action method="addItemRender"><type>default</type><block>sales/order_item_renderer_default</block><template>sales/order/items/renderer/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>sales/order_item_renderer_grouped</block><template>sales/order/items/renderer/default.phtml</template></action>
+                <action method="addItemRender"><type>downloadable</type><block>downloadable/sales_order_item_renderer_downloadable</block><template>downloadable/sales/order/items/renderer/downloadable.phtml</template></action>
+                <action method="addItemRender"><type>bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/items/renderer.phtml</template></action>
+                <block type="sales/order_totals" name="order_totals" template="sales/order/totals.phtml">
+                    <action method="setLabelProperties"><value>colspan="4" class="a-right"</value></action>
+                    <action method="setValueProperties"><value>class="last a-right"</value></action>
+                    <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml">
+                        <action method="setIsPlaneMode"><value>1</value></action>
+                    </block>
+                </block>
+            </block>
+            <block type="gomage_checkout/checkout_success_register" name="gomage.checkout.success.register">
+                <block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before" translate="label">
+                    <label>Form Fields Before</label>
+                </block>
+                <block type="core/text_list" name="gomage.checkout.success.additional.info">
+                	<block type="core/template" template="gomage/checkout/success/register.phtml" />
+                </block>
+            </block>
+     	</reference>
+    </checkout_onepage_success>
+
+    <sales_order_view>
+        <reference name="additional.product.info">
+            <block type="gomage_checkout/checkout_success_additional" template="gomage/checkout/success/additional.phtml" name="gomage.checkout.additional.product.info" />
+        </reference>
+    </sales_order_view>
+
+    <sales_order_print>
+        <reference name="additional.product.info">
+            <block type="gomage_checkout/checkout_success_additional" template="gomage/checkout/success/additional.phtml" name="gomage.checkout.additional.product.info" />
+        </reference>
+    </sales_order_print>
+
+    <sales_email_order_items>
+        <reference name="additional.product.info">
+            <block type="gomage_checkout/checkout_success_additional" template="gomage/checkout/success/additional.phtml" name="gomage.checkout.additional.product.info" />
+        </reference>
+    </sales_email_order_items>
+
+</layout>

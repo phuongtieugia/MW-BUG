@@ -1,0 +1,22 @@
+
+MW_RewardPoints_Model_Quote_Address_Total_Rewardpoints_Before::fetch()
+$store_id   = Mage::app()->getStore()->getId();
+                    $quote      = $address->getQuote();
+                    $point      = $quote->getMwRewardpoint();
+                    $point_show = Mage::helper('rewardpoints')->formatPoints($point, $store_id);
+                    $amount     = Mage::helper('core')->currency(Mage::helper('rewardpoints')->exchangePointsToMoneys($point, $store_id), false, false);
+
+                    if($amount != 0)
+                    {
+                        $title = Mage::helper('rewardpoints')->__('You Redeem (%s)', $point_show);
+                        if(Mage::app()->getStore()->isAdmin())
+                        {
+                            $title = Mage::helper('rewardpoints')->__('You Redeem (%s points)', $point);
+                        }
+                        $address->addTotal(array(
+                            'code'   => $this->getCode(),
+                            'title'  => $title,
+                            'value'  => -$amount,
+                            'strong' => false
+                        ));
+                    }

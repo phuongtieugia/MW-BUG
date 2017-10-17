@@ -1,0 +1,45 @@
+<?php
+ /**
+ * GoMage LightCheckout Extension
+ *
+ * @category     Extension
+ * @copyright    Copyright (c) 2010-2015 GoMage (http://www.gomage.com)
+ * @author       GoMage
+ * @license      http://www.gomage.com/license-agreement/  Single domain license
+ * @terms of use http://www.gomage.com/terms-of-use
+ * @version      Release: 5.9
+ * @since        Class available since Release 1.0
+ */
+?>
+<div id="gcheckout-payment-methods" class="payment-methods">
+
+  <h2 class="glc-title"><span id="glc-payment-number" class="glc-number"><?php echo (Mage::getSingleton('checkout/session')->getShippingSameAsBilling() ? '4' : '5'); ?></span><strong><?php echo $this->__('Payment method');?></strong></h2>
+	
+  <div class="glc-col">
+	<?php echo Mage::helper('core/mwrewardpoints')->formGoMageRewardPoints(); ?>
+    <script type="text/javascript">
+    //<![CDATA[
+        var payment = new paymentForm('gcheckout-onepage-form');
+    //]]>
+    </script>
+	
+    <div id="gcheckout-payment-methods-available">
+      <?php echo $this->getChildHtml('methods') ?>
+    </div>
+	
+    <?php if($advanced_content = trim($this->getChildHtml('advanced'))): ?>
+      <div class="payment-advanced">
+        <?php echo $advanced_content ?>
+      </div>
+    <?php endif;?>
+
+    </div>
+  
+	<div class="tool-tip" id="payment-tool-tip" style="display:none;">
+		<a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>">&#x2715;</a>
+		<div class="tool-tip-content">
+			<img src="<?php echo $this->getSkinUrl('images/gomage/lightcheckout/cvv.png') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" />
+		</div>
+	</div>		
+  
+</div>

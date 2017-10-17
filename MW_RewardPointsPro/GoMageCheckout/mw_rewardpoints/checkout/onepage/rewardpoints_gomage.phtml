@@ -1,0 +1,142 @@
+<?php $quote = Mage::getSingleton('checkout/session')->getQuote();
+	  $store_id = Mage::app()->getStore()->getId();
+	  $spend_point = $this->getMaxPointsToCheckout();
+	  $earn_rewardpoint = (int)$quote->getEarnRewardpoint();
+	  $reward_icon = Mage::helper('rewardpoints/data')->getRewardIconHtml($store_id);
+$check = version_compare(Mage::getVersion(),'1.4.0.1','>=');?>
+<div id="rewardpoints_box">
+    <div class="discount discount-codes box">
+       <?php /*?> <?php if($check):?><h2 style="background-image: : none; padding: 0px;"><?php echo $reward_icon.$this->__('Reward points') ?></h2><?php else:?><h4 style="background-image: : none; padding: 0px;"><?php echo $reward_icon.$this->__('Reward points') ?></h4><?php endif;?><?php */?>
+        <div style="background-image: : none; padding: 0px;"><?php echo $reward_icon ?><label style="color: #666666;font-weight: bold;" for="mw_amount"><?php echo $this->__("Points to redeem")?> </label><input style="color:#000; width:50px; height:30px; text-align:left;font-size: 13px;font-weight: bold;" type="text" name="mw_amount" id="mw_amount" /> <label id="mw_label_amount" style="color:#000; font-weight:bold;display:none;"></label></div>
+        <div class="discount-form">
+        	<?php $rate = $this->getPointPerMoney($store_id);?>
+        	<div style="width:100%;">
+        	<?php if($this->_getCustomer()->getId()):?>
+	        	<div style="float:left;width:250px;">
+	        		<div id="mw_reward_slider_contaner" class="mw_reward_slider_contaner" style="width:200px;">
+	        			<div id="mw_reward_decr_handle"></div>
+	        			<div id="mw_reward_incr_handle"></div>
+	        			<div id="mw_slider" class="mw_reward_select" ></div>
+	        		</div>
+	        		<?php /*?><div style="padding: 15px 0 5px 0;"><label for="mw_amount"><?php echo $this->__("Points to redeem")?> </label><input style="color:#000; width:50px; text-align:left;font-size: 13px;font-weight: bold;" type="text" name="mw_amount" id="mw_amount" /> <label id="mw_label_amount" style="color:#000; font-weight:bold;display:none;"></label></div><?php */?>
+	        		<div style="padding-top: 10px;"><input type="checkbox" name="mw_use_max_points" id="mw_use_max_points" /><label for="mw_use_max_points" style="padding-left: 5px;"><?php echo $this->__("Use maximum (<b>%s</b>)",Mage::helper('rewardpoints')->formatPoints($spend_point,$store_id));?></label></div>
+              		
+				</div>
+		         <?php else:?>
+		         <div style="text-align: left; margin-bottom:10px; border-bottom: 1px dotted; padding-bottom: 10px;"><?php echo $this->__("Please <a href='%s'>LOGIN</a> to use reward points", Mage::getUrl('customer/account/login'))?></div>
+	            <?php endif;?>
+            </div>
+            <div style="clear:both;"></div>
+		</div>
+	</div>
+</div>
+<?php 
+$point = $quote->getMwRewardpoint();
+$step = Mage::helper('rewardpoints/data')->getPointStepConfig($store_id);
+$min = (int)Mage::helper('rewardpoints/data')->getMinPointCheckoutStore($store_id);
+?>
+
+<script type="text/javascript">
+    var step_slider = <?php echo $step;?>;
+    var min_slider = <?php echo $min;?>;
+    var time = 1000;
+    var time_new = 2000;
+    var timer;
+    var mw_sider = new MwRewardSlider(
+        'mw_amount',
+        'mw_reward_slider_contaner',
+        'mw_slider',
+        'mw_reward_decr_handle',
+        'mw_reward_incr_handle',
+        <?php echo $min?>,
+        <?php echo $this->getMaxPointsToCheckout()?>,
+        <?php echo $step?>,
+        'mw_label_amount',
+        'mw_use_max_points'
+        
+    );
+
+mw_sider.setPointChange(<?php echo $point?>);
+
+mw_sider.changeRewardPointCallback = runTimer;
+
+$('mw_amount').observe('keyup', function(e){
+
+	amount = this.value;
+	clearTimeout(timer);
+	timer = setTimeout("mw_sider.setPointChange(amount);",time_new);
+	
+});
+
+$('mw_use_max_points').observe('click', function(e){
+	if(this.checked)
+		mw_sider.setPointChange(<?php echo $this->getMaxPointsToCheckout()?>);
+	else
+		mw_sider.setPointChange(0);
+});
+
+
+function runTimer()
+{
+	clearTimeout(timer);
+	timer = setTimeout("updateRewardPoints();",time);
+};
+
+function updateRewardPoints()
+{
+	var amount = $('mw_amount').value;
+	amount = parseInt(amount/<?php echo $step?>) * <?php echo $step?>;
+	if(amount < <?php echo $min?>) 
+		amount = 0;
+	
+	new Ajax.Request("<?php echo Mage::getUrl('rewardpoints/checkout/onepagepost',array('_secure'=>Mage::app()->getFrontController()->getRequest()->isSecure()))?>", {
+		   method: 'post',
+		   postBody: "rewardpoints="+$('mw_amount').value,
+		   onComplete: function(data) {
+			   //alert(1);
+				/* $('checkout-payment-method-load').update(data.responseText);
+				if($('mw-osc-column-container')){
+					updatePaymentMethod();
+				} */
+				/* Lightcheckout.submit(Lightcheckout.getFormData(), 'get_totals'); */
+				checkout.submit(checkout.getFormData(), 'get_totals');
+				// new Ajax.Request("<?php echo Mage::getUrl('gomage_checkout/onepage/ajax/',array('_secure'=>Mage::app()->getFrontController()->getRequest()->isSecure()))?>",{
+				// 	method: 'post',
+				// 	postBody: "action=get_totals",
+				// 	onComplete: function(ndata){
+				// 		//alert(2);
+				// 		/* $$('#gcheckout-onepage-review div.totals')[0].html(ndata.review); */
+				// 		//checkout.innerHTMLwithScripts($$('#gcheckout-onepage-review div.totals')[0], ndata.review);
+				// 	}
+				// })
+			}
+	});
+}
+
+function updateRewardpointsForm()
+{
+	if($('mw-osc-column-container')){
+		if($('loading-mask')) $('loading-mask').show();
+	}else{
+		if($('mw-checkout-payment-rewardpoints'))$('mw-checkout-payment-rewardpoints').update($('mw_reward_onpage-please-wait').innerHTML);
+	}
+	new Ajax.Request("<?php echo Mage::getUrl('rewardpoints/checkout/updateformreward',array('_secure'=>Mage::app()->getFrontController()->getRequest()->isSecure()))?>", {
+		   method: 'post',
+		   onComplete: function(data) {
+				$('mw-checkout-payment-rewardpoints').update(data.responseText);
+				if($('mw-osc-column-container')){
+					//updatePaymentMethod();
+					if($('loading-mask')) $('loading-mask').hide(); 
+				}
+			}
+	});
+}
+
+</script>
+
+<div id="mw_reward_onpage-please-wait" style="display: none; ">
+	<div style="text-align:left;margin-top:30px;">
+	    <img src="<?php echo $this->getSkinUrl('mw_rewardpoints/images/loading.gif')?>" class="v-middle" alt="loading"> &nbsp; 
+	    <?php echo Mage::helper('rewardpoints')->__("Updating cart information...")?>
+	</div>
+</div>

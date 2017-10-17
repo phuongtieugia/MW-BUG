@@ -1,0 +1,24 @@
+File rewardpoints.xml
+<opc_index_index>
+		<reference name="head">
+			<action method="addJs"><script>mw_rewardpoints/lib/mw.reward.slider.js</script></action>
+			<action method="addCss"><stylesheet>mw_rewardpoints/css/mw_reward_slider.css</stylesheet></action>
+        </reference>
+	</opc_index_index>
+
+File rewardpoints.phtml
+
+
+new Ajax.Request("<?php echo Mage::getUrl('rewardpoints/checkout/onepagepost',array('_secure'=>Mage::app()->getFrontController()->getRequest()->isSecure()))?>", {
+		   method: 'post',
+		   postBody: "rewardpoints="+$('mw_amount').value,
+		   onComplete: function(data) {
+			   IWD.OPC.Checkout.pullReview();
+				$('checkout-payment-method-load').update(data.responseText);
+				if($('mw-osc-column-container')){
+					updatePaymentMethod();
+				}
+				var vopc = '<?php echo Mage::getConfig()->getModuleConfig("IWD_Opc")->version;?>';
+				IWD.OPC.Checkout.pullReview();
+			}
+	});

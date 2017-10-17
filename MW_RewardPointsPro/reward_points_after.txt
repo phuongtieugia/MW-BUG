@@ -1,0 +1,10 @@
+<reward_points_after>
+                        <class>rewardpoints/quote_address_total_rewardpoints_after</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <renderer>rewardpoints/checkout_total</renderer>
+                    </reward_points_after>
+                    <reward_points_before>
+                        <class>rewardpoints/quote_address_total_rewardpoints_before</class>
+                        <after>grand_total</after>
+                        <renderer>rewardpoints/checkout_total</renderer>
+                    </reward_points_before>

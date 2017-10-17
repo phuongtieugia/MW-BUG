@@ -1,0 +1,79 @@
+ public function changemanualAction()
+        {
+            $_customer = Mage::getModel('customer/customer')->getCollection()->addAttributeToSelect('entity_id');
+            $usable_points = 0;
+            foreach ($_customer as $key => $c) {
+                $member_id =  $c->getId();
+                $usable_points = Mage::getModel ( 'rewards/customer_indexer_points' )->getCollection ()->addFieldToFilter ( 'customer_id', $member_id );
+                if ($usable_points->count ()) {
+                    $usable_points = $usable_points->getFirstItem ()->getCustomerPointsUsable ();
+                    if($usable_points > 0){
+                        echo $usable_points;
+                        echo "</br>*****</br>";    
+                        $this->addRewardPoint($member_id,$usable_points);
+                    }
+                }
+                $usable_points = 0;
+            }
+            die;
+
+        }
+        public function addRewardPoint($member_id,$amount = 0){
+            $_customer = Mage::getModel('rewardpoints/customer')->load($member_id);
+            if(count($_customer->getData()) == 0){
+                $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+                $write->insert(
+                        "mw_reward_point_customer", 
+                        array(
+                            "customer_id" => $member_id, 
+                            "mw_reward_point" => 0,
+                            "mw_friend_id" => 0,
+                            "subscribed_balance_update" => 1,
+                            "subscribed_point_expiration" => 1,
+                            "last_checkout" => "0000-00-00 00:00:00",
+                        )
+                );
+                $_customer = Mage::getModel('rewardpoints/customer')->load($member_id);
+            }
+            
+
+            $store_id  = Mage::getModel('customer/customer')->load($_customer->getId())->getStoreId();
+            $oldPoints = $_customer->getMwRewardPoint();
+            $action = 1;
+            $comment = "";
+            $newPoints = $oldPoints + $amount * $action;
+            if($newPoints < 0)
+            {
+                $newPoints = 0;
+            }
+            $amount = abs($newPoints - $oldPoints);
+
+
+            if($amount > 0)
+            {
+                $detail = $comment;
+
+                
+                $_customer->setData('mw_reward_point', $newPoints);
+
+                $_customer->save();
+
+                $balance = $_customer->getMwRewardPoint();
+
+                $results         = Mage::helper('rewardpoints/data')->getTransactionExpiredPoints($amount, $store_id);
+                $expired_day     = $results[0];
+                $expired_time    = $results[1];
+                $point_remaining = $results[2];
+
+                $historyData = array('type_of_transaction' => ($action > 0) ? MW_RewardPoints_Model_Type::ADMIN_ADDITION : MW_RewardPoints_Model_Type::ADMIN_SUBTRACT,
+                                     'amount'              => $amount,
+                                     'balance'             => $balance,
+                                     'transaction_detail'  => $detail,
+                                     'transaction_time'    => Mage::getSingleton('core/date')->gmtDate(),
+                                     'expired_day'         => $expired_day,
+                                     'expired_time'        => $expired_time,
+                                     'point_remaining'     => $point_remaining,
+                                     'status'              => MW_RewardPoints_Model_Status::COMPLETE);
+                $_customer->saveTransactionHistory($historyData);
+            }
+        }

@@ -1,0 +1,3 @@
+Problem expire time MW_RewardPoints_Helper_Data: processExpiredPointsWhenSpentPoints() ->setOrder('expired_time', 'ASC')  ->setOrder('history_id', 'ASC');
+
+MW_RewardPoints_Model_Obsever: expiredPoint()  ->setOrder('expired_time', 'ASC') ->setOrder('history_id', 'DESC');

@@ -1,0 +1,40 @@
+Hi, we discovered a bug in the Reward Points extension, specifically in Earning Rules -> Shopping Cart Earning Rule -> Spend Y get X Reward Points
+ 
+An example: Reward points: 10, Per dollars spent: 100
+ 
+If purchasing for 100, customer correctly gets 10 points.
+ 
+However, if puchasing for 110, 120,130 or up to 200, the customer STILL only gets 10 points.
+Only when the user orders by multiples of the “Per dollars spent”, he gets more points. As such, more points are only applied in steps of 100: 200, 300, 400 and so on.
+ 
+The reason for this is a bug in the the rule calculation. In essence, the rule is currently like this, for example in MW_RewardPoints_Model_Quote_Address_Total_Rewardpoints_After::processRule(), line 663 :
+ 
+$result_reward_point  = $result_reward_point + ( int )(($baseSubtotalWithDiscount / $reward_step) * $reward_point);
+ 
+If we remove $result_reward_point, its easier to work with for the example’s sake:
+ 
+$result_reward_point  = ( int )(($baseSubtotalWithDiscount / $reward_step) * $reward_point);
+ 
+The problem is that the removal of the decimals with (int) is only applied on the first half of the expression. Examples with the values above:
+ 
+( int )(100 / 100) * 10 = (int)1.0 * 10 = 1 * 10 = 10 (CORRECT)
+( int )(110 / 100) * 10 = (int)1.1 * 10 = 1 * 10 = 10 (INCORRECT)
+( int )(120 / 100) * 10 = (int)1.2 * 10 = 1 * 10 = 10 (INCORRECT)
+( int )(130 / 100) * 10 = (int)1.3 * 10 = 1 * 10 = 10 (INCORRECT)
+ 
+And so on, until the price reaches 200, where the result will be correct again:
+ 
+( int )(200 / 100) * 10 = (int)2 * 10 = 2 * 10 = 20 (CORRECT)
+ 
+The correct calclation is:
+ 
+$result_reward_point  = ( int )((($baseSubtotalWithDiscount / $reward_step) * $reward_point));
+ 
+where the decimals are removed from the ENTIRE expression. Note the extra paranthesis.
+ 
+May I also recommend that you encapsulate these calculations in a helper function? They are spread ALL over the extension code - there are about 50 of them!
+ 
+ 
+Thanks,
+ 
+Jan Faroe

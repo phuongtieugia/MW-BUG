@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    	<reference name="head">
+			<block type="rewardpoints/facebook_like" name="mw_like_head" as="mw_like_head" template="mw_rewardpoints/facebook/head.phtml" />
+		</reference>
+		<reference name="before_body_end">
+			<block type="rewardpoints/facebook_like" name="mw_like_init" as="mw_like_init" template="mw_rewardpoints/facebook/facebook_init.phtml" />
+		</reference>
+    </default>
+    <customer_account translate="label">
+	    <reference name="customer_account_navigation">
+	    	<action method="addLink" translate="label" module="rewardpoints" ifconfig="rewardpoints/config/enabled"><name>reward_points</name><path>rewardpoints/rewardpoints/</path><label>My Reward Points</label></action>
+	   		<action method="addLink" translate="label" module="rewardpoints" ifconfig="rewardpoints/config/enabled"><name>reward_points_invitation</name><path>rewardpoints/invitation/</path><label>My Invitations</label></action>
+	    </reference>
+    </customer_account>
+    
+    <rewardpoints_invitation_index>
+    <update handle="customer_account"/>
+    	<reference name="content">
+	        <block type="core/template" name="customer_invitation_dashboard" template="mw_rewardpoints/customer/account/invitation.phtml">
+	            <block type="core/template" name="customer_invitation_form" as="invite_form" template="mw_rewardpoints/customer/account/invitation/invite_form.phtml"/>
+	        </block>
+        </reference>
+    </rewardpoints_invitation_index>
+    <rewardpoints_invitation_loginmail>
+   		<reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+    	<reference name="content">
+	    	<block type="rewardpoints/invitation_mail"  template="mw_rewardpoints/customer/account/invitation/login_mail.phtml"/>
+        </reference>
+   </rewardpoints_invitation_loginmail>
+   <rewardpoints_invitation_processmail>
+   		<reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+    	<reference name="content">
+	    	<block type="rewardpoints/invitation_mail" name="process_mail" as="process_mail" template="mw_rewardpoints/customer/account/invitation/process_mail.phtml"/>
+        </reference>
+   </rewardpoints_invitation_processmail>
+
+    
+    <rewardpoints_rewardpoints_index>
+    	<update handle="customer_account"/>
+    	<reference name="head">
+    		<action method="addJs"><script>mw_js/jquery.js</script></action>
+    		<action method="addJs"><script>mw_rewardpoints/js.js</script></action>
+    	</reference>
+    	<reference name="content">
+	        <block type="rewardpoints/rewardpoints" name="customer_rewardpoints_dashboard" template="mw_rewardpoints/customer/account/rewardpoints.phtml">
+	            <block type="rewardpoints/rewardpoints_info" name="customer_rewardpoints_info" as="info" template="mw_rewardpoints/customer/account/rewardpoints/info.phtml"/>
+	            <block type="rewardpoints/rewardpoints_email" name="customer_rewardpoints_email" as="email" template="mw_rewardpoints/customer/account/rewardpoints/email.phtml"/>
+	            <block type="rewardpoints/rewardpoints_transaction" name="customer_rewardpoints_transaction" as="transaction" template="mw_rewardpoints/customer/account/rewardpoints/transaction.phtml">
+	            	<action method="setPageSize"><page_size>15</page_size></action>
+	            	<block type="rewardpoints/rewardpoints_transaction_note" name="customer_rewardpoints_transaction_note" as="note" template="mw_rewardpoints/customer/account/rewardpoints/transaction/note.phtml"/>
+	            </block>
+	            <!-- <block type="core/template" name="customer_rewardpoints_send" as="send" template="mw_rewardpoints/customer/account/rewardpoints/send.phtml"/> -->
+	        </block>
+        </reference>
+    </rewardpoints_rewardpoints_index>
+    
+    <checkout_cart_index>
+    	<reference name="head">
+    		<action method="addJs"><script>mw_rewardpoints/accordion.js</script></action>
+    		<action method="addJs"><script>mw_rewardpoints/mw.reward.slider.js</script></action>
+			<action method="addCss"><stylesheet>mw_rewardpoints/css/mw_reward_slider.css</stylesheet></action>
+			<!--  <action method="addCss"><stylesheet>mw_rewardpoints/css/slider.css</stylesheet></action>
+			<action method="addJs"><script>mw_js/jquery.js</script></action>
+			<action method="addItem"><type>skin_js</type><name>mw_rewardpoints/js/ui/jquery.ui.core.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>mw_rewardpoints/js/ui/jquery.ui.widget.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>mw_rewardpoints/js/ui/jquery.ui.mouse.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>mw_rewardpoints/js/ui/jquery.ui.slider.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>mw_rewardpoints/js/noconflict.js</name></action>-->
+        </reference>
+        
+	    <reference name="checkout.cart">
+	    	<action method="setCartTemplate" ifconfig="rewardpoints/config/extend_cart"><value>mw_rewardpoints/checkout/cart.phtml</value></action>
+            <action method="chooseTemplate"/>
+	    	<block type="rewardpoints/checkout_cart_rewardpoints" name="rewardpoints.checkout.cart.rewardpoints" as="rewardpoints" template="mw_rewardpoints/checkout/cart/rewardpoints.phtml"/>
+	    </reference>
+	    <reference name="checkout.cart.totals">
+	    	<action method="setTemplate" ifconfig="rewardpoints/config/enabled"><template>mw_rewardpoints/checkout/cart/totals.phtml</template></action>
+	    	<block type="core/template" name="rewardpoints.checkout.cart.totals.rewardpoints" as="rewardpoints" template="mw_rewardpoints/checkout/cart/totals/rewardpoints.phtml"/>
+	    	<block type="core/template" name="rewardpoints.checkout.cart.totals.rewardpoints_totals" as="rewardpoints_totals" template="mw_rewardpoints/checkout/cart/totals/rewardpoints_totals.phtml"/>
+	    </reference>
+    </checkout_cart_index>
+    
+    <rewardpoints_checkout_rewardpointspost>
+    	<reference name="root">
+    		<action method="setTemplate"><template>mw_rewardpoints/page/empty.phtml</template></action>
+    	</reference>
+	    <reference name="content">
+		    <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="mw_rewardpoints/checkout/cart/totals_ajax.phtml">
+		    	<block type="core/template" name="rewardpoints.checkout.cart.totals.rewardpoints" as="rewardpoints" template="mw_rewardpoints/checkout/cart/totals/rewardpoints.phtml"/>
+		    	<block type="core/template" name="rewardpoints.checkout.cart.totals.rewardpoints_totals" as="rewardpoints_totals" template="mw_rewardpoints/checkout/cart/totals/rewardpoints_totals.phtml"/>
+		    </block>
+		</reference>
+    </rewardpoints_checkout_rewardpointspost>
+    
+    <rewardpoints_checkout_updaterules>
+	    <reference name="root">
+	    		<action method="setTemplate"><template>mw_rewardpoints/page/empty.phtml</template></action>
+    	</reference>
+	    <reference name="content">
+		    <block type="rewardpoints/checkout_cart_rewardpoints" name="rewardpoints.checkout.cart.rules" as="rules" template="mw_rewardpoints/checkout/cart/rules.phtml"></block>
+		</reference>
+    </rewardpoints_checkout_updaterules>
+	<checkout_onepage_index>
+		<reference name="head">
+			<action method="addJs"><script>mw_rewardpoints/lib/mw.reward.slider.js</script></action>
+			<action method="addCss"><stylesheet>mw_rewardpoints/css/mw_reward_slider.css</stylesheet></action>
+        </reference>
+       <!-- <reference name="checkout.payment.methods">
+	    	<action method="setTemplate" ifconfig="rewardpoints/config/enabled"><template>mw_rewardpoints/checkout/onepage/payment/methods.phtml</template></action>
+	    </reference> -->
+	</checkout_onepage_index> 
+ 
+    <sales_order_view>
+        <reference name="order_totals">
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_order_view>
+    
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_order_print>
+    
+    <sales_email_order_items>
+        <reference name="order_totals">
+           <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_order_invoice>
+    
+    <sales_order_printinvoice>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_order_printinvoice>
+    
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_order_creditmemo>
+    
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_order_printcreditmemo>
+    
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.earn.points" template="mw_rewardpoints/sales/order/earn_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>first</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.redeemed.points" template="mw_rewardpoints/sales/order/redeemed_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        	<block type="rewardpoints/sales_order_total" name="mw.reward.sales.order.totals.points" template="mw_rewardpoints/sales/order/totals_points.phtml" after="-">
+        		<action method="setAfterTotal"><value>discount</value></action>
+        	</block>
+        </reference>
+    </sales_email_order_creditmemo_items>
+    
+</layout> 

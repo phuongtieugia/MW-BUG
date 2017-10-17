@@ -1,0 +1,46 @@
+<?php $cartUrl = Mage::getUrl('checkout/cart', array('_secure'=>true));?>
+<?php $islogin = (Mage::getSingleton('customer/session')->isLoggedIn()) ? 1 : 0; ?>
+<?php
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$reward_point_sell_product = $quote->getMwRewardpointSellProduct();
+if($islogin){
+	$rewardpoints = $quote->getMwRewardpoint();
+	$customer_id = $quote->getCustomerId();
+	$customer_rewarpoint = Mage::getModel('rewardpoints/customer')->load($customer_id)->getMwRewardPoint();
+	if($customer_rewarpoint < $reward_point_sell_product){
+		Mage::getSingleton('checkout/session')->addError($this->__("You do not have enough points for product in cart."));
+		Mage::app()->getFrontController()->getResponse()->setRedirect($cartUrl);
+	}
+}
+else{
+	if($reward_point_sell_product > 0){
+		Mage::getSingleton('checkout/session')->addError($this->__("You do not have enough points for product in cart."));
+		Mage::app()->getFrontController()->getResponse()->setRedirect($cartUrl);
+	}
+}
+?>
+
+
+
+
+<?php 
+
+if((Mage::helper('rewardpoints')->moduleEnabled())){
+				$cartUrl = Mage::getUrl('checkout/cart', array('_secure'=>true));
+				$islogin = (Mage::getSingleton('customer/session')->isLoggedIn()) ? 1 : 0;
+				$customer_id = Mage::getSingleton('checkout/session')->getQuote()->getCustomerId();
+				if($islogin){
+					$customer_rewarpoint = Mage::getModel('rewardpoints/customer')->load($customer_id)->getMwRewardPoint();
+					$getMaxPointToCheckOut = Mage::helper('rewardpoints')->getMaxPointToCheckOut();
+					if($customer_rewarpoint < $getMaxPointToCheckOut){
+						Mage::getSingleton('checkout/session')->addError($this->__("You do not have enough points for product in cart."));
+						/* Mage::app()->getFrontController()->getResponse()->setRedirect($cartUrl); */
+						echo json_encode(array(
+							'error' => 1,
+							'msg'   => $this->__('You do not have enough points for product in cart')
+						));
+						exit;
+					}
+				}
+				
+			}

@@ -1,0 +1,24 @@
+Case 1 : A does not reward points
+
+1. User A invites B with email.
+2. B clicks on the link in email and goes to our site.
+3. B register on our site AND SUBSCRIBE TO NEWSLETTER.
+4. B makes order in our site.
+5. Order is completed from backend.
+6. B gets reward points for the order.
+7. A does not get ANY REWARD POINTS.
+
+Case 2 : A gets reward points
+1. User A invites B with email.
+2. B clicks on the link in email and goes to our site.
+3. B register on our site and DOES NOT SUBSCRIBE TO NEWSLETTER.
+4. B makes order in our site.
+5. Order is completed from backend.
+6. B gets reward points for the order.
+7. A alos gets rewards points.
+
+if(!$friend){
+	$friend_id = Mage::getModel('core/cookie')->get('friend');
+	$friend    = Mage::getModel('rewardpoints/customer')->load($friend_id);
+	Mage::helper('rewardpoints/data')->checkAndInsertCustomerId($customer->getId(), $friend_id);	
+}
