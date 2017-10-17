@@ -1,0 +1,1 @@
+Are you working on it,I am getting the error : 'Mage registry key "_singleton/freegift/observer" already exists'?

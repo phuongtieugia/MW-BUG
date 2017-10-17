@@ -1,0 +1,20 @@
+TS#1017238: I SELECT Stop further rules processing  "Yes"   HOWEVER  If I upgrade AMOUNT, IT HAVE 2 GIFT IN CART 
+
+Price hien thi sai tren site
+
+Loi Xoa sp tren mini cart. them 1 doan js vao header: TS#1017614 
+
+TS#1017603 - Campatibility patch for Ajax Pro and Free Gift
+
+Coupon/Discount Code Free Gift ko co san pham: check Social Sharing: DISABLE
+
+Khi ket hop vs ajax cart can them: window.staticMinicart = new AjaxCart.Views.miniUpdCart({refreshCart: true, show_msg: false});
+
+vao cac action js
+
+Allowed memory size of 536870912 bytes exhausted (tried to allocate 72 bytes) in /home/latortilla/public_html/demo/lib/Zend/Db/Statement/Pdo.php on line 228
+
+MW_FreeGift_Model_Validator
+- line 199 
+/* $quoteid = Mage::getSingleton('checkout/session')->getQuote(); */
+ $cartItems = $quote->getAllVisibleItems();

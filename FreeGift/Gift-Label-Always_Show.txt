@@ -1,0 +1,19 @@
+Free Gift always show when all free gift rule has inactive
+
+Helper / Data.php
+public function checkRule($ruleID){
+		if($ruleID){
+			$model = Mage::getModel('freegift/rule')->load($ruleID);
+			if($model->getIsActive()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+freegift/freegift_label.phtml
+
+line 21
+
+if($showLabelFreeGift && Mage::helper("freegift")->checkRule($rule->getRuleId()))

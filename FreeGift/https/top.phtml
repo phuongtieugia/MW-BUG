@@ -1,0 +1,27 @@
+<script type="text/javascript">
+<?php 
+$base_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+$paramHttps = (Mage::app()->getStore()->isCurrentlySecure()) ?  array('_forced_secure'=>true) : array();
+$versioninfo = Mage::getVersionInfo();
+$store_view = Mage::app()->getStore()->getCode();
+?>
+
+var mw_baseUrl = "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);?>";
+var mw_js_baseUrl ="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>";
+var mw_post_baseUrl = "<?php echo $base_url.(empty($store_view) ? "" : $store_view."/"); ?>";
+var mw_ctrl = "<?php echo Mage::app()->getRequest()->getControllerName()?>";
+var mw_session_id = '<?php echo Mage::getSingleton("core/session")->getEncryptedSessionId();?>';
+var isLogged = "<?php echo Mage::getSingleton('customer/session')->isLoggedIn();?>";
+window.freegiftConfig = {
+    url: {
+        add                                 : "<?php echo Mage::getUrl('freegift/cart/addg', $paramHttps);?>",
+        configure                           : "<?php echo Mage::getUrl('freegift/cart/configure', $paramHttps);?>",
+        getproduct                          : "<?php echo Mage::getUrl('freegift/cart/getproduct', $paramHttps);?>",
+        updatePost                          : "<?php echo Mage::getUrl('freegift/cart/updatePost', $paramHttps);?>",
+        delete                              : "<?php echo Mage::getUrl('freegift/cart/delete', $paramHttps);?>",
+        cart                                : "<?php echo Mage::getUrl('checkout/cart', $paramHttps);?>"
+    },
+};
+</script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS);?>mw_freegift/lib/head.min.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS);?>mw_freegift/head.main.js"></script>

@@ -1,0 +1,17 @@
+few days ago I was reporting error when adding to cart product with group price, that the price is not respected (final customer www.sevtprefirmu.sk).
+I have traced it down to following:
+In app\code\local\MW\FreeGift\Model\Quote\Address\Total\Freegift.php on line 91 you have foreach, where you are rewriting already loaded attributes!
+                foreach($attrs as $attr){
+                    try{
+                        //$_product->setData($attr->getAttributeCode(), $_product->getData($attr->getAttributeCode()));
+                        // CHANGE - price error 
+if (stripos($attr->getAttributeCode(), 'price') !== false) continue;
+                        // END CHANGE
+                        $_product->setData($attr->getAttributeCode(), Mage::getResourceModel('catalog/product')->getAttributeRawValue($_product->getId(), $attr->getAttributeCode(), Mage::app()->getStore()));
+                    }catch (Exception $e){
+                        $e->getMessage();
+                    }
+                } 
+ 
+This is an example of fix (and not completely right).
+Please, use e-mail of myself and do not put tickekt it into the final customer account.
