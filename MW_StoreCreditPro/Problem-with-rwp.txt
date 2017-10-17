@@ -1,0 +1,22 @@
+<quote>
+                <totals>
+                    <mw_storecredit>
+                        <class>storecreditpro/quote_address_total_storecredit</class>
+                        <after>reward_points_after,reward_points_before</after>
+                       <!-- <renderer>storecredit/checkout_total</renderer> --> 
+                    </mw_storecredit>
+                </totals>
+            </quote>
+
+
+
+Paypal problem
+
+<paypal_prepare_line_items>
+    <observers>
+        <storecreditpro>
+            <class>storecreditpro/obsever</class>
+            <method>addPaypalRewardItem</method>
+        </storecreditpro>
+    </observers>
+</paypal_prepare_line_items>
