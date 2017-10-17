@@ -1,0 +1,14 @@
+Blank page after login
+
+
+<admin>
+    	<routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <mcore after="Mage_Adminhtml">MW_Mcore_Adminhtml</mcore>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
