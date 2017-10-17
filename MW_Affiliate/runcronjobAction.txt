@@ -1,0 +1,12 @@
+runcronjobAction
+
+public function runcronjobAction()
+    {
+    	//auto withdrawn
+    	Mage::getModel('affiliate/observer')->runCron();
+    	//member program
+    	Mage::getModel('affiliate/observer')->runCronMemberProgram();
+    	//commission holding
+    	Mage::getModel('affiliate/observer')->runCronHoldingCommission();
+    	echo "Everything is ok.";
+    }

@@ -1,0 +1,5 @@
+#File: /app/code/local/MW/Affiliate/Model|Observer.php
+#Line 13
+previous line: Mage::getSingleton('core/session')->addSuccess(Mage::helper('affiliate')->__('Thank you for visiting our site'));
+
+changed to: Mage::getSingleton('core/session', array("name"=>"frontend"))->addSuccess(Mage::helper('affiliate')->__('Thank you for visiting our site'));

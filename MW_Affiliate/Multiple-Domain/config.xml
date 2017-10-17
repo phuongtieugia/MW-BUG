@@ -1,0 +1,742 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MW_Affiliate>
+            <version>4.1.0</version>
+        </MW_Affiliate>
+    </modules>
+    <frontend>
+    	<secure_url>
+            <affiliate>/affiliate/</affiliate>
+            <credit>/credit/</credit>
+        </secure_url>
+        <routers>
+            <affiliate>
+                <use>standard</use>
+                <args>
+                    <module>MW_Affiliate</module>
+                    <frontName>affiliate</frontName>
+                </args>
+            </affiliate>
+        </routers>
+        <layout>
+            <updates>
+                <affiliate>
+                    <file>mw_affiliate.xml</file>
+                </affiliate>
+            </updates>
+        </layout>
+        <translate>
+			<modules>
+				<MW_Affiliate>
+					<files>
+						<default>MW_AffiliateFontend.csv</default>
+					</files>
+				</MW_Affiliate>
+			</modules>
+		</translate>
+    </frontend>
+    <!-- <admin>
+        <routers>
+			<affiliate>
+				<use>admin</use>
+				<args>
+					<module>MW_Affiliate</module>
+					<frontName>affiliate</frontName>
+				</args>
+			</affiliate>
+        </routers>
+    </admin> -->
+	<admin>
+		<routers>
+		  <affiliateadmin>
+			<use>admin</use>
+			<args>
+			  <module>MW_Affiliate</module>
+			  <frontName>admin_affiliate</frontName>
+			</args>
+		  </affiliateadmin>
+		</routers>
+	</admin>
+    <adminhtml>
+		<menu>
+			<affiliate module="affiliate">
+				<title>Affiliate Pro</title>
+				<sort_order>68</sort_order>               
+				<children>
+					<withdrawn module="affiliate">
+						<title>Manage Withdrawals</title>
+						<sort_order>0</sort_order>
+						<children>
+							<pending_withdrawn module="affiliate">
+								<title>Pending Withdrawals</title>
+								<sort_order>1</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatewithdrawnpending</action>
+							</pending_withdrawn>
+							<all_withdrawn module="affiliate">
+								<title>All Withdrawals</title>
+								<sort_order>2</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatewithdrawn</action>
+							</all_withdrawn>
+						</children>
+					</withdrawn>
+					<transaction module="affiliate">
+						<title>View All Transactions</title>
+						<sort_order>1</sort_order>
+						<children>
+							<affiliate module="affiliate">
+								<title>Commission History</title>
+								<sort_order>2</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatehistory</action>
+							</affiliate>
+							<credit module="affiliate">
+								<title>Transaction History</title>
+								<sort_order>3</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatecredithistory</action>
+							</credit>
+						</children>	
+					</transaction>
+					<group module="affiliate">
+						<title>Manage Affiliate Groups</title>
+						<sort_order>2</sort_order>
+						<action>admin_affiliate/adminhtml_affiliategroup</action>
+					</group>
+					<member module="affiliate">
+						<title>Manage Affiliates</title>
+						<sort_order>3</sort_order>
+						<children>
+							<active module="affiliate">
+								<title>Active Affiliates</title>
+								<sort_order>1</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatemember</action>
+							</active>
+							<pending module="affiliate">
+								<title>Pending Affiliates</title>
+								<sort_order>2</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatememberpending</action>
+							</pending>
+							<parent module="affiliate">
+								<title>All Customers</title>
+								<sort_order>3</sort_order>
+								<action>admin_affiliate/adminhtml_affiliateparent</action>
+							</parent>
+						</children>	
+					</member>
+					<website module="affiliate">
+						<title>Manage Affiliate Websites</title>
+						<sort_order>4</sort_order>
+						<action>admin_affiliate/adminhtml_affiliatewebsite</action>
+					</website>
+					<program module="affiliate">
+						<title>Manage Programs</title>
+						<sort_order>5</sort_order>
+						<action>admin_affiliate/adminhtml_affiliateprogram</action>
+					</program>
+					<banner module="affiliate">
+						<title>Manage Banners</title>
+						<sort_order>6</sort_order>
+						<action>admin_affiliate/adminhtml_affiliatebanner</action>
+					</banner>
+					<report module="affiliate">
+						<title>Affiliate Report</title>
+						<sort_order>7</sort_order>
+						<children>
+                            <overview module="affiliate">
+								<title>Overview</title>
+								<sort_order>0</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatereport/overview</action>
+							</overview>
+							<referral module="affiliate">
+								<title>Affiliate Invitation</title>
+								<sort_order>2</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatereport/referral</action>
+							</referral>
+							<sales module="affiliate">
+								<title>Affiliate Sales</title>
+								<sort_order>1</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatereport/index</action>
+							</sales>
+							<referralsite module="affiliate">
+								<title>Affiliate Website(s)</title>
+								<sort_order>3</sort_order>
+								<action>admin_affiliate/adminhtml_affiliatereport/referralsite</action>
+							</referralsite>
+						</children>	
+					</report>
+					<configuration module="affiliate">
+						<title>Configuration</title>
+						<sort_order>8</sort_order>
+						<action>adminhtml/system_config/edit/section/affiliate</action>
+					</configuration>
+					
+				</children>
+			</affiliate>
+		</menu> 
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<affiliate module="affiliate">
+							<title>Affiliate Pro</title>
+							<sort_order>68</sort_order>               
+							<children>
+								<withdrawn module="affiliate">
+									<title>Manage Withdrawals</title>
+									<sort_order>0</sort_order>
+									<children>
+										<pending_withdrawn module="affiliate">
+											<title>Pending Withdrawals</title>
+											<sort_order>1</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatewithdrawnpending</action>
+										</pending_withdrawn>
+										<all_withdrawn module="affiliate">
+											<title>All Withdrawals</title>
+											<sort_order>2</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatewithdrawn</action>
+										</all_withdrawn>
+									</children>
+								</withdrawn>
+								<transaction module="affiliate">
+									<title>View All Transactions</title>
+									<sort_order>1</sort_order>
+									<children>
+										<affiliate module="affiliate">
+											<title>Commission History</title>
+											<sort_order>2</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatehistory</action>
+										</affiliate>
+										<credit module="affiliate">
+											<title>Transaction History</title>
+											<sort_order>3</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatecredithistory</action>
+										</credit>
+									</children>	
+								</transaction>
+								<group module="affiliate">
+									<title>Manage Affiliate Groups</title>
+									<sort_order>2</sort_order>
+									<action>admin_affiliate/adminhtml_affiliategroup</action>
+								</group>
+								<member module="affiliate">
+									<title>Manage Affiliates</title>
+									<sort_order>3</sort_order>
+									<children>
+										<active module="affiliate">
+											<title>Active Affiliates</title>
+											<sort_order>1</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatemember</action>
+										</active>
+										<pending module="affiliate">
+											<title>Pending Affiliates</title>
+											<sort_order>2</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatememberpending</action>
+										</pending>
+										<parent module="affiliate">
+											<title>All Customers</title>
+											<sort_order>3</sort_order>
+											<action>admin_affiliate/adminhtml_affiliateparent</action>
+										</parent>
+									</children>	
+								</member>
+								<website module="affiliate">
+									<title>Manage Affiliate Websites</title>
+									<sort_order>4</sort_order>
+									<action>admin_affiliate/adminhtml_affiliatewebsite</action>
+								</website>
+								<program module="affiliate">
+									<title>Manage Programs</title>
+									<sort_order>5</sort_order>
+									<action>admin_affiliate/adminhtml_affiliateprogram</action>
+								</program>
+								<banner module="affiliate">
+									<title>Manage Banners</title>
+									<sort_order>6</sort_order>
+									<action>admin_affiliate/adminhtml_affiliatebanner</action>
+								</banner>
+								<report module="affiliate">
+									<title>Affiliate Report</title>
+									<sort_order>7</sort_order>
+									<children>
+                                        <overview module="affiliate">
+            								<title>Overview</title>
+            								<sort_order>0</sort_order>
+            								<action>admin_affiliate/adminhtml_affiliatereport/overview</action>
+            							</overview>
+										<referral module="affiliate">
+											<title>Affiliate Invitation</title>
+											<sort_order>1</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatereport/referral</action>
+										</referral>
+										<sales module="affiliate">
+											<title>Affiliate Sales</title>
+											<sort_order>2</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatereport/index</action>
+										</sales>
+										<referralsite module="affiliate">
+											<title>Affiliate Website(s)</title>
+											<sort_order>3</sort_order>
+											<action>admin_affiliate/adminhtml_affiliatereport/referralsite</action>
+										</referralsite>
+									</children>	
+								</report>
+								<configuration module="affiliate">
+									<title>Configuration</title>
+									<sort_order>8</sort_order>
+									<action>adminhtml/system_config/edit/section/affiliate</action>
+								</configuration>
+							</children>
+						</affiliate>
+						<system>
+                            <children>
+                                <config>
+                                    <children>
+										<!-- ten la trung ten chi ra trong file config system.xml -->
+                                        <affiliate translate="title" module="affiliate">
+											<!-- Title display in role -->
+                                            <title>Affiliate</title>
+                                        </affiliate >
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<affiliate>
+					<file>mw_affiliate.xml</file>
+				</affiliate>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<MW_Affiliate>
+					<files>
+						<default>MW_AffiliateBackend.csv</default>
+					</files>
+				</MW_Affiliate>
+			</modules>
+		</translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <affiliate>
+                <class>MW_Affiliate_Model</class>
+                <resourceModel>affiliate_mysql4</resourceModel>
+            </affiliate>
+            <affiliate_mysql4>
+                <class>MW_Affiliate_Model_Mysql4</class>
+                <entities>
+                	<affiliateprogram>
+                     	<table>mw_affiliate_program</table>
+                    </affiliateprogram>
+                    <affiliateproductprogram>
+                     	<table>mw_affiliate_product_program</table>
+                    </affiliateproductprogram>
+                    <affiliatecustomerprogram>
+                     	<table>mw_affiliate_customer_program</table>
+                    </affiliatecustomerprogram>
+                    <affiliatecategoryprogram>
+                     	<table>mw_affiliate_category_program</table>
+                    </affiliatecategoryprogram>
+                    <affiliateinvitation>
+                     	<table>mw_affiliate_invitation</table>
+                    </affiliateinvitation>
+                    <affiliatebanner>
+                     	<table>mw_affiliate_banner</table>
+                    </affiliatebanner>
+                    <affiliatebannermember>
+                     	<table>mw_affiliate_banner_member</table>
+                    </affiliatebannermember>
+                    <affiliatecustomers>
+                     	<table>mw_affiliate_customers</table>
+                    </affiliatecustomers>
+                    <affiliatewithdrawn>
+                     	<table>mw_affiliate_withdrawn</table>
+                    </affiliatewithdrawn>
+                    <affiliatehistory>
+                     	<table>mw_affiliate_history</table>
+                    </affiliatehistory>
+                    <affiliatetransaction>
+                     	<table>mw_affiliate_transaction</table>
+                    </affiliatetransaction>
+                    <affiliategroup>
+                     	<table>mw_affiliate_group</table>
+                    </affiliategroup>
+                    <affiliategroupprogram>
+                     	<table>mw_affiliate_group_program</table>
+                    </affiliategroupprogram>
+                    <affiliategroupmember>
+                     	<table>mw_affiliate_group_member</table>
+                    </affiliategroupmember>
+                    <affiliatewebsitemember>
+                    	<table>mw_affiliate_website_member</table>
+                    </affiliatewebsitemember>
+                </entities>
+            </affiliate_mysql4>
+        </models>
+        <sales>
+        <!-- apdate lai gia khi co affiliate discount va credit khi o gio hang-->
+          <quote>
+                <totals>
+                    <affiliate_discount>
+                        <class>MW_Affiliate_Model_Quote_Address_Total_Discount</class>
+                        <after>discount</after>
+                        <before>grand_total</before>
+                    </affiliate_discount>
+               </totals>
+           </quote> 
+           <!-- apdate lai gia khi co affiliate discount va credit hien thi don hang, ca admin va fontend -->
+          <!--   <order_invoice>
+            	<totals>
+                    <affiliate>
+                        <class>affiliate/order_invoice_total_affiliate</class>
+                    </affiliate>
+            	</totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <affiliate>
+                        <class>affiliate/order_creditmemo_total_affiliate</class>
+                    </affiliate>
+                </totals>
+            </order_creditmemo>-->
+        </sales>
+        <!-- apdate lai gia khi co affiliate discount va credit hien thi PDF khi in  admin  -->
+       <!--   <pdf>
+    		<totals>
+                <affiliate_discount translate="title">
+                    <title>Affiliate Discount</title>
+                    <source_field>affiliate_discount</source_field>
+                    <amount_prefix>-</amount_prefix>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>201</sort_order>
+                    <model>affiliate/order_pdf_total_affiliate</model>
+                </affiliate_discount>
+                <credit_discount translate="title">
+                    <title>credit Discount</title>
+                    <source_field>credit_discount</source_field>
+                    <amount_prefix>-</amount_prefix>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>202</sort_order>
+                    <model>affiliate/order_pdf_total_credit</model>
+                </credit_discount>
+            </totals>
+    	</pdf> -->
+        <resources>
+            <affiliate_setup>
+                <setup>
+                    <module>MW_Affiliate</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </affiliate_setup>
+            <affiliate_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </affiliate_write>
+            <affiliate_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </affiliate_read>
+        </resources>
+       <!--   <rewrite>
+        	<mw_affiliate_account>
+        		<from><![CDATA[#^/customer/account/#]]></from>
+                <to>/affiliate/account/</to>
+        	</mw_affiliate_account>
+        </rewrite> -->
+        <events>
+        	<customer_delete_commit_after>
+        		<observers>
+                    <affiliate>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Observer</class>
+                        <method>deleteCustomer</method>
+                    </affiliate>
+                </observers>
+        	</customer_delete_commit_after>
+        	<affiliate_referral_link_click>
+        		<observers>
+                    <affiliate>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Observer</class>
+                        <method>clickReferralLink</method>
+                    </affiliate>
+                </observers>
+        	</affiliate_referral_link_click>
+        	<mw_affiliate_account>
+            	<observers>
+                    <affiliate_account>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Observer</class>
+                        <method>saveCustomerAffiliate</method>
+                    </affiliate_account>
+                </observers>
+            </mw_affiliate_account>
+            <controller_action_layout_render_before_customer_account_create>
+				<observers>
+					<affiliate_account>
+						<type>singleton</type>
+						<class>MW_Affiliate_Model_Observer</class>
+						<method>overwriteFormRegister</method>
+					</affiliate_account>
+				</observers>
+			</controller_action_layout_render_before_customer_account_create>
+            <controller_action_predispatch_customer_account_createpost>
+				<observers>
+					<affiliate_account>
+						<type>singleton</type>
+						<class>MW_Affiliate_Model_Observer</class>
+						<method>beforeSaveCustomer</method>
+					</affiliate_account>
+				</observers>
+			</controller_action_predispatch_customer_account_createpost>
+			<controller_action_postdispatch_customer_account_createpost>
+				<observers>
+					<affiliate_account>
+						<type>singleton</type>
+						<class>MW_Affiliate_Model_Observer</class>
+						<method>setCustomerAccount</method>
+					</affiliate_account>
+				</observers>
+			</controller_action_postdispatch_customer_account_createpost>
+			<sales_order_place_after>
+                <observers>
+                    <affiliate_checkout>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Order</class>
+                        <method>saveOrderAfter</method>
+                    </affiliate_checkout>
+                </observers>
+            </sales_order_place_after> 
+            <sales_order_save_after>
+                <observers>
+                    <affiliate_payment>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Observer</class>
+                        <method>updateStatusOrder</method>
+                    </affiliate_payment>
+                </observers>
+            </sales_order_save_after>
+            <checkout_submit_all_after>
+                <observers>
+                    <affiliate_payment>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Observer</class>
+                        <method>updateStatusOrder</method>
+                    </affiliate_payment>
+                </observers>
+            </checkout_submit_all_after>
+            <controller_front_init_before>
+            	<observers>
+                    <affiliate_refund>
+                        <type>singleton</type>
+                        <class>MW_Affiliate_Model_Observer</class>
+                        <method>dispathClickLink</method>
+                    </affiliate_refund>
+                </observers>
+            </controller_front_init_before> 
+        </events>
+        <blocks>
+            <affiliate>
+                <class>MW_Affiliate_Block</class>
+            </affiliate>
+            <!-- rewrite lai de hien thi giao dien affiliate discount va credit hien thi don hang admin-->
+            <adminhtml>
+            	<rewrite>
+            		<sales_order_totals>MW_Affiliate_Block_Adminhtml_Sales_Order_Totals</sales_order_totals>
+            		<!--  <sales_order_invoice_totals>MW_Affiliate_Block_Adminhtml_Sales_Order_Invoice_Totals</sales_order_invoice_totals>
+            		<sales_order_creditmemo_totals>MW_Affiliate_Block_Adminhtml_Sales_Order_Creditmemo_Totals</sales_order_creditmemo_totals>-->
+            	</rewrite>
+            </adminhtml>
+             <!-- rewrite lai de hien thi giao dien affiliate discount va credit hien thi don hang fontend-->
+            <sales>
+            	<rewrite>
+            		<order_totals>MW_Affiliate_Block_Sales_Order_Totals</order_totals>
+            		<!-- <order_invoice_totals>MW_Affiliate_Block_Sales_Order_Invoice_Totals</order_invoice_totals>
+            		<order_creditmemo_totals>MW_Affiliate_Block_Sales_Order_Creditmemo_Totals</order_creditmemo_totals> -->
+            	</rewrite>
+            </sales>
+        </blocks>
+        <helpers>
+            <affiliate>
+                <class>MW_Affiliate_Helper</class>
+            </affiliate>
+        </helpers>
+        <template>
+		  <email>
+		    <affiliate_invitation_email_template translate="label" module="affiliate">
+			      <label>Invitation Email To Friends</label>
+			      <file>mw_affiliate/invitation_email_to_friend.html</file>
+			      <type>html</type>
+		    </affiliate_invitation_email_template>
+		    <affiliate_customer_email_template translate="label" module="affiliate">
+			      <label>Notify Affiliate Sign Up</label>
+			      <file>mw_affiliate/notify_customer_affiliate_sign_up.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template>
+		    <affiliate_customer_email_template_successful translate="label" module="affiliate">
+			      <label>Notify Affiliate affiliate approved</label>
+			      <file>mw_affiliate/notify_customer_affiliate_approved.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_successful>
+		    <affiliate_customer_email_template_unsuccessful translate="label" module="affiliate">
+			      <label>Notify Affiliate unapproved</label>
+			      <file>mw_affiliate/notify_customer_affiliate_unapproved.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_unsuccessful>
+		    <affiliate_customer_email_template_lock translate="label" module="affiliate">
+			      <label>Notify Affiliate account locked</label>
+			      <file>mw_affiliate/notify_customer_affiliate_account_locked.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_lock>
+		    <affiliate_customer_email_template_unlock translate="label" module="affiliate">
+			      <label>Notify Affiliate account unlocked</label>
+			      <file>mw_affiliate/notify_customer_affiliate_account_unlocked.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_unlock>
+		    <affiliate_customer_email_template_withdrawn translate="label" module="affiliate">
+			      <label>Notify Affiliate withdrawal request</label>
+			      <file>mw_affiliate/notify_customer_withdrawal_request.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_withdrawn>
+		    <affiliate_customer_email_template_withdrawn_complete translate="label" module="affiliate">
+			      <label>Notify Affiliate withdrawal completed</label>
+			      <file>mw_affiliate/notify_customer_withdrawal_completed.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_withdrawn_complete>
+		    <affiliate_customer_email_template_withdrawn_cancel translate="label" module="affiliate">
+			      <label>Notify Affiliate withdrawal cancelled</label>
+			      <file>mw_affiliate/notify_customer_withdrawal_cancelled.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_withdrawn_cancel>
+		    <affiliate_customer_email_template_credit_balance_changed translate="label" module="affiliate">
+			      <label>Notify Affiliate credit balance changed</label>
+			      <file>mw_affiliate/notify_customer_credit_balance_changed.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_credit_balance_changed>
+		    <affiliate_customer_email_template_add_program translate="label" module="affiliate">
+			      <label>Notify Affiliate of new program</label>
+			      <file>mw_affiliate/notify_customer_new_program.html</file>
+			      <type>html</type>
+		    </affiliate_customer_email_template_add_program>
+		    <affiliate_admin_customer_email_template translate="label" module="affiliate">
+			      <label>Notify admin affiliate sign up</label>
+			      <file>mw_affiliate/notify_admin_affiliate_sign_up.html</file>
+			      <type>html</type>
+		     </affiliate_admin_customer_email_template>
+		     
+		  </email>
+		</template>
+    </global>
+     <default>
+        	<affiliate>
+        		<config>
+        			<enabled>1</enabled>        			
+        			<auto_approve>0</auto_approve>
+        			<default_group>1</default_group>
+        			<set_customerinvited>0</set_customerinvited>
+        			<!--  <commission_order>0</commission_order>
+        			<commission_time>0</commission_time>
+        			<commission_customer>0</commission_customer>-->
+        			<referral_code>6</referral_code>
+        			<affiliate_share><![CDATA[/customer
+/affiliate
+/credit
+/checkout
+/wishlist
+/contacts
+/catalogsearch
+/seo_sitemap]]></affiliate_share>
+				   <auto_signup_affiliate>0</auto_signup_affiliate>
+				   <overwrite_register>0</overwrite_register>
+				   <show_referral_code_register>1</show_referral_code_register>
+				   <signup_affiliate>2</signup_affiliate>
+				   <overwrite_cart>0</overwrite_cart>
+				   <show_referral_code_cart>1</show_referral_code_cart>				   
+        	 </config>
+        	 <general>
+        	 	<affiliate_position>1</affiliate_position>
+        		<affiliate_discount>1</affiliate_discount>
+        		<affiliate_tax>0</affiliate_tax>
+        		<affiliate_commission>1</affiliate_commission>
+       			<status_add_commission>processing</status_add_commission>
+       			<status_subtract_commission>closed</status_subtract_commission>
+       			<enabled_reward>1</enabled_reward>
+       			<commission_holding_period>30</commission_holding_period>
+       			<referral_signup_commission>0</referral_signup_commission>
+       			<referral_visitor_commission>0</referral_visitor_commission>
+       			<referral_subscribe_commission>0</referral_subscribe_commission>
+        	 </general>
+        	 <money>
+        	 	<affiliate_fee_taken>1</affiliate_fee_taken>
+       			<affiliate_withdraw_min>30</affiliate_withdraw_min>
+       			<affiliate_withdraw_max>10000</affiliate_withdraw_max>
+       			<affiliate_withdrawn_period>1</affiliate_withdrawn_period>
+       			<affiliate_withdrawn_day>1</affiliate_withdrawn_day>
+       			<affiliate_withdrawn_month>28</affiliate_withdrawn_month>
+       			<gateway>a:4:{s:17:"_1359713502010_10";a:3:{s:13:"gateway_value";s:6:"paypal";s:13:"gateway_title";s:6:"PayPal";s:9:"mw_status";s:3:"yes";}s:18:"_1359713543476_476";a:3:{s:13:"gateway_value";s:12:"moneybookers";s:13:"gateway_title";s:12:"Moneybookers";s:9:"mw_status";s:3:"yes";}s:18:"_1359713555578_578";a:3:{s:13:"gateway_value";s:11:"banktranfer";s:13:"gateway_title";s:11:"Banktranfer";s:9:"mw_status";s:2:"no";}s:18:"_1359713573409_409";a:3:{s:13:"gateway_value";s:5:"check";s:13:"gateway_title";s:5:"Check";s:9:"mw_status";s:3:"no";}}</gateway>
+        	 </money>
+        	 <invitation>				
+				<affiliate_cookie>30</affiliate_cookie>
+        	 	<using_customer_email>0</using_customer_email>
+				<email_sender>general</email_sender>
+				<email_template>affiliate_invitation_email_template</email_template>
+        	 </invitation>
+        	 <likebox>
+        	 	<likebox_width>195</likebox_width>
+        	 	<likebox_title>You might also like</likebox_title>
+        	 	<likebox_product_qty>6</likebox_product_qty>
+        	 </likebox>
+        	 <paypal_credential>
+        	 	<paypal_status>0</paypal_status>
+        	 	<api_endpoint>0</api_endpoint>
+        	 	<paypal_min_balance>500</paypal_min_balance>
+        	 </paypal_credential>
+        	 <customer>
+				<email_sender>general</email_sender>
+				<email_template>affiliate_customer_email_template</email_template>
+				<email_template_successful>affiliate_customer_email_template_successful</email_template_successful>
+				<email_template_unsuccessful>affiliate_customer_email_template_unsuccessful</email_template_unsuccessful>
+				<email_template_lock>affiliate_customer_email_template_lock</email_template_lock>
+				<email_template_unlock>affiliate_customer_email_template_unlock</email_template_unlock>
+				<email_template_withdrawn>affiliate_customer_email_template_withdrawn</email_template_withdrawn>
+				<email_template_withdrawn_complete>affiliate_customer_email_template_withdrawn_complete</email_template_withdrawn_complete>
+				<email_template_withdrawn_cancel>affiliate_customer_email_template_withdrawn_cancel</email_template_withdrawn_cancel>
+				<email_template_credit_balance_changed>affiliate_customer_email_template_credit_balance_changed</email_template_credit_balance_changed>
+				<email_template_add_program>affiliate_customer_email_template_add_program</email_template_add_program>
+		     </customer>
+        	 <admin_customer>
+        	 	<email_sender>general</email_sender>
+				<email_template>affiliate_admin_customer_email_template</email_template>
+        	 </admin_customer> 
+         </affiliate>
+   </default>
+    <crontab>
+        <jobs>
+            <auto_withdrawn>
+                <schedule><cron_expr>5 0 * * *</cron_expr></schedule>
+                <run><model>affiliate/observer::runCron</model></run>
+            </auto_withdrawn>
+            <member_program>
+                <schedule><cron_expr>*/60 * * * *</cron_expr></schedule>
+                <run><model>affiliate/observer::runCronMemberProgram</model></run>
+            </member_program>
+            <commission_holding>
+            	<schedule><cron_expr>1 0 * * *</cron_expr></schedule>
+            	<run><model>affiliate/observer::runCronHoldingCommission</model></run>
+            </commission_holding>
+        </jobs>
+    </crontab>
+</config>

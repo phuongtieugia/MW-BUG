@@ -1,0 +1,7 @@
+customergroup_affcustomergroup
+
+id
+group_id - int
+payment_method - varchar
+
+ {{block type="bmproducts/product_latest" name="cms.latest" title="Latest 60 Products"  productsCount="60" template="bmproducts/product/listcms.phtml"}}
