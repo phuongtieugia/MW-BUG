@@ -1,0 +1,31 @@
+<table>
+	<tr><td>
+			<?php $store_id = Mage::app()->getStore()->getId();?>
+			<p class="amount"><?php echo $this->__('Your Reward Points: <strong>%s</strong> = <strong>%s</strong>',Mage::helper('rewardpoints')->formatPoints($this->getRewardPoints(),$store_id),$this->getMoney($store_id)) ?></p>
+			    <?php $rate = $this->getPointPerMoney($store_id);?>
+			<p class="amount"><?php echo $this->__('Points/Currency Exchange Rate: <strong>%s</strong> = <strong>%s</strong>',Mage::helper('rewardpoints')->formatPoints($rate[0],$store_id),$this->formatMoney($rate[1]) ) ?></p>
+			<?php if($this->canExchangeToCredit($store_id)):?>
+			<?php $_rate = $this->getPointPerCredit($store_id);?>
+			<p class="amount"><?php echo $this->__('Reward Point/Credit Rate: <strong>%s</strong> = <strong>%s</strong> (credit)',Mage::helper('rewardpoints')->formatPoints($_rate[0],$store_id),$rate[1] ) ?></p>
+			<?php endif;?>
+	</td>
+	</tr>
+	<tr>
+	
+	<td>
+		<form name="mw_rewardpoints_coupon" id="mw_rewardpoints_coupon" action="<?php echo $this->getUrl('rewardpoints/rewardpoints/coupon');?>" method="post">
+			<div style="width:230px; float:left; font-weight: bold;"><label><?php echo $this->__("Coupon code:")?> </label><input type="text" name="coupon_code" class="input-text required-entry mw-rewardpoint-validate-coupon-code" /></div>
+			<div style="float:left; text-align: right;"><button type="submit" title="<?php echo $this->__("Submit")?>" class="button"><span><span><?php echo $this->__("Submit")?></span></span></button></div>
+		</form>
+	</td>
+	
+	</tr>
+</table>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+    var exchangeForm = new VarienForm('mw_rewardpoints_coupon', true);
+    //]]>
+</script>

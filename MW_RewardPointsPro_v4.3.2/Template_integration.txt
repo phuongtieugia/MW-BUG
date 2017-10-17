@@ -1,0 +1,221 @@
+Reward Point Pro - Template Integration Guide
+---------------------------------------------
+
+TEMPLATES ARE REWRITEN BY DEFAULT
+------------------------------------
+
+- in controller checkout_cart_index 
+
++ rewrite template: checkout/cart.phtml and checkout/cart/totals.phtml
+
+INTEGRATE REWARD POINTS BLOCK IN SHOPPING CART
+----------------------------------------------
+
+1. edit the file app/design/frontend/default_package/your_theme/template/checkout/cart.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->formRewardShoppingCartRewardPoints(); ?>
+
+3. before this code:
+<?php echo $this->getChildHtml('coupon') ?>
+
+SHOW REWARD POINTS IN CHECKOUT PAGE 
+-----------------------------------
+Display earned and redeemed points in order review total
+
+1. edit the file app/design/frontend/default_package/your_theme/template/checkout/onepage/review/totals.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->earnPointsOnepageReviewRewardPoints(); ?>
+
+3. after this code:
+<?php $_colspan = $this->helper('tax')->displayCartBothPrices() ? 5 : 3; ?>
+
+4. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->totalPointsRedeemOnepageReviewRewardPoints(); ?>
+
+5. after this code:
+<?php echo $this->renderTotals(null, $_colspan); ?>
+
+SHOW REWARD POINTS IN REGISTRATION
+----------------------------------
+
+1. edit app/design/frontend/default_package/your_theme/template/customer/form/register.phtml
+   or app/design/frontend/default_package/your_theme/template/persistent/customer/form/register.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsCreateAccountRewardPoints(); ?>
+
+3. before  this code:
+<div class="account-create">
+
+SHOW REWARD POINT IN PRODUCT REVIEW FORM
+----------------------------------------
+
+1. edit the file: app/design/frontend/default_package/your_theme/template/review/form.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsProductReviewRewardPoints(); ?>
+
+3. after this code:
+<?php if ($this->getAllowWriteReviewFlag()): ?>
+
+SHOW REWARD POINT IN POLL VOTING
+--------------------------------
+
+1. edit the file: app/design/frontend/default_package/your_theme/template/poll/active.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsSubmitPollRewardPoints(); ?>
+
+3. before this code:
+<button type="submit" title="<?php echo $this->__('Vote') ?>" class="button"><span><span><?php echo $this->__('Vote') ?></span></span></button>
+
+SHOW REWARD POINT IN SIGNING UP NEWLETTER FORM
+----------------------------------------------
+
+1. edit this file: app/design/frontend/default_package/your_theme/template/customer/form/register.phtml
+or app/design/frontend/default_package/your_theme/template/persistent/customer/form/register.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsSignUpNewLetterRewardPoints(); ?>
+
+3. after this code:
+<?php if ($this->isNewsletterEnabled()): ?>
+
+
+SHOW REWARD POINTS IN PRODUCT LISTING PAGE
+------------------------------------------
+
+1. edit this file:
+app/design/frontend/default_package/your_theme/template/catalog/product/list.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsProductListRewardPoints($_product); ?>
+
+3. after this code (for list mode):
+
+<?php if($_product->isSaleable()): ?>
+    <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+     <?php else: ?>
+     <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+ <?php endif; ?>
+
+4. and after this code (for grid mode):
+
+<?php echo $this->getPriceHtml($_product, true) ?>
+
+SHOW REWARD POINTS IN PRODUCT DETAIL PAGE
+------------------------------------------
+
+1. edit the file:
+app/design/frontend/default_package/your_theme/template/catalog/product/view.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsProductDetailRewardPoints($_product); ?>
+
+3. before this code:
+<?php if ($_product->getShortDescription()):?>
+
+SHOW POINT BALANCE ON TOP LINK
+-----------------------------
+Show point balance next to My Account on top link
+
+1. edit the file:
+app/design/frontend/default_package/your_theme/template/page/template/links.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsTopLinkRewardPoints($_link); ?>
+
+3. before this code: 
+<?php echo $_link->getAfterText() ?>
+
+
+SHOW POINT BALANCE ON MY REWARD POINTS MENU
+-------------------------------------------
+Show point balance next to My Account / My Reward Points
+
+1. edit the file:
+app/design/frontend/default_package/your_theme/template/customer/account/navigation.phtml
+
+2. copy this code:
+echo $_link->getLabel().Mage::helper('core/mwrewardpoints')->pointsMyAccountRewardPoints($_link); 
+
+3. replace this code: 
+echo $_link->getLabel()
+
+
+SHOW FACEBOOK LIKE & SEND BUTTON IN PRODUCT DETAIL PAGE
+-------------------------------------------
+1. edit the file:
+app/design/frontend/default_package/your_theme/template/catalog/product/view.phtml
+
+2. copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->showFacebookRewardPoints(); ?>
+
+3. before this code:
+<?php if ($_product->getShortDescription()):?>
+
+
+DISPLAY EARN POINT MINI CART
+-------------------------------------------
+
+app/design/frontend/default_package/your_theme/template/checkout/cart/sidebar.phtml
+
+copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->pointsMiniCartRewardPoints(); ?>
+
+before this code:
+
+ <?php endif ?>
+<?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+
+
+DISPLAY FORM REWARD IN ONEPAGE CHECKOUT
+-------------------------------------------
+
+app/design/frontend/default_package/your_theme/template/checkout/onepage/payment.phtml
+
+copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->formRewardOnepageCheckoutRewardPoints(); ?>
+
+before this code:
+
+<form action="" id="co-payment-form">
+
+
+DISPLAY FORM REWARD IN ONEPAGE CHECKOUT (ONETEP CHECKOUT MAGE-WORLD)
+-------------------------------------------
+
+app/design/frontend/default_package/your_theme/template/mw_onestepcheckout/daskboard/onepage/payment.phtml
+
+copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->formRewardOnepageCheckoutRewardPoints(); ?>
+
+before this code:
+
+<div  id="co-payment-form">
+
+And  
+app/design/frontend/default_package/your_theme/template/mw_onestepcheckout/daskboard.phtml
+
+copy this code:
+
+if($MW_Onestepcheckout('#mw-checkout-payment-rewardpoints').length)
+{
+	updateRewardpointsForm();
+}
+
+after code: (in function updateShippingMethod() )
+
+<?php if(Mage::getStoreConfig('onestepcheckout/ajax_update_other/ajax_shipping_payment')):?>
+	updatePaymentType();
+<?php endif;?>
+
+INVITATION CODE
+-------------------------------------------
+
+copy this code:
+<?php echo Mage::helper('core/mwrewardpoints')->showInvitationRewardPoints(); ?>
+
+into template that you want show

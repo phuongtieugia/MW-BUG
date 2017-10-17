@@ -1,0 +1,14 @@
+<?php 
+	  $store_id = Mage::app()->getStore()->getId();
+	  $quote = Mage::getSingleton('checkout/session')->getQuote();
+	  $earn_rewardpoint = (int)$quote->getEarnRewardpoint();
+?>
+
+	<div  class="mw_reward_toggle">
+<?php foreach($this->getRewardPointsRule() as $rule):?>
+    	<div style="width:100%;font-size: 11px; margin: 0 0 5px 0; overflow: hidden;">
+      		<div style="float:left; width:260px"><?php echo $this->__('<span style="float: left;">+</span> <div style="margin: 0px 0px 0px 10px;">%s %s</div>',($rule['qty']>1?$rule['qty']." x":""),$rule['message']);?></div>
+        </div>
+	</div>
+<?php endforeach;?>
+

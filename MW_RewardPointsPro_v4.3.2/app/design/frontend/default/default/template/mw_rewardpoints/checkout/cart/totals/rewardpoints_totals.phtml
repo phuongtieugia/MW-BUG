@@ -1,0 +1,16 @@
+<?php 
+	  $quote = Mage::getSingleton('checkout/session')->getQuote();
+	  $rewardpoints = $quote->getMwRewardpoint();
+	  $reward_point_sell_product = $quote->getMwRewardpointSellProduct();
+	  $total_reward_point = $rewardpoints + $reward_point_sell_product;
+	  $store_id = Mage::app()->getStore()->getId();
+?>
+
+<?php if($total_reward_point && $reward_point_sell_product):?>
+<tr>
+    <td colspan="1" class="a-right" style="font-weight:bold;"><?php echo Mage::helper('rewardpoints')->__('Total Points')?></td>
+    <td class="a-right" style="">
+        <span class="price"><?php echo Mage::helper('rewardpoints')->formatPoints($total_reward_point,$store_id)?></span>
+	</td>
+</tr>
+<?php endif;?>

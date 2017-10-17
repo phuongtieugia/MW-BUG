@@ -1,0 +1,35 @@
+<div id="transaction_history_box">
+<?php echo $this->getToolbarHtml()?>
+<?php $transactions = $this->getTransaction();?>
+<table id="my-transaction-table" class="data-table">
+    <col width="1">
+    <col width="1">
+    <!-- <col width="1"> -->
+    <col width="1">
+    <col width="1">
+    <col width="1">
+        <thead>
+            <tr>
+            	<th style="text-align: center;"><?php echo $this->__("ID")?></th>
+                <th><?php echo $this->__("Date")?></th>
+                <th style="text-align: center;"><?php echo $this->__("Points")?></th>
+                <th style="text-align: center;"><?php echo $this->__("Balance")?></th>
+                <th><?php echo $this->__("Transaction Detail")?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($transactions as $transaction):?>
+            <tr>	<td style="text-align: center;"><?php echo $transaction->getData('history_id')?></td>
+                    <td style="width: 70px;"><?php echo $this->getFormatDateNew($transaction)?></td>
+                    <td style="text-align: right;"><span class="price"><?php echo $this->formatAmount($transaction->getAmount(), $transaction->getTypeOfTransaction())?></span></td>
+                    <td style="text-align: right;"><?php echo $transaction->getData('balance')?></td>
+                    <td style="width: 230px;"><?php echo $this->getTransactionDetailNew($transaction)?></td>
+           	</tr>
+        <?php endforeach;?>
+      	</tbody>
+</table>
+
+<?php echo $this->getToolbarHtml()?>
+
+</div>
+<script type="text/javascript">decorateTable('my-transaction-table')</script>

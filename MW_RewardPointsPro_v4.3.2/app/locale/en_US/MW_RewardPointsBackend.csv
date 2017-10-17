@@ -1,0 +1,393 @@
+//reward point backend
+//Admin Menu
+Reward Points,Reward Points
+Earning Rules,Earning Rules
+Catalog Rules,Catalog Rules
+Product Reward Points,Product Reward Points
+Shopping Cart Rules,Shopping Cart Rules
+Customer Behavior Rules,Customer Behavior Rules
+Sell Products in Points,Sell Products in Points
+Spending Rules,Spending Rules
+Transaction History,Transaction History
+Customer Reward Points,Customer Reward Points
+Reports,Reports
+Configuration,Configuration
+Catalog Earning Rules,Catalog Earning Rules
+
+
+// report
+
+Total Rewarded,Total Rewarded
+Total Redeemed,Total Redeemed
+Number of Orders,Number of Orders
+Number of Sign Ups,Number of Sign Ups
+Number of Customers,Number of Customers
+Rewarded on Purchases,Rewarded on Purchases
+Rewarded on Sign-Ups,Rewarded on Sign-Ups
+Rewarded on Subscribers,Rewarded on Subscribers
+Rewarded on Reviews,Rewarded on Reviews
+Other Rewards,Other Rewards
+Total Transactions,Total Transactions
+Avg Redeemed per Order,Avg Redeemed per Order
+Total Sales,Total Sales
+Total Point Discount,Total Point Discount
+Total Discount,Total Discount
+
+Fixed Reward Points,Fixed Reward Points
+Total Points,Total Points
+You Earn,You Earn
+Fixed Reward Points for whole cart,Fixed Reward Points for whole cart
+Buy X get Y Reward Points,Buy X get Y Reward Points
+Buy X Allow to Use Y Reward Points,Buy X Allow to Use Y Reward Points
+Allow to Use Unlimited Points,Allow to Use Unlimited Points
+Allow to Use Fixed Reward Points,Allow to Use Fixed Reward Points
+Do Not Allow to Use Reward Points,Do Not Allow to Use Reward Points
+Catalog Reward Rules,Catalog Reward Rules
+Apply Rules,Apply Rules
+Add New Rule,Add New Rule
+No Catalog Reward Rules Found,No Catalog Reward Rules Found
+Enable and Save rule to activate,Enable and Save rule to activate
+Apply the rule only if the following conditions are met for the entire cart (leave blank for all products),Apply the rule only if the following conditions are met for the entire cart (leave blank for all products)
+Fixed Reward Points (X),Fixed Reward Points (X)
+Spend Y Get X Reward Points,Spend Y Get X Reward Points
+Fixed Reward Points (X) for Whole Cart,Fixed Reward Points (X) for Whole Cart
+Reward Points (X),Reward Points (X)
+Per (Y) dollars Spent ,Per (Y) dollars Spent 
+Skip if Fixed Reward Points chosen,Skip if Fixed Reward Points chosen
+Set Product Reward Points,Set Product Reward Points
+Promotional Message,Promotional Message
+Choose Yes under Configuration / Display Configuration to display,Choose Yes under Configuration / Display Configuration to display
+Promotional Banner,Promotional Banner
+Apply the rule only if the following conditions are met for the entire cart (leave blank for all products),Apply the rule only if the following conditions are met for the entire cart (leave blank for all products)
+Apply the rule only to <u>cart items</u> matching the following conditions (leave blank for all items),Apply the rule only to <u>cart items</u> matching the following conditions (leave blank for all items)
+Use default point expiration time,Use default point expiration time
+Set in Configuration / General Settings,Set in Configuration / General Settings
+Allow to use fixed Reward Points (X) per order,Allow to use fixed Reward Points (X) per order
+Spend (Y) to allow to use Reward Points (X),Spend (Y) to allow to use Reward Points (X)
+Customer Accounts,Customer Accounts
+Manually Adjust Reward Point Balance,Manually Adjust Reward Point Balance
+All Transaction History,All Transaction History
+Customer Balance,Customer Balance
+Rule Name,Rule Name
+Start Date,Start Date
+End Date,End Date
+Priority,Priority
+Apply,Apply
+points,points
+Description,Description
+Store View,Store View
+Customer Groups,Customer Groups
+Status,Status
+Action,Action
+Action (Manage Points),Action (Manage Points)
+Edit,Edit
+Save Rule,Save Rule
+Delete Rule,Delete Rule
+Edit Rule '%s',Edit Rule '%s'
+New Rule,New Rule
+Rule Information,Rule Information
+Conditions,Conditions
+Reward Points Using the Following,Reward Points Using the Following
+Allow reward points using the following information,Allow reward points using the following information
+Reward Points (Y),Reward Points (Y)
+Reward Point Step (Buy X dollars),Reward Point Step (Buy X dollars)
+Stop Further Rules Processing,Stop Further Rules Processing
+Conditions (leave blank for all products),Conditions (leave blank for all products)
+catalog reward rules does not exist,catalog reward rules does not exist
+The catalog reward rule has successfully saved,The catalog reward rule has successfully saved
+The catalog reward rules have been applied.,The catalog reward rules have been applied.
+Unable to find catalog rule to save,Unable to find catalog rule to save
+Unable to apply rules.,Unable to apply rules.
+The catalog rule has successfully deleted,The catalog rule has successfully deleted
+Please select catalog rule(s),Please select catalog rule(s)
+Total of %d record(s) were successfully updated,Total of %d record(s) were successfully updated
+Save Product Reward Points,Save Product Reward Points
+Products,Products
+Reward Points Earned,Reward Points Earned
+Individual Reward Points,Individual Reward Points
+"Individual Reward Points <br /><div style=width: 700px; font-size: 11px;"">Reward Points for products take priority over catalog rules. (Shopping cart rules may still apply)</div>""","Individual Reward Points <br /><div style=width: 700px; font-size: 11px;"">Reward Points for products take priority over catalog rules. (Shopping cart rules may still apply)</div>"""
+"Product Reward Points <br /><div style=width: 700px; font-size: 11px;"">Reward Points for products take priority over catalog rules. (Shopping cart rules may still apply)</div>""","Product Reward Points <br /><div style=width: 700px; font-size: 11px;"">Reward Points for products take priority over catalog rules. (Shopping cart rules may still apply)</div>"""
+Promotion Message,Promotion Message
+Promotion Banner,Promotion Banner
+The reward points has successfully saved,The reward points has successfully saved
+The reward points has been saved successfully!,The reward points has been saved successfully!
+Unable to find product to save,Unable to find product to save
+Import Product Reward Points,Import Product Reward Points
+Website,Website
+"CSV (Product Id, SKUs, Reward Points)","CSV (Product Id, SKUs, Reward Points)"
+"CSV (Customer Id, Customer Email, Reward Points,Comment)","CSV (Customer Id, Customer Email, Reward Points,Comment)"
+CSV File,CSV File
+At rows %s reward points must be numeric,At rows %s reward points must be numeric
+At rows %s product is not avaiable,At rows %s product is not avaiable
+Some errors occur while importing points,Some errors occur while importing points
+Your file was imported successfuly,Your file was imported successfuly
+Please select a file to import,Please select a file to import
+Shopping Cart Reward Rule,Shopping Cart Reward Rule
+No Shopping Cart Spending Rule Found,No Shopping Cart Spending Rule Found
+No Shopping Cart Earning Rule Found,No Shopping Cart Earning Rule Found
+Rule does not exist,Rule does not exist
+The rule has successfully saved,The rule has successfully saved
+Unable to find rule to save,Unable to find rule to save
+The rule has successfully deleted,The rule has successfully deleted
+Manage Customer Behavior Rules,Manage Customer Behavior Rules
+Transaction Type,Transaction Type
+Customer Behavior Rule,Customer Behavior Rule
+General information,General information
+Customer activity,Customer activity
+Reward for,Reward for
+Use default expired time config,Use default expired time config
+Expiration dates of point,Expiration dates of point
+Referral Link,Referral Link
+Format x (fixed number of points) or x/y (earning x points for every y monetary units of total order value),Format x (fixed number of points) or x/y (earning x points for every y monetary units of total order value)
+Format x (fixed number of points) or x/y (earn x points for every y monetary units spent),Format x (fixed number of points) or x/y (earn x points for every y monetary units spent)
+Shopping Cart Spending Rules,Shopping Cart Spending Rules
+Spend Point (Y),Spend Point (Y)
+Spend Point Step (Buy X),Spend Point Step (Buy X)
+No Transaction Found,No Transaction Found
+Created Time,Created Time
+Customer Email,Customer Email
+Customer Name,Customer Name
+Amount,Amount
+Balance,Balance
+Transaction Detail,Transaction Detail
+Manage Members,Manage Members
+Import Reward Points,Import Reward Points
+Save Member,Save Member
+Rewardpoints Member Information,Rewardpoints Member Information
+Change Reward Points Of Customer,Change Reward Points Of Customer
+Reward Points Information,Reward Points Information
+Change Reward Points Of Customer,Change Reward Points Of Customer
+Comment,Comment
+Pending,Pending
+Complete,Complete
+Subtraction,Subtraction
+Addition,Addition
+Uncomplete,Uncomplete
+Enabled,Enabled
+Disabled,Disabled
+Member does not exist,Member does not exist
+The member has successfully saved,The member has successfully saved
+Unable to find member to save,Unable to find member to save
+Manage Reward Points,Manage Reward Points
+Use Reward Points To Sell Products,Use Reward Points To Sell Products
+Date Event,Date Event
+Leave blank for no time restriction,Leave blank for no time restriction
+'Set Further Rules Processing' under 'Actions','Set Further Rules Processing' under 'Actions'
+Set priority under 'Rule Information',Set priority under 'Rule Information'
+Shopping Cart Earning Rule,Shopping Cart Earning Rule
+Set Reward Points,Set Reward Points
+Reward Point Spending Rules,Reward Point Spending Rules
+
+
+
+//transaction type
+Signing Up Newsletter,Signing Up Newsletter
+Posting Product Review,Posting Product Review
+Purchase Product,Purchase Product
+Referral Visitor (Friend click on referral link),Referral Visitor (Friend click on referral link)
+Referral Sign-Up,Referral Sign-Up
+First Referral Purchase,First Referral Purchase
+Receive From Friend,Receive From Friend
+Send Points To Friend,Send Points To Friend
+Checkout An Order,Checkout An Order
+Exchange To Credit,Exchange To Credit
+Use To Checkout,Use To Checkout
+Add By Admin,Added By Admin
+Subtract By Admin,Subtract By Admin
+Exchange From Credit,Exchange from credit
+Next Referral Purchases,Next Referral Purchases
+Voting Poll,Voting Poll
+Tagging product,Tagging product
+Signing Up Newsletter,Signing Up Newsletter
+Buy Reward Points,Buy Reward Points
+Facebook Like,Facebook Like
+Facebook Send Message,Facebook Send Message
+Customer Birthday,Customer Birthday
+Special Events,Special Events
+Posting Testimonial,Posting Testimonial
+Custom Reward,Custom Reward
+Tagging Product,Tagging Product
+Coupon Code,Coupon Code
+
+
+//transaction detail
+Reward for Registering,Reward for Registering
+Reward for Signing up Newsletter,Reward for Signing up Newsletter
+Reward for Posting Product Review,Reward for Posting Product Review
+Reward for Voting in a Poll,Reward for Voting in a Poll
+Reward for Your Birthdays,Reward for Your Birthdays
+Reward for Special Events: (<b>%s</b>),Reward for Special Events: (<b>%s</b>)
+Reward for Facebook Like: (<b><a href='%s'>Visit Link</a></b>),Reward for Facebook Like: (<b><a href='%s'>Visit Link</a></b>)
+Reward for Facebook Send: (<b><a href='%s'>Visit Link</a></b>),Reward for Facebook Send: (<b><a href='%s'>Visit Link</a></b>)
+Reward Referral Visitors: (<b>%s</b>),Reward Referral Visitors: (<b>%s</b>)
+Reward Referral Sign-Ups: (<b>%s</b>),Reward Referral Sign-Ups: (<b>%s</b>)
+Reward for reviewing product <b><a href='%s'>%s</a></b>,Reward for reviewing product <b><a href='%s'>%s</a></b>
+Reward for purchasing product <b><a href='%s'>%s</a></b>,Reward for purchasing product <b><a href='%s'>%s</a></b>
+Reward for purchasing product <b><a href='%s'>%s</a></b> in order <b><a href='%s'>#%s</a></b>,Reward for purchasing product <b><a href='%s'>%s</a></b> in order <b><a href='%s'>#%s</a></b>
+Reward for friend visiting referral link: (<b>%s</b>),Reward for friend visiting referral link: (<b>%s</b>)
+Reward for friend registering: (<b>%s</b>),Reward for friend registering: (<b>%s</b>)
+Reward for the first purchase of friend (<b>%s</b>),Reward for the first purchase of friend (<b>%s</b>)
+Reward for purchase of a friend (<b>%s</b>),Reward for purchase of a friend (<b>%s</b>)
+Receive points from friend (<b>%s</b>),Receive points from friend (<b>%s</b>)
+Send points to friend (<b>%s</b>),Send points to friend (<b>%s</b>)
+Reward for checkout order <b><a href='%s'>#%s</a></b>,Reward for checkout order <b><a href='%s'>#%s</a></b>
+Exchange to %s credits,Exchange to %s credits
+Use to checkout order <b><a href='%s'>#%s</a></b>,Use to checkout order <b><a href='%s'>#%s</a></b>
+Added by admin: <i>%s</i>,Added by admin: <i>%s</i>
+Subtracted by admin: <i>%s</i>,Subtracted by admin: <i>%s</i>
+Exchange from credit,Exchange from credit
+Reward for filling out poll,Reward for filling out poll
+Reward for signing up for newsletter,Reward for signing up for newsletter
+The sendding points to friend(<strong>%s</strong>) was expired,The sendding points to friend(<strong>%s</strong>) was expired
+You get back used points for order <a href='%s'><strong>#%s</strong></a> (refunded),You get back used points for order <a href='%s'><strong>#%s</strong></a> (refunded)
+Subtract earned points for order <a href='%s'><strong>#%s</strong></a> (refunded),Subtract earned points for order <a href='%s'><strong>#%s</strong></a> (refunded)
+Subtract earned points for product <b><a href='%s'>%s</a></b> (refunded),Subtract earned points for product <b><a href='%s'>%s</a></b> (refunded)
+You add new tag <strong>%s</strong>,Add new tag <strong>%s</strong>
+Subtract earned points for purchase of friend (<b>%s</b>) (refunded),Subtract earned points for purchase of friend (<b>%s</b>) (refunded)
+Reward for checkout order <b><a href='%s'>#%s</a></b><br>,Reward for checkout order <b><a href='%s'>#%s</a></b><br>
++%s points (%s) <br>,+%s points (%s) <br>
++%s points for product: %s <br>,+%s points for product: %s <br>
+Reward for you like the page: (<b>%s</b>),Reward for you like the page: (<b>%s</b>)
+Reward for you send message on page: (<b>%s</b>),Reward for you send message on page: (<b>%s</b>)
+Reward for customer birthday,Reward for customer birthday
+Reward for special event: (<b>%s</b>),Reward for special event: (<b>%s</b>)
+Subtract earned points for expriring points,Subtract earned points for expriring points
+Points expiration of transaction ID #%s,Points expiration of transaction ID #%s
+%s points will be expired on %s,%s points will be expired on %s
+Posting Testimonial Id %s,Posting Testimonial Id %s
+Reward for Tagging Product <b><a href='%s'>%s</a></b>,Reward for Tagging Product <b><a href='%s'>%s</a></b>
+
+
+
+//reward points configuration
+Point Step,Point Step
+Redeem points in increments of:,Redeem points in increments of:
+"Increment must be in integer. Ex 5: Redeem points  in groups of 5. 5,10,15 etc.","Increment must be in integer. Ex 5: Redeem points  in groups of 5. 5,10,15 etc."
+Point step must be integer,Point step must be integer
+Allow redeemed points to apply to tax,Allow redeemed points to apply to tax
+Allow redeemed points to apply to shipping,Allow redeemed points to apply to shipping
+Minimum points required to be redeemed per purchase,Minimum points required to be redeemed per purchase
+Maximum Points allowed per account,Maximum Points allowed per account
+Add reward points to account balance when order status is,Add reward points to account balance when order status is
+Subtract earned points when order is refunded,Subtract earned points when order is refunded
+Restore redeemed points when order is refunded,Restore redeemed points when order is refunded
+Default Comment for CSV Point Imports,Default Comment for CSV Point Imports
+Default Comment when importing points from CSV file,Default Comment when importing points from CSV file
+Apply Reward Points,Apply Reward Points
+Default Reward Point Expiration (in days),Default Reward Point Expiration (in days)
+Enter 0 or leave the field empty if Reward Points do not expire,Enter 0 or leave the field empty if Reward Points do not expire
+Reward Points policy page,Reward Points policy page
+Reward Points Icon,Reward Points Icon
+Display Reward Points Icon,Display Reward Points Icon
+"Default is No. If Yes, Reward Point Icon replaces Unit name of Reward Points.","Default is No. If Yes, Reward Point Icon replaces Unit name of Reward Points."
+Create message in Earning Rules / Shopping Cart Rules,Create message in Earning Rules / Shopping Cart Rules
+Sending point transaction to expire after (set hours) if not accepted by friend,Sending point transaction to expire after (set hours) if not accepted by friend
+Email Notifications,Email Notifications
+Balance Update Email Template,Balance Update Email Template
+Reward Points Expiration Email Template,Reward Points Expiration Email Template
+Points for Customer's Birthday Email Template,Points for Customer's Birthday Email Template
+Sending Points Email Template,Sending Points Email Template
+Reminder email sent before points expire (in # of days),Reminder email sent before points expire (in # of days)
+Reward Points Pro,Reward Points Pro
+General,General
+Enable Reward Points,Enable Reward Points Pro
+Point-Currency Exchange Rate,Point-Currency Exchange Rate
+Points/Currency Exchange Rate,Points/Currency Exchange Rate
+Point-Credit Exchange Rate,Point-Credit Exchange Rate
+Format x/y (x points / y monetary units). X and Y must be integer.,Format x/y (x points / y monetary units). X and Y must be integer.
+Apply reward point,Apply reward point
+Before Discount,Before Discount
+After Discount,After Discount
+Add reward point to account balance when order state is,Add reward point to account balance when order state is
+Subtract reward point from account balance when order status is,Subtract reward point from account balance when order status is
+Extend shopping cart page,Extend shopping cart page
+Default: No (Only set Yes if there is no other module extends shopping cart page to avoid conflict),Default: No (Only set Yes if there is no other module extends shopping cart page to avoid conflict)
+Reward Points Expire in (days),Reward Points Expire in (days)
+Enter 0 or leave the field empty if not expire,Enter 0 or leave the field empty if not expire
+Number of Customers for Running Cron,Number of Customers for Running Cron
+Allow Reward Points For Products,Allow Reward Points For Products
+Display Configuration,Display Configuration
+Display reward point image,Display reward point image
+"Default is No. If Yes, not display unit name of reward point.","Default is No. If Yes, not display unit name of reward point."
+Unit name of reward points,Unit name of reward points
+Position of unit name,Position of unit name
+Before Point Value,Before Point Value
+After Point Value,After Point Value
+Reward points image,Reward points image
+Default option image size,Default option image size
+Display Point Icon,Display Point Icon
+Point Icon,Point Icon
+Reward Icon,Reward Icon
+Link Reward Icon To,Link Reward Icon To
+Display Promotion Message,Display Promotion Message
+Display Promotion Banner,Display Promotion Banner
+Default Banner Size,Default Banner Size
+Default is 900 x 120.,Default is 900 x 120.
+Send Reward Points,Send Reward Points
+Allow sending points to friends,Allow sending points to friends
+Expire sending transaction after (hour),Expire sending transaction after (hour)
+Points Payment Method Setting,Points Payment Method Setting
+Enter 0 or leave the field empty if not require  (not recommend),Insert 0 or leave the field empty if not require  (not recommended)
+FaceBook Config,FaceBook Config
+Site Name,Site Name
+"When a customer likes"" your product"," it will read ""[Customer] likes [product name] on [site name]."" Leave this blank if you would like it to read ""[Customer Name] likes [product name]"".""","When a customer likes"" your product"," it will read ""[Customer] likes [product name] on [site name]."" Leave this blank if you would like it to read ""[Customer Name] likes [product name]""."""
+FaceBook Application Id and Key,FaceBook Application Id and Key
+FaceBook Like Button Language,FaceBook Like Button Language
+Send An Email To Customer,Send a notification email to sender
+Send An Email To Recipient,Send a notification email to recipient
+Email Sender,Email Sender
+System will use this address to sent email,System will use this address to send email
+Customer's Email Template,Customer's Email Template
+Recipient's Email Template,Recipient's Email Template
+Exchange To Credit,Exchange point to credit
+Allow to exchange points to credit,Allow to exchange points to credit
+Using Reward Points,Using Reward Points
+Sharing Reward Points,Sharing Reward Points
+Email Notification,Email Notification
+Enable notifications,Enable notifications
+Balance update email,Balance update email
+Points expiration email,Points expiration email
+Points for customer's birthday email,Points for customer's birthday email
+Sending Points email,Sending Points email
+Email sending before points expiring (in days),Email sending before points expiring (in days)
+Sending reward points email,Sending reward points email
+Notify customers by default,Notify customers by default
+"Default is No. If Yes, automatically send email notification of balance change to customer.","Default is No. If Yes, automatically send email notification of balance change to customer."
+Capcha,Capcha
+Enable Capcha,Enable Capcha
+Background Image,Background Image
+Background Color,Background Color
+Default value : FFFFFF,Default value : FFFFFF
+Capcha Image Width (px),Capcha Image Width (px)
+Default value : 255,Default value : 255
+Capcha Image Height (px),Capcha Image Height (px)
+Default value : 50,Default value : 50
+Perturbation,Perturbation
+Default value : 0.7,Default value : 0.7
+Code length (px),Code length (px)
+Default value : 7,Default value : 7
+Text Color,Text Color
+Default value : FF7F27,Default value : FF7F27
+Use Transparent Text,Use Transparent Text
+Text Transparency Percentage,Text Transparency Percentage
+100 = completely transparent,100 = completely transparent
+Number of lines,Number of lines
+Enter 0 or leave the field empty if not require,Enter 0 or leave the field empty if not require
+Line Color,Line Color
+Default value : E8E8E8,Default value : E8E8E8
+Use Word List,Use Word List
+if select yes the capcha code will show a random word or random code,"if select yes, the capcha code will show a random word or random code"
+Author Information,Author Information
+Tier Reward Point,Tier Reward Point
+Fix Reward Points,Fix Reward Points
+Disable All,Disable All
+Uncomplete,Uncomplete
+Reward Point Api,Reward Point Api
+Get customer id by customer email,Get customer id by customer email
+Get Balance by Email,Get Balance by Email
+Get Balance by Customer id,Get Balance by Customer id
+Update Points for a Customer,Update Points for a Customer
+Invitation email template,Invitation email template
+Add option to show credit info,Add option to show credit info
+Ex: You will earn 100 points ($10),Ex: You will earn 100 points ($10)
+Condition only applies to Shopping cart rules. For Catalog rules change RP in Individual Reward Point Earning Rule or create new RP Catalog Rule,Condition only applies to Shopping cart rules. For Catalog rules change RP in Individual Reward Point Earning Rule or create new RP Catalog Rule

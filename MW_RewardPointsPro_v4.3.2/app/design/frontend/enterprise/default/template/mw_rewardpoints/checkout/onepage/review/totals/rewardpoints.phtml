@@ -1,0 +1,12 @@
+<?php $quote = Mage::getSingleton('checkout/session')->getQuote();
+	  $store_id = Mage::app()->getStore()->getId();
+	  $rewardpoints = $quote->getMwRewardpoint();
+	  $earn_rewardpoint = (int)$quote->getEarnRewardpoint();
+
+
+   if($earn_rewardpoint):?>
+	<tr>
+	    <td colspan="3" class="a-right" colspan="1"><?php echo Mage::helper("rewardpoints")->__("You Earn");?></td>
+	    <td class="a-right"><span class="price"><?php echo Mage::helper('rewardpoints')->formatPoints($earn_rewardpoint,$store_id)?></span></td>
+	</tr>
+<?php endif;?>

@@ -1,0 +1,26 @@
+<?php if(Mage::helper('rewardpoints')->moduleEnabled()){?>
+<?php $store_id = Mage::app()->getStore()->getId();?>
+<div class="dashboard">
+    <div class="box-account box-info account-box ad-account-info">
+        <div class="head box-head">
+		<h2 style="background: none;padding: 0px;"><?php echo Mage::helper('rewardpoints/data')->getRewardIconHtml($store_id).$this->__('Reward Points Information') ?></h2>
+        </div>
+
+		<table>
+			<tr><td>
+					<?php $store_id = Mage::app()->getStore()->getId();?>
+					<p class="amount"><?php echo $this->__('Your Reward Points: <strong>%s</strong> = <strong>%s</strong>',Mage::helper('rewardpoints')->formatPoints($this->getRewardPoints(),$store_id),$this->getMoney($store_id)) ?></p>
+					    <?php $rate = $this->getPointPerMoney($store_id);?>
+					<p class="amount"><?php echo $this->__('Points/Currency Exchange Rate: <strong>%s</strong> = <strong>%s</strong>',Mage::helper('rewardpoints')->formatPoints($rate[0],$store_id),$this->formatMoney($rate[1]) ) ?></p>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var exchangeForm = new VarienForm('frm_exchange_rewardpoints', true);
+    //]]>
+</script>
+<?php }?>

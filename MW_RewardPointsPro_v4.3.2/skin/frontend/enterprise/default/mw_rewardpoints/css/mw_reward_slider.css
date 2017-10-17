@@ -1,0 +1,50 @@
+
+#mw_reward_incr_handle, #mw_reward_decr_handle{
+	width: 20px;
+	height: 18px;
+	float:left;
+	margin-top: 2px;
+}
+
+#mw_reward_incr_handle{
+	background: url("../images/incr.gif") no-repeat scroll 0 0 transparent;
+	position: absolute;
+	right: -20px;
+}
+
+#mw_reward_incr_handle:HOVER{
+	background: url("../images/incr_hover.gif") no-repeat scroll 0 0 transparent;
+}
+
+#mw_reward_decr_handle{
+	background: url("../images/decr.gif") no-repeat scroll 0 0 transparent;
+	position: absolute;
+	margin-left: -20px;
+}
+
+#mw_reward_decr_handle:HOVER{
+	background: url("../images/decr_hover.gif") no-repeat scroll 0 0 transparent;
+}
+
+.mw_reward_select { 
+	background: url("../images/slider_handle.gif") no-repeat scroll 0 0 transparent; 
+	font-weight: normal; 
+	color: #555555;
+	min-height: 16px;
+	cursor: default;
+    height: 2em;
+    margin-top: 4px;
+    position: absolute;
+    width: 0.9em;
+    z-index: 2;
+}
+
+.mw_reward_slider_contaner{
+	background:url(../images/slider_rail.gif) repeat-x scroll 0 0 transparent;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-left:20px;
+	padding-right: 10px;
+	position: relative;
+	min-height: 16px;
+}

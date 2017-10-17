@@ -1,0 +1,94 @@
+<form id="form-validate" method="post" action="<?php echo $this->getUrl('rewardpoints/invitation/invite')?>">
+	<div class="fieldset group-select">
+        <h2 class="legend"><?php echo $this->__('Connect & Share');?></h2>
+        <span><?php echo $this->__('With friends on Facebook, Twitter, or Google.') ?></span>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="customer-name">
+				    <div class="name-firstname">
+				        <?php $url = Mage::helper('rewardpoints')->getLink(Mage::getModel('customer/session')->getCustomer());?>
+				        
+				        <div style = "padding-top: 10px;">
+		        			<!-- AddThis Button BEGIN -->
+							<div class="addthis_toolbox addthis_default_style addthis_32x32_style"
+								addthis:url="<?php echo $url;?>"
+						        addthis:title="<?php echo $url; ?>"
+						        addthis:description="<?php echo $url; ?>">
+							<a class="addthis_button_preferred_1"></a>
+							<a class="addthis_button_preferred_2"></a>
+							<a class="addthis_button_preferred_3"></a>
+							<a class="addthis_button_preferred_4"></a>
+							<!--  <a class="addthis_button_compact"></a>-->
+							<a href="http://www.addthis.com/bookmark.php?v=250&pubid={YOUR_PROFILE_ID}" class="addthis_button_compact"></a> 
+							<a class="addthis_counter addthis_bubble_style"></a>
+							</div>
+							<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-500a790c6c746380"></script>
+						</div>
+						
+				    </div>
+				</div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="fieldset group-select">
+        <h2 class="legend"><?php echo $this->__('Referral Link');?></h2>
+        <span><?php echo $this->__('Copy + paste your personal link into your blog, email or IM.') ?></span>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="customer-name">
+				    <div>
+				        <?php $url = Mage::helper('rewardpoints')->getLink(Mage::getModel('customer/session')->getCustomer());?>
+						<div class="div_share">
+							<input type="text" value="<?php echo $url ?>" style="width:580px" onclick="this.select()">
+							<div class="clear_both"><span> </span></div>						
+						</div>
+				    </div>
+				</div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="fieldset group-select">
+        <?php echo $this->getBlockHtml('formkey')?>
+        <h2 class="legend"><?php echo $this->__('Invite Friends Via Email');?></h2>
+        <span style="padding-bottom:10px;"><?php echo $this->__('Send invitation emails to your friends and family');?></span>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="customer-name">
+				    <div class="field input-box name-firstname">
+				        <label class="required" style="color:#666666; float: none; text-align: left;" for="email"><?php echo Mage::helper('rewardpoints')->__('Email of your friends');?><em style="color:#EB340A">*</em></label>
+				        <div class="input-box" style="float: none;">
+				            <textarea class="input-text required-entry" title="Email" name="email" id="email" style="width:580px; height:70px"></textarea>
+				            <?php 
+				            	$url = Mage::getUrl('rewardpoints/invitation/widget');
+				            	$url = substr($url,strpos($url,'/',7));
+				            ?>
+				            <div class="spr_comas" style="clear: both; padding: 10px 0px 0px 0px";>
+				          		<!--  <a href="#" onclick="showPlaxoABChooser('email', '<?php //echo $url;?>'); return false"><img src="<?php //echo $this->getSkinUrl('mw_invitation/images/add_button.gif')?>" alt="Add from my address book" /></a> -->
+				          		<a href="#" onClick="javascript:mw_popup_func();return false;"><img src="<?php echo $this->getSkinUrl('mw_rewardpoints/images/add_button.gif')?>" alt="Add from my address book" /></a>
+				            	<div><?php echo $this->__('Separate with commas (,)');?></div>
+				            </div>
+				        </div>
+				        <label class="required" style="color:#666666; float: none; text-align: left;" for="message"><?php echo Mage::helper('rewardpoints')->__('Message');?><em style="color:#EB340A">*</em></label>
+				        <div class="input-box" style="float: none;">
+				            <textarea class="input-text required-entry" title="Message" name="message" id="message" style="width:580px; height:200px"></textarea>
+				        </div>
+				    </div>
+				</div>
+            </li>
+        </ul>
+        <div class="buttons-set form-buttons">
+	        <button class="button form-button" title="<?php echo Mage::helper('rewardpoints')->__("Send");?>" type="submit"><span><span>  <?php echo Mage::helper('rewardpoints')->__("Send");?>  </span></span></button>			       
+	    </div>
+	     <p class="required"><?php echo Mage::helper('rewardpoints')->__("* Required Fields");?></p>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    function mw_popup_func(){
+		var popWin =  window.open('<?php echo $this->getUrl('rewardpoints/invitation/loginmail');?>','newwindow','toolbar=no,location=no,menubar=no,titlebar=no,status=yes,width=500,height=500,resizable=no,scrollbars=yes,top=0,left=0');
+	}
+    //]]>
+</script>

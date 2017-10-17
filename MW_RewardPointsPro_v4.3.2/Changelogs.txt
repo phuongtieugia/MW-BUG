@@ -1,0 +1,195 @@
+REWARD POINTS PRO - CHANGE LOGS
+-------------------------------
+Legend
+
++ New feature
+* Fix bug
+v4.3.1 (September 19, 2014)
++ New visual graphs report based on activities of rewarded points and redeemed points
+* Fix bug: Facebook like and share
+
+v4.3.0 (July 30, 2014)
++ Support multiple shipping for type of products: simple, configurable, bundle
++ Support set "Sell products in points" and "Individual earn point" for each item of products: configurable, grouped, bundled 
++ Add option to allow/disallow using points and default coupon code together
++ Allow to count TAX after/before redeem point
++ Edit text for"Sell products in points"
++ Compatible with Magento CE 1.9 and Magento EE 1.14
+* Fix bug still place order when balance not enough to purchase "Sell products in points"
+* Fix bug send email when balance decrease by refund
+
+v4.2.3 (March 12, 2014)
+* Fixed bug customer's balance has not enough point to purchase "Sell product in points" at Frontend
+* Fixed bug admin add points for Account be created in backend
+
+v4.2.2 (December 31, 2013)
++ Allow to calculate reward points before / after tax
+* Fixed bug maximum points per order
+
+v4.2.1 (December 05, 2013)
++ Upgrade for Magento 1.8
+* Fixed bug redeem point and press enter
+* Fixed bug error case Max point per account
+* Fixed bug sell product in point combined redeem point
+
+v4.1.9 (August 24, 2013)
++ Allow to use reward point in onepage checkout
++ auto disable the old invitation module (if any)
++ Optimize code
+* Fixed bug link email template store view
+* Fixed sql to upgrade from RWL
+* fixed bug cancelled order
+* fixed bug refund order
+* fixed bug relating to spend maximum points
+* edit Template_integration.txt 
+* secure_url invitation
+* fix bug earn point when register customer onepage checkout
+
+
+v4.1.0 <May 08, 2013>
+
++ Reward Points Report (Overview, Rewarded Points, Redeemed Points)
++ Allow to reward and redeem points in admin order editing page
++ Add the Reward Points tab in customer editing page
++ Show reward points info on customer account dashboard
++ Show pending points transaction in customer transaction history
++ Update convenience points slider using Prototype
++ Allow to use points at checkout
++ Show reward points in mini cart
++ Add option to show credit info. Ex: You will earn 100 points ($10)
++ Allow to set default comment and add specific comment while import customer reward points via CSV
++ Allow to set: Maximum points balance, Minimum points balance to be available to redeem, Apply Reward Point Before Tax or After Tax
++ Allow spending points on tax and shipping fee
++ Allow to define custom reward rule with referral link and coupon (for private / offline marketing)
+
+v3.0.6 <March 08, 2013>
+
++ Update promotion message (display) 
++ Update reward points block in shopping cart
++ Edit custom rule link
++ Update webservice API
++ Add email templates: points expiration email, points for customer's birthday email
++ Points Expiry for Customer Behavior Rule
++ Update text / labels and CSV translation file
+* Fix bug catalog rule (showing points)
+* Fix bug many products in catalog rule
+
+v3.0<January 10, 2013>
+
++ Points Expiry
++ Reward Points Payment Method
++ Reward for customer birthdays
++ Reward for special events. 
++ Reward for Facebook Like
++ Reward for Facebook Send
++ Sell product using points only
++ Web service API Support
++ Support promotion messages / banners on shopping cart page
++ Show detail earning points (Rule description). 
+
+v2.0.6 <december 8,1012>
+
++ fix bug bundle product
+
+v2.0.5.1 <december 7,1012>
+
++ fix bug max point checkout
+
+v2.0.5 <november 29,1012>
+
++ add reward icon
+
+v2.0.4 <november 10,1012>
+
++ add type rule earn point cart: Fixed Reward Points for whole cart
+
+v2.0.3 <november 06,1012>
+
+- fix bug text
+
+v2.0.2 <october 27,1012>
+
+- Remove capcha when send points to friend
+- Send mail to customer when balance changed
+
+
+v2.0.1 <october 18,1012>
+
+- Fix bug
+
+
+
+
+v2.0 <october 6,1012>
+
+- earning rules : 
+	
++ catalog rules
+	
++ product reward point
+	
++ shoping cart rules
+    
++ activity rules
+
+- spending rules	
+
+
+
+v1.7.4
+- Fix bug discount reward point
+
+v1.7.3
+- Fix bug tax
+
+v1.7.2
+- fix bug payment
+- fix bug customer register when reward point offline
+- fix bug css slider bar
+v1.6.11
+- fix without showing points if customer enought points to use only points to checkout order
+v1.6.10
+- Fix tax issues with multiple currency
+- Fix some error about earn point with multiple currency
+v1.6.9
+- Fix Tax issues
+v1.6.8.3
+- Update transaction history in backend
+v1.6.8.2
+- fix some bug
+v1.6.8.1
+- fix earning zero points when referral purchase product.
+v1.6.8
+- Update transaction history
+
+v1.6.7.3
+- Fix can't create invoice
+- Fix displaying zero reward points discount.
+
+v1.6.7.2
+- Fix text/label translation issues
+
+v1.6.7
++ Support checking out on Paypal Express
++ Update text/labels and translation file
+
+v1.6.5
+- Add link to log in page (at the step /Use your reward points/)
+- Check and correct spelling and grammar.
+- Update comment in transaction history
+
+v1.6
+- Correct the display of Reward Points Discount, Total Paid on order view page, invoice view page, print invoice
+
+v1.3.4
++ Allow to restrict other promotions when using reward points to checkout
++ Display earned reward point for specific product on category and product detail page
++ Allow to send invitation via customer email
+
+v1.3.2
++ Use point slider when checkout instead of input box
++ Allow to configure point currency (point, gold...)
++ Support earning point when vote poll
+
+v1.1
++ Extension Release

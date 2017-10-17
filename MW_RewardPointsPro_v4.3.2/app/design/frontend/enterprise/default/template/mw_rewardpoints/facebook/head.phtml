@@ -1,0 +1,49 @@
+<?php //if($this->getEnable() && $this->getCustomerId()){?>
+<?php if($_product = Mage::registry('current_product')){?>
+<meta property="og:title" content="<?php echo htmlspecialchars($_product->getName()) ?>"/>
+<meta property="og:type" content="product"/>
+<meta property="og:url" content="<?php echo $this->getCurrentUrl() ?>"/>
+<?php if($_product->getImage() != 'no_selection' && $_product->getImage()){ ?>
+<meta property="og:image" content="<?php echo Mage::helper('catalog/image')->init($_product, 'image') ?>"/>
+<?php } ?>
+<?php if(($_description = $_product->getShortDescription()) || ($_description = $_product->getDescription())){?>
+<meta property="og:description" content="<?php echo htmlspecialchars(strip_tags($_description)) ?>"/>
+<?php } ?>
+<?php if($app_id = $this->getAppId()){?>
+<meta property="fb:app_id" content="<?php echo $app_id ?>"/>
+<?php }?>
+<?php if($site_name = $this->getSiteName()){?>
+<meta property="og:site_name" content="<?php echo htmlspecialchars($site_name) ?>"/>
+<?php }?>
+<?php }elseif ($_category = Mage::registry('current_category')){ ?>
+	<meta property="og:title" content="<?php echo htmlspecialchars($_category->getName()) ?>"/>
+	<meta property="og:type" content="product"/>
+	<meta property="og:url" content="<?php echo $this->getCurrentUrl() ?>"/>
+	<?php if($_categoryImage = $_category->getImageUrl()){ ?>
+	<meta property="og:image" content="<?php echo $_category->getImageUrl() ?>"/>
+	<?php } ?>
+	<?php if($_description = $_category->getDescription()){?>
+	<meta property="og:description" content="<?php echo htmlspecialchars(strip_tags($_description)) ?>"/>
+	<?php } ?>
+	<?php if($app_id = $this->getAppId()){?>
+	<meta property="fb:app_id" content="<?php echo $app_id ?>"/>
+	<?php }?>
+	<?php if($site_name = $this->getSiteName()){?>
+	<meta property="og:site_name" content="<?php echo htmlspecialchars($site_name) ?>"/>
+	<?php }?>
+<?php } elseif (Mage::getSingleton('cms/page')->getId()){ ?>
+	<?php $_page = Mage::getSingleton('cms/page'); ?>
+	<meta property="og:title" content="<?php echo htmlspecialchars($_page->getTitle()) ?>"/>
+	<meta property="og:type" content="article"/>
+	<meta property="og:url" content="<?php echo $this->getCurrentUrl() ?>"/>
+	<?php if($_description = $_page->getMetaDescription()){?>
+	<meta property="og:description" content="<?php echo htmlspecialchars(strip_tags($_description)) ?>"/>
+	<?php } ?>
+	<?php if($app_id = $this->getAppId()){?>
+	<meta property="fb:app_id" content="<?php echo $app_id ?>"/>
+	<?php }?>
+	<?php if($site_name = $this->getSiteName()){?>
+	<meta property="og:site_name" content="<?php echo htmlspecialchars($site_name) ?>"/>
+<?php }?>
+<?php } ?>
+<?php //}?>

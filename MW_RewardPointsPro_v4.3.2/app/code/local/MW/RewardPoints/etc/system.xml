@@ -1,0 +1,574 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <mageworld translate="label">
+            <label>Mage World</label>
+            <sort_order>100</sort_order>
+        </mageworld>
+    </tabs>
+    <sections>
+        <rewardpoints translate="label" module="rewardpoints">
+            <label>Reward Points Pro</label>
+            <tab>mageworld</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <config translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Reward Points</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+
+                        <!--  	<retrict_other_promotions translate="label">
+                                <label>Restrict Other Promotions</label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </retrict_other_promotions>-->
+
+                        <point_money_rate translate="label">
+                            <label>Points/Currency Exchange Rate</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Format x/y (x points / y monetary units). X and Y must be integer.</comment>
+                        </point_money_rate>
+                        <point_step translate="label">
+                            <label>Redeem points in increments of:</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Increment must be in integer. Ex 5: Redeem points in groups of 5. 5,10,15 etc.</comment>
+                        </point_step>
+                        <appy_reward_point translate="label">
+                            <label>Calculate Reward Points Earned</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/appyreward</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Condition only applies to Shopping cart rules. For Catalog rules change RP in Individual Reward Point Earning Rule or create new RP Catalog Rule</comment>
+                        </appy_reward_point>
+                        <appy_reward_point_tax translate="label">
+                            <label>Calculate Reward Points Earned</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/appyrewardtax</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </appy_reward_point_tax>
+                        <redeem_point_on_tax translate="label">
+                            <label>Calculate to TAX</label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_caltax</frontend_model>
+                            <source_model>rewardpoints/redeemtax</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </redeem_point_on_tax>
+                        <extend_cart translate="label">
+                            <label>Extend shopping cart page to display reward points block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: No (Only set Yes if there is no other module extends shopping cart page to avoid conflict)</comment>
+                        </extend_cart>
+                        <redeemed_tax translate="label">
+                            <label>Allow redeemed points to apply to tax</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <validate>required-entry</validate>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </redeemed_tax>
+                        <redeemed_shipping translate="label">
+                            <label>Allow redeemed points to apply to shipping</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <frontend_model>rewardpoints/adminhtml_system_config_redship</frontend_model>
+                            <validate>required-entry</validate>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </redeemed_shipping>
+                        <using_coupon_rwp translate="label">
+                            <label>Allow using reward points and coupon code at the same time</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <validate>required-entry</validate>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </using_coupon_rwp>
+                        <min_checkout>
+                            <label>Minimum points required to be redeemed per purchase</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 or leave empty if no limitations</comment>
+                        </min_checkout>
+                        <max_point_balance>
+                            <label>Maximum Points allowed per account</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 or leave empty if no limitations</comment>
+                        </max_point_balance>
+                        <status_add_reward_point translate="label">
+                            <label>Add reward points to account balance when order status is</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <validate>required-entry</validate>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </status_add_reward_point>
+                        <!--  <status_subtract_reward_point translate="label">
+                             <label>Subtract reward point from account balance when order state is</label>
+                             <frontend_type>select</frontend_type>
+                             <source_model>adminhtml/system_config_source_order_status</source_model>
+                             <validate>required-entry</validate>
+                             <sort_order>8</sort_order>
+                             <show_in_default>1</show_in_default>
+                             <show_in_website>1</show_in_website>
+                             <show_in_store>1</show_in_store>
+                         </status_subtract_reward_point> -->
+                        <subtract_reward_point translate="label">
+                            <label>Subtract earned points when order is refunded</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </subtract_reward_point>
+                        <restore_spent_points translate="label">
+                            <label>Restore redeemed points when order is refunded</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </restore_spent_points>
+
+                        <default_comment>
+                            <label>Default Comment when importing points from CSV file</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_comment>
+                        <expiration_days>
+                            <label>Default Reward Point Expiration (in days)</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enter 0 or leave the field empty if Reward Points do not expire</comment>
+                        </expiration_days>
+                        <!--<qty_customer>
+                            <label>Number of Customers for Running Cron</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-digits</validate>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 100</comment>
+                        </qty_customer>
+                         <enabled_product_reward_point>
+                            <label>Allow Reward Points For Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled_product_reward_point> -->
+                    </fields>
+                </config>
+                <display>
+                    <label>Display Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <point_curency>
+                            <label>Unit name of reward points</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </point_curency>
+                        <curency_position>
+                            <label>Position of unit name</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/position</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </curency_position>
+                        <reward_icon translate="label">
+                            <label>Reward Icon</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">mw_rewardpoint</upload_dir>
+                            <base_url type="media" scope_info="1">mw_rewardpoint</base_url>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reward_icon>
+                        <link_reward_icon_to>
+                            <label>Link Reward Icon To</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Reward Points policy page</comment>
+                        </link_reward_icon_to>
+                        <point_curency_image translate="label">
+                            <label>Reward Points Icon</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">mw_rewardpoint</upload_dir>
+                            <base_url type="media" scope_info="1">mw_rewardpoint</base_url>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </point_curency_image>
+                        <enable_image>
+                            <label>Display Reward Points Icon</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is No. If Yes, Reward Point Icon replaces Unit name of Reward Points.</comment>
+                        </enable_image>
+                        <show_credit_info>
+                            <label>Add option to show credit info</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Ex: You will earn 100 points ($10)</comment>
+                        </show_credit_info>
+                        <enable_message>
+                            <label>Display Promotion Message</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Create message in Earning Rules / Shopping Cart Rules</comment>
+                        </enable_message>
+                        <enable_banner>
+                            <label>Display Promotion Banner</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Upload banner under Earning Rules / Shopping Cart Rules</comment>
+                        </enable_banner>
+                        <banner_size translate="label">
+                            <label>Default Banner Size</label>
+                            <validate>validate-digits required-entry validate-greater-than-zero</validate>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_renderer_config_bannersize</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is 900 x 120.</comment>
+                        </banner_size>
+
+                    </fields>
+                </display>
+                <using_points>
+                    <label>Sharing Reward Points</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allow_send_reward_point_to_friend translate="label">
+                            <label>Allow sending points to friends</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allow_send_reward_point_to_friend>
+                        <time_life>
+                            <label>Sending point transaction to expire after (set hours) if not accepted by friend</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enter 0 or leave the field empty if not expire</comment>
+                        </time_life>
+                    </fields>
+                </using_points>
+                <facebook translate="label">
+                    <label>FaceBook Config</label>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!--  <enabled translate="label">
+                             <label>Enabled</label>
+                             <frontend_type>select</frontend_type>
+                             <source_model>adminhtml/system_config_source_yesno</source_model>
+                             <sort_order>1</sort_order>
+                             <show_in_default>1</show_in_default>
+                             <show_in_website>1</show_in_website>
+                             <show_in_store>1</show_in_store>
+                         </enabled>
+                         <site_name translate="label">
+                             <label>Site Name</label>
+                             <frontend_type>text</frontend_type>
+                             <sort_order>2</sort_order>
+                             <comment>When a customer "likes" your product, it will read "[Customer] likes [product name] on [site name]." Leave this blank if you would like it to read "[Customer Name] likes [product name]".</comment>
+                             <show_in_default>1</show_in_default>
+                             <show_in_website>1</show_in_website>
+                             <show_in_store>1</show_in_store>
+                         </site_name> -->
+                        <appid translate="label">
+                            <label>Facebook Application Id</label>
+                            <comment><![CDATA[ Get <a href="https://developers.facebook.com/apps" target="_blank">Facebook API</a> access info.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <!--  <validate>required-entry</validate>  -->
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </appid>
+                        <!--  <type translate="label">
+                            <label>Button Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/facebook_type</source_model>
+                            <sort_order>4</sort_order>
+                            <comment>Using the XFBML buttons requires a Facebook App ID. The benefit of XFBML buttons is that your customers can post comments at the time that they "like" your page.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </type>
+                       <lang translate="label">
+                            <label>FaceBook Like Button Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/facebook_lang</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lang>
+                        <send translate="label">
+                            <label>Send Button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <comment>Show a Send Button next to the Like Button. Requires use of the XFBML button type and a valid Application ID.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </send>  -->
+                    </fields>
+                </facebook>
+                <email_notifications translate="label">
+                    <label>Email Notifications</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!-- <enable_send_email_to_sender translate="label">
+                            <label>Send An Email To Customer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_send_email_to_sender>-->
+
+                        <enable_notifications translate="label">
+                            <label>Enable notifications</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_notifications>
+
+                        <email_sender>
+                            <label>Email Sender</label>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>System will use this address to sent email</comment>
+                        </email_sender>
+
+                        <!--   <sender_template>
+                             <label>Customer's Email Template</label>
+                             <frontend_type>select</frontend_type>
+                             <source_model>adminhtml/system_config_source_email_template</source_model>
+                             <sort_order>70</sort_order>
+                             <show_in_default>1</show_in_default>
+                             <show_in_website>1</show_in_website>
+                             <show_in_store>1</show_in_store>
+                         </sender_template>-->
+                        <points_balance>
+                            <label>Balance Update Email Template</label>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </points_balance>
+                        <points_expiration>
+                            <label>Reward Points Expiration Email Template</label>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </points_expiration>
+                        <points_birthday>
+                            <label>Points for Customer's Birthday Email Template</label>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </points_birthday>
+                        <recipient_template>
+                            <label>Sending Points Email Template</label>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </recipient_template>
+                        <!--   <enable_points_changed translate="label">
+                             <label>Notify customers by default</label>
+                             <frontend_type>select</frontend_type>
+                             <source_model>adminhtml/system_config_source_yesno</source_model>
+                             <sort_order>7</sort_order>
+                             <show_in_default>1</show_in_default>
+                             <show_in_website>1</show_in_website>
+                             <show_in_store>1</show_in_store>
+                             <comment>Default is No. If Yes, automatically send email notification of balance change to customer.</comment>
+                         </enable_points_changed>-->
+                        <invitation_email>
+                            <label>Invitation email template</label>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invitation_email>
+                        <expiration_days>
+                            <label>Reminder email sent before points expire (in # of days)</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-digits</validate>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enter 0 or leave the field empty if not require (not recommend)</comment>
+                        </expiration_days>
+                    </fields>
+                </email_notifications>
+
+                <author_information translate="label">
+                    <label>Author Information</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>The Reward Points Extension is developed and supported by &lt;a href="http://www.mage-world.com/"&gt;www.Mage-World.com&lt;/a&gt;.
+                        If you need any support or have any question, please contact us at &lt;a href="mailto:support@mage-world.com"&gt;support@mage-world.com.&lt;/a&gt;
+                    </comment>
+                </author_information>
+            </groups>
+
+        </rewardpoints>
+    </sections>
+</config>

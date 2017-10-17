@@ -1,0 +1,20 @@
+<?php
+
+$_order  = $this->getOrder();
+$_source = $this->getSource();
+$this->setPriceDataObject($_source); 
+
+$rewardOrder = Mage::getModel('rewardpoints/rewardpointsorder')->load($_order->getId());
+$store_id = Mage::getModel('sales/order')->load($_order->getId())->getStoreId();
+$earn_rewardpoint = (int)$rewardOrder->getEarnRewardpoint();
+
+if ($earn_rewardpoint){ ?>
+<tr>
+    <td class="label">
+        <?php echo Mage::helper('rewardpoints')->__('You Earn'); ?>
+    </td>
+    <td><?php echo Mage::helper('rewardpoints')->formatPoints($earn_rewardpoint,$store_id) ?></td>
+</tr>
+<?php };
+?>
+

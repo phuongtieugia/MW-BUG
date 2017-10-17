@@ -1,0 +1,5 @@
+<?php $store_id = Mage::app()->getStore()->getId();
+	  $currency = Mage::helper('rewardpoints')->getPointCurency($store_id);?>
+<ul>
+	<li><?php echo $this->__('The %s will not be added or subtracted if the transaction status is <b>Pending or Uncompleted</b>',$currency)?></li>	
+</ul>

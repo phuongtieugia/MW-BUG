@@ -1,0 +1,47 @@
+
+    <script type="text/javascript">
+   		 new SlideShow('mw_rewardpoint_promotion_banner');
+    </script>
+    <style type="text/css" media="screen">
+    
+    ul#mw_rewardpoint_promotion_banner {
+      margin-bottom: 15px;
+    }
+      
+      ul#mw_rewardpoint_promotion_banner li {
+        display: block;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        text-align: center;
+      }
+        
+        ul#mw_rewardpoint_promotion_banner li img {
+          border: 1px solid #333;
+        }
+        
+  	</style>
+    <?php
+		$height = 120;
+		$width = 900;
+		$store_id = Mage::app()->getStore()->getId();
+		$banner_size_config = Mage::helper('rewardpoints/data')->getPromtionBannerSize($store_id);
+		$array_banner_size_config = explode(',',$banner_size_config);	
+		if(isset($array_banner_size_config[0])) $width = $array_banner_size_config[0];
+		if(isset($array_banner_size_config[1])) $height = $array_banner_size_config[1];
+		$listBanner = $this->getBannerRules();
+        if(count($listBanner)>0){
+    ?>
+        <div class="mw_rwp_promotion_banner" style="height: <?php echo ($height+15).'px';?>">
+        	<ul id="mw_rewardpoint_promotion_banner" >
+	            <?php foreach($listBanner as $banner): ?>
+	            <?php $image_url = Mage::helper('rewardpoints/image')->init($banner)->keepAspectRatio(false)->constrainOnly(false)->keepFrame(false)->resize($width,$height);?>
+                <li><img src="<?php echo $image_url;?>" alt=""></li>
+                <!--  <li><img src="<?php //echo $this->resizeImg($banner,$width,$height,'mw_rewardpoint_resized');?>" alt=""></li>-->
+                <?php endforeach; ?>                
+            </ul>
+        </div>
+<?php
+       } 
+?>

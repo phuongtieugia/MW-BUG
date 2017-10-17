@@ -1,0 +1,15 @@
+
+<form action="<?php echo $this->getUrl('rewardpoints/rewardpoints/email') ?>" method="post" id="form-validate">
+    <ul class="form-list">
+    	<li class="control"><input type="checkbox" name="subscribed_balance_update" id="subscribed_balance_update" value="1" title="<?php echo $this->__('Subscribe to balance update') ?>"<?php if($this->getSubscribedBalanceUpdate()): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="subscribed_balance_update"><?php echo $this->__('Subscribe to balance update') ?></label></li>
+    	<li class="control"><input type="checkbox" name="subscribed_point_expiration" id="subscribed_point_expiration" value="1" title="<?php echo $this->__('Subscribe to points expiration notification') ?>"<?php if($this->getSubscribedPointExpiration()): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="subscribed_point_expiration"><?php echo $this->__('Subscribe to points expiration notification') ?></label></li>
+    </ul>
+    <div class="buttons-set">
+        <button type="submit" title="<?php echo $this->__('Save') ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>

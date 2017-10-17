@@ -1,0 +1,63 @@
+<?php $store_id = Mage::app()->getStore()->getId();?>
+<style type="text/css" media="screen">
+	.mw_rwp_promotion{
+		background: #EFF5EA ;
+		color: #3D6611;
+		padding: 8px 8px 8px 8px;
+		margin-bottom: 15px;
+		font-weight: bold;
+		font-size: 12px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+	}
+    ul#mw_rewardpoint_promotion_message {
+		min-height: 24px;
+      	margin: 0;
+      	padding: 0;
+      	position: relative;
+    	over-flow: hidden
+    }
+      
+      ul#mw_rewardpoint_promotion_message li {
+        display: block;
+        list-style: none;
+        margin: 0;
+        padding: 0px 0px 0px 30px;
+        position: relative !important;
+		line-height: 24px;
+    }
+            
+  </style>
+  <script type="text/javascript">
+        /*<![CDATA[*/
+    	new SlideShow('mw_rewardpoint_promotion_message',{ slideDuration: 4, startHidden: false });
+        /*]]>*/
+  </script>
+  
+	
+	<?php
+	$list_messages = $this->getMessageRules();
+    if(sizeof($list_messages)){?>
+    <div style="overflow: hidden;">
+	    <div style="padding: 8px 0px 0px 10px; float: left;  position: relative;  z-index: 10;">
+	    <?php
+	    	echo Mage::helper('rewardpoints/data')->getRewardIconHtml($store_id);
+	    ?>
+	    </div>
+	
+		<div id="mw_rwp_promotion" class="mw_rwp_promotion">
+	        <ul id="mw_rewardpoint_promotion_message" >			
+	            <?php 
+					$message_html = "";
+					foreach($list_messages as $list_message){
+						$message_html = "<li>".$list_message."</li>".$message_html;
+					}
+					echo $message_html;
+				?>
+	        </ul>
+	    </div>
+    </div>
+    <?php
+    }
+	?>
+

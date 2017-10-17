@@ -1,0 +1,41 @@
+.icon-paste-price
+{
+    background: url('../img/paste-icon-25.png') no-repeat;
+    width: 25px;
+    height: 25px;
+    background-size: 20px;
+    display: inline-block;
+    float: left;
+}
+
+.rwp_most-user-point .top-1,
+.rwp_most-user-point .top-2,
+.rwp_most-user-point .top-3
+{
+    background: rgb(255, 92, 0);
+    color: white;
+    width: 22px;
+    text-align: center;
+}
+.rwp_most-user-point .top-all
+{
+    background: rgb(116, 116, 116);
+    color: white;
+    width: 22px;
+    text-align: center;
+}
+.rwp_most-user-point .top-1 > span,
+.rwp_most-user-point .top-2 > span,
+.rwp_most-user-point .top-3 > span,
+.rwp_most-user-point .top-all > span
+{
+    text-align: center;
+    display: block;
+}
+
+.rwp_most-user-point .label > span{
+    margin: 0 0 0 6px;
+}
+.rwp_most-user-point td{
+    padding: 2px 1px 2px 1px !important;
+}

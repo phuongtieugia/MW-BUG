@@ -1,0 +1,46 @@
+<?php if($this->getAppId() != ""){?>
+<script  type="text/javascript">
+	
+		window.fbAsyncInit = function() {
+			FB.init({
+			  appId  : <?php echo $this->getAppId() ?>,
+			  cookie : true,
+			  status : true,
+			  oauth  : true,
+			  xfbml  : true,
+			  /*version    : 'v2.7'*/
+			});
+
+			FB.Event.subscribe('edge.create',
+				function(response) {
+					//alert('You liked the URL: ' + response);
+					new Ajax.Request("<?php echo $this->getUrl('rewardpoints/rewardpoints/setpointsfblike');?>", {
+					   method: 'post',
+					   postBody: "pageurl="+response,
+			
+				});
+					
+				}
+			);
+			/*FB.Event.subscribe('message.send',
+					function(response) {
+						//alert('You send the URL: ' + response);
+						new Ajax.Request("<?php echo $this->getUrl('rewardpoints/rewardpoints/setpointsfbsend');?>", {
+						   method: 'post',
+						   postBody: "pageurl="+response,
+				
+					});
+						
+					}
+				);*/
+		};
+
+		(function(d){
+			var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+			var locale = '<?php echo $this->getLang() ?>';
+			js = d.createElement('script'); js.id = id; js.async = true;
+			js.src = "//connect.facebook.net/" + locale + "/all.js";
+			d.getElementsByTagName('head')[0].appendChild(js);
+		  }(document));
+</script>
+<?php } ?>

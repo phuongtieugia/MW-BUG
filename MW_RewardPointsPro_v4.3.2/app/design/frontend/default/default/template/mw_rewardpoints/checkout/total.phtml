@@ -1,0 +1,14 @@
+<?php if ($this->getTotal()->getValue()): ?>
+    <tr>
+        <td class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $this->getTotal()->getTitle(); ?>
+        </td>
+        <td class="a-right">
+            <?php if($this->getTotal()->getValue() == "NO_FORMAT"):?>
+                <?php echo Mage::helper('rewardpoints')->formatPoints($this->getTotal()->getText(), $this->_store->getId()); ?>
+            <?php else: ?>
+                <?php echo Mage::helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
+            <?php endif; ?>
+        </td>
+    </tr>
+<?php endif; ?>

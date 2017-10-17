@@ -1,0 +1,9 @@
+
+<?php //if($this->getEnable() && $this->getCustomerId()){?>
+<?php if($app_id = $this->getAppId()){?>
+<meta property="fb:app_id" content="<?php echo $app_id ?>"/>
+<?php }?>
+<?php if($site_name = $this->getSiteName()){?>
+<meta property="og:site_name" content="<?php echo htmlspecialchars($site_name) ?>"/>
+<?php }?>
+<?php //}?>

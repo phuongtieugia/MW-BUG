@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <api>
+        <resources>
+            <rewardpoints translate="title" module="rewardpoints">
+                <title>Reward Point Api</title>
+                <acl>rewardpoints</acl>
+                <model>rewardpoints/api_api</model>
+                <methods>
+                    <getcustomeridbyemail translate="title" module="rewardpoints">
+                        <title>Get customer id by customer email</title>
+                        <acl>rewardpoints/getcustomeridbyemail</acl>
+                    </getcustomeridbyemail>
+                    <getbalancebyemail translate="title" module="rewardpoints">
+                        <title>Get Balance by Email</title>
+                        <acl>rewardpoints/getbalancebyemail</acl>
+                    </getbalancebyemail>
+                    <getbalancebyid translate="title" module="rewardpoints">
+                        <title>Get Balance by Customer id</title>
+                        <acl>rewardpoints/getbalancebyid</acl>
+                    </getbalancebyid>
+                    <updatepoints translate="title" module="rewardpoints">
+                        <title>Update Points for a Customer</title>
+                        <acl>rewardpoints/updatepoints</acl>
+                    </updatepoints>
+                    <getproductrewardpoints translate="title" module="rewardpoints">
+                        <title>Get Product Reward Points by SKU</title>
+                        <acl>rewardpoints/getproductrewardpoints</acl>
+                    </getproductrewardpoints>
+                </methods>
+                <faults translate="title" module="rewardpoints">
+                    <data_invalid> <!-- if we get invalid input data for customers -->
+                        <code>100</code>
+                        <!-- we cannot know all the errors that can appear, their details can be found in error message for call -->
+                        <message>Invalid order data. Details in error message.</message>
+                    </data_invalid>
+                    <!-- not_exists>
+                        <code>102</code >
+                        <message>Or doesn't exist.</message>
+                    </not_exists-->
+                    <not_actived>
+                        <code>103</code>
+                        <message>Extension can not be actived. Details in error message.</message>
+                    </not_actived>
+                </faults>
+            </rewardpoints>
+        </resources>
+        <acl>
+            <resources>
+                <rewardpoints translate="title" module="rewardpoints">
+                    <title>Reward Point Api</title>
+
+                    <getcustomeridbyemail translate="title" module="rewardpoints">
+                        <title>Get customer id by customer email</title>
+                    </getcustomeridbyemail>
+                    <getbalancebyemail translate="title" module="rewardpoints">
+                        <title>Get Balance by Email</title>
+                    </getbalancebyemail>
+                    <getbalancebyid translate="title" module="rewardpoints">
+                        <title>Get Balance by Customer id</title>
+                    </getbalancebyid>
+                    <updatepoints translate="title" module="rewardpoints">
+                        <title>Update Points for a Customer</title>
+                    </updatepoints>
+                    <getproductrewardpoints translate="title" module="rewardpoints">
+                        <title>Get Product Reward Points by SKU</title>
+                    </getproductrewardpoints>
+
+                </rewardpoints>
+            </resources>
+        </acl>
+    </api>
+</config>

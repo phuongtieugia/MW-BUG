@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Retail Evolved - Facebook Like Button
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled with this
+ * package in the file EVOLVED_EULA.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://retailevolved.com/eula-1-0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to service@retailevolved.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * You may edit this file, but only at your own risk, as long as it is within
+ * the constraints of the license agreement. Before upgrading the module (not Magento), 
+ * be sure to back up your original installation as the upgrade may override your
+ * changes.
+ *
+ * @category   Evolved
+ * @package    Evolved_Like
+ * @copyright  Copyright (c) 2010 Kaelex Inc. DBA Retail Evolved (http://retailevolved.com)
+ * @license    http://retailevolved.com/eula-1-0 (Retail Evolved EULA 1.0)
+ */
+
+?>
+<?php 	
+	$_showSend = $this->getShowSend();
+?>
+	<div id="fb-root"></div>	
+	<!-- Using the JavaScript SDK -->
+    
+	<div class="mw-facebook">
+        <div id="mw-share-facebook" title="Share on Facebook">
+            <a href="javascript:;">
+                <img class="mw-img-icon" src="<?php echo $this->getIconFace(); ?>"/>
+            </a>
+        </div>
+        <div class="fb-like"
+                data-href="<?php echo $this->getCurrentUrl(); ?>"
+                data-width="500px"
+                data-layout="standard"
+                data-action="like"
+                data-show-faces="true"
+                data-share="false">
+        </div>  
+    </div>
+
+    
+ <script type="text/javascript">  
+    var share_face = document.getElementById('mw-share-facebook');
+    share_face.onclick = postToFeed;
+       
+   function postToFeed()
+        {
+                FB.ui(
+                    {
+                        method: 'share',
+                        href: '<?php echo $this->getCurrentUrl(); ?>',
+                    },
+                    function(response) {
+    						
+    					if (response) {
+                            new Ajax.Request("<?php echo $this->getUrl('rewardpoints/rewardpoints/setpointsfbsend');?>", {
+    						   method: 'post',
+    						   postBody: "pageurl=<?php echo $this->getCurrentUrl(); ?>",
+                               });
+                               
+                        }
+    				});         
+        }
+        
+</script>

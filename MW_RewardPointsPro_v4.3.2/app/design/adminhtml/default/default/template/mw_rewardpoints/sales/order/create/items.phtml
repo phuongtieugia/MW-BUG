@@ -1,0 +1,45 @@
+<?php 
+$store_id = $this->getStoreId();
+$rate = $this->getRate($store_id);?>
+<div class="entry-edit box-right">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Reward points (Use maximum <b>%s</b>)',$this->getMaxPointToCheckOut()); ?></h4>
+     </div>
+     <fieldset class="np">
+         <div class="content">
+         
+         <ul id="mw_reward_accordion">
+		      <li  class="mw_reward_section">
+		        <div <?php if (!sizeof($this->getRewardPointsRule())) echo "style=\"display:none\"";?> ><span id="reward-points-rules-title" style="color: #0A263C;line-height: 1.5;"><?php echo $this->__("You will be awarded <b>%s</b>",$this->getEarnPointShow()." ")?><a id = "mw_view" class="mw_reward_title" style="color: #DC6809 !important;font-weight: bold"href="#"><?php echo $this->__('(Details)');?></a></span></div>
+		        <div  id="reward-points-rules" class="mw_reward_toggle">
+		        	<?php foreach($this->getRewardPointsRule() as $rule):?>
+		        	<div style="width:100%;font-size: 11px; margin: 0 0 5px 0; overflow: hidden;">
+		        		<div style="float:left; width:258px"><?php echo $this->__('<span style="float: left;">+</span> <div style="margin: 0px 0px 0px 10px;">%s %s</div>',($rule['qty']>1?$rule['qty']." x":""),$rule['message']);?></div>
+		        	</div>
+		        	<?php endforeach;?>
+		        </div>
+		      </li>
+		    </ul>
+		    
+		    <div style="margin: 5px 0 10px;"><?php echo $this->__("You have <b>%s</b> available (<b>%s</b> = <b>%s</b>)",$this->getCurrentRewardPoints(),Mage::helper('rewardpoints')->formatPoints($rate[0],$store_id), $this->formatMoney($rate[1]))?></div>
+		    
+            <p><input id="mw_rewardpoint_add_input" type="text" class="input-text validate-digits" style="width:200px" />&nbsp;<button onclick="applyMwRewardPoint()" type="button" value="" class="scalable"><span><span><span><?php echo $this->__('Add Reward points'); ?></span></span></span></button></p>
+            <?php if($points = $this->getRewardPoints()){ ?>
+                <p><strong><?php echo Mage::helper('rewardpoints')->formatPoints($points,$store_id); ?></strong> [<a href="#" onclick="removeMwRewardPoint('<?php echo $points; ?>'); return false;" title="<?php echo $this->__('Remove'); ?>"><?php echo $this->__('Remove'); ?></a>]</p>
+            <?php }?>
+            
+            <div><?php echo $this->__('Use maximum <b>%s</b>',$this->getMaxPointToCheckOut()); ?></div>
+        </div>        
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+	accordion = new Accordion('mw_reward_accordion', { startHidden: false });
+	document.observe('dom:loaded', function(){
+	    accordion = new Accordion('mw_reward_accordion', { startHidden: false });
+	
+	});
+//]]>
+</script>

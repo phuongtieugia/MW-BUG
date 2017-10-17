@@ -1,0 +1,37 @@
+<?php 
+	  $quote = Mage::getSingleton('checkout/session')->getQuote();
+	  $rewardpoints = $quote->getMwRewardpoint();
+	  $earn_rewardpoint = (int)$quote->getEarnRewardpoint();
+	 // $reward_point_sell_product = $quote->getMwRewardpointSellProduct();
+	  //$total_reward_point = $rewardpoints + $reward_point_sell_product;
+	  $store_id = Mage::app()->getStore()->getId();
+?>
+<?php if($earn_rewardpoint):?>
+<tr>
+    <td colspan="1" class="a-right"><?php echo Mage::helper('rewardpoints')->__('You Earn')?></td>
+    <td class="a-right" style="">
+        <span class="price"><?php echo Mage::helper('rewardpoints')->formatPoints($earn_rewardpoint,$store_id)?></span>
+	</td>
+</tr>
+<?php endif;?>
+
+<?php /*if($rewardpoints):?>
+<?php //$money = Mage::helper('rewardpoints')->getCheckoutSession()->getDiscount();
+	 $money = $quote->getMwRewardpointDiscount();
+?>
+<tr>
+    <td colspan="1" class="a-right"><?php echo Mage::helper('rewardpoints')->__('You Redeem')?></td>
+    <td class="a-right" style="">
+        <span class="price"><?php echo Mage::helper('rewardpoints')->formatPoints($rewardpoints,$store_id)?></span>
+	</td>
+</tr>
+<?php endif;*/?>
+
+<?php /* if($total_reward_point):?>
+<tr>
+    <td colspan="1" class="a-right" style="font-weight:bold;"><?php echo Mage::helper('rewardpoints')->__('Total Points')?></td>
+    <td class="a-right" style="">
+        <span class="price"><?php echo Mage::helper('rewardpoints')->formatPoints($total_reward_point,$store_id)?></span>
+	</td>
+</tr>
+<?php endif; */?>

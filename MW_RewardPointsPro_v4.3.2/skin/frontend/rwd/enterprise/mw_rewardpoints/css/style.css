@@ -1,0 +1,41 @@
+.coin{
+    background: url("../images/coin.png") no-repeat;
+    width: 15px;
+    height: 15px;
+    display: block;
+    background-size: 15px;
+}
+.mw_display_point.hide{
+    display: none;
+}
+.mw_display_point.show{
+    display: block;
+}
+.mw-facebook {
+    float: left;
+    display: table;
+}
+
+.mw-img-icon{
+    float: left;
+    margin-top: 3px;
+    height: 25px;
+    width: 50px;
+}
+.mw-icon-text{
+    margin-left: 3px;
+    margin-right: 3px;
+    color: #004080;
+}
+#mw-share-facebook{
+    padding-top: 10px;
+    width:300px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+#mw-share-facebook a{
+    display: table-cell; 
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+}

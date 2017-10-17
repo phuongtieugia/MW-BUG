@@ -1,0 +1,17 @@
+<!--@subject Your points balance changed @-->
+
+<p>Dear {{var customer_name}},</p>
+
+<p>Your points balance has changed.</p>
+
+<p>Here is the transaction details:<br>
+<strong>Points Amount:</strong> {{var transaction_amount}}<br>
+<strong>Your Balance:</strong> {{var customer_balance}}<br>
+<strong>Detail:</strong> {{var transaction_detail}}<br>
+<strong>Date:</strong> {{var transaction_time}}</p>
+
+<p>Please <a href="{{var customer_link}}">login to your account</a> to check your balance and review the transaction history.<br>
+If you have any questions about your transaction, please feel free to contact us at <a href="mailto:{{var email_contact}}">{{var email_contact}}</a> or by phone at {{var phone_contact}}.</p>                                            
+
+<p>This message was sent by the Reward Points system - {{var store_name}}.</p>
+

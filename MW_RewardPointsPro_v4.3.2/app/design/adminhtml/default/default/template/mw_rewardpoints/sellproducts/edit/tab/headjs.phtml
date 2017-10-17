@@ -1,0 +1,66 @@
+<script type="text/javascript">
+//<![CDATA[
+    if(typeof MW=='undefined') {
+        MW = {};
+    }
+    MW.SellProductPoint = Class.create();
+    MW.SellProductPointTemplate = '<tr class="expanded-{{type_class}}-{{product_id}}"><td></td><td colspan="{{colspan}}">' +
+    '   <table class="border" cellpadding="0" cellspacing="0">' +
+    '       <thead>' +
+    '           <tr class="headings">' +
+    '               <th width="1"><?php echo Mage::helper('rewardpoints')->__('ID') ?></th>' +
+    '               <th><?php echo Mage::helper('rewardpoints')->__('Name') ?></th>' +
+    '               <th width="80" class="type-price price-type-box"><?php echo Mage::helper('catalog')->__('Price') ?></th>' +
+    '               <th width="180" class="type-type"><?php echo Mage::helper('catalog')->__('SKU') ?></th>' +
+    '               <th width="80" class="type-uqty qty-box"><?php echo Mage::helper('rewardpoints')->__('Set Reward Points') ?></th>' +
+    '           </tr>' +
+    '       </thead> ' +
+    '       <tbody>' +
+    '           <tr><td colspan="5"><?php echo Mage::helper('catalog')->__('Loading...') ?></td></tr>' +
+    '       </tbody>' +
+    '   </table>' +
+    '</td><td></td></tr>';
+    MW.SellProductPoint.prototype = {
+        template: new Template(MW.SellProductPointTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', '')),
+        initialize : function() {
+            var link_childs = $$('.a-expan-child');
+            for (var i=0; i < link_childs.length; i++) {
+                Event.observe(link_childs[i], 'click', this.expandChild.bind(this));
+            }
+        },
+        expandChild: function(event, element){
+            if (element == undefined) {
+                element = $(Event.element(event));
+            }
+            var url          =  '<?php echo $this->getUrl('*/*/getChildProduct', array('_current' => true)); ?>';
+            var product_id   =  element.readAttribute('data-product-id');
+            var type_id      =  element.readAttribute('data-type-id');
+
+            if($$(".expanded-"+type_id+"-"+product_id).length > 0){return true;}
+
+            var el_parent_tr    =  element.up(1);
+            var el_child_td     =  el_parent_tr.select('td');
+
+            var data = {
+                colspan: el_child_td.length - 2,
+                type_class: type_id,
+                product_id: product_id
+            };
+
+            Element.insert(el_parent_tr, {
+                after :this.template.evaluate(data)
+            });
+            new Ajax.Request(url, {
+                method: 'post',
+                parameters: {type_id: type_id, product_id: product_id},
+                onComplete: function(transport) {
+                    if (200 == transport.status) {
+                        console.log(transport);
+                    }
+                }
+            });
+        }
+    };
+    var bMWSellPoint = new MW.SellProductPoint();
+//]]>
+</script>

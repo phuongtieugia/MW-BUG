@@ -1,0 +1,29 @@
+<script>
+jQuery.noConflict();
+jQuery(function(){		
+	var allowCheckout = '<?php echo Mage::getSingleton("checkout/session")->getAllowCheckout(); ?>';
+	var osco = '<?php echo getOnestepcheckoutModule(); ?>';	
+	if(!allowCheckout){
+		
+		jQuery('.checkout-types').css("display","none");	
+		jQuery('.buttons-set').css("display","none");	
+		
+		if(osco){
+			jQuery('#onestepcheckout_place_order_button').css("display","none");	
+		}
+	}
+	
+});
+</script>
+<?php
+function getOnestepcheckoutModule()
+{
+	$modules = array_keys((array)Mage::getConfig()->getNode('modules')->children());
+	if(in_array('MW_Onestepcheckout',$modules)) 
+	{
+		if(Mage::getStoreConfig('onestepcheckout/config/enabled'))
+			return true;
+	}
+	return false;
+}
+?>
