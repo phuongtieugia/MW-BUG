@@ -1,0 +1,3 @@
+Discount all group
+MW_FollowUpEmail_Model_Mysql4_Salesrule_Collection
+them dong code: $this->addWebsiteGroupDateFilter($websiteId, $customerGroupId, $now);
