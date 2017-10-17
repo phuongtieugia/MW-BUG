@@ -1,0 +1,330 @@
+<?php $watermark = Mage::getBaseDir('media').DS."watermark/watermark.png";?>
+
+<?php $currentAlbum = $this->getCurrentAlbum()?>
+<?php $currentPhoto = $this->getCurrentPhoto()?>
+<?php $nextPhoto = $this->getNextPhoto();?>
+<?php $previousPhoto = $this->getPreviousPhoto();?>
+<?php $slideshowSize = $this->getSlideshowSize($currentAlbum);?>
+<?php $secBaseUrl = Mage::getUrl('',array('_secure'=>true)); ?>
+				<?php if(file_exists(Mage::getBaseDir('media').DS.$currentPhoto->getFilename())):?>
+					<?php
+						$_src = Mage::helper('gallery/image')->watermark_image($currentPhoto->getFilename());
+						$src = $this->helper('gallery/image')->init($_src)->keepFrame(false)->resize(840, 630);
+					?>
+					<?php $slideSrc = $this->helper('gallery/image')->init($_src)->resize($slideshowSize['width'], $slideshowSize['height'],false) ?>
+				<?php else:?>
+					<?php $slideSrc = $this->getSkinUrl("images/catalog/product/placeholder/image.jpg")?>
+					<?php $src = $this->getSkinUrl("images/catalog/product/placeholder/small_image.jpg")?>
+				<?php endif;?>
+<?php
+// New FileName 4 Printdata
+$tempFilename = $currentPhoto->getFilename().'_id'.$currentPhoto->getId();
+$find = array("/", ".");
+$newFilename = str_replace($find, "_", $tempFilename);
+// Get Extension 4 Printdata
+$array = explode(".", $currentPhoto->getFilename()); 
+$extension = array_pop($array);
+?>
+<script type="text/javascript">
+
+/* AJAX Star Rating : v1.0.3 : 2008/05/06 */
+/* http://www.nofunc.com/AJAX_Star_Rating/ */
+
+function $gp_s(v,o) { return((typeof(o)=='object'?o:document).getElementById(v)); }
+function $gp_S1(o) { return((typeof(o)=='object'?o:$gp_s(o)).style); }
+function gp_agent(v) { return(Math.max(navigator.userAgent.toLowerCase().indexOf(v),0)); }
+function gp_abPos(o) { var o=(typeof(o)=='object'?o:$gp_s(o)), z={X:0,Y:0}; while(o!=null) { z.X+=o.offsetLeft; z.Y+=o.offsetTop; o=o.offsetParent; }; return(z); }
+function gp_XY(e,v) { var o=gp_agent('msie')?{'X':event.clientX+document.body.scrollLeft,'Y':event.clientY+document.body.scrollTop}:{'X':e.pageX,'Y':e.pageY}; return(v?o[v]:o); }
+
+var star={};
+
+star.mouse=function(e,o) { 
+		if(star.stop || isNaN(star.stop)) { star.stop=0;
+	
+			document.onmousemove=function(e) { var n=star.num;
+			
+				var p=gp_abPos($gp_s('star'+n)), x=gp_XY(e), oX=x.X-p.X, oY=x.Y-p.Y; star.num=o.id.substr(4);
+				//alert(x.Y + "-" +p.Y + "="+oY)
+				if(oX<1 || oX>84 || /*oY<0 ||*/ oY>19) { star.stop=1; star.revert(); }
+				else {
+					$gp_S1('starCur'+n).width=oX+'px';
+					$gp_S1('starUser'+n).color='#111';
+					$gp_s('starUser'+n).innerHTML=Math.round(oX/84*100)+'%';
+				}
+			};
+		} 
+};
+
+star.update=function(e,o) { var n=star.num, v=parseInt($gp_s('starUser'+n).innerHTML);
+
+	n=o.id.substr(4); $gp_s('starCur'+n).title=v;
+	document.getElementById('rate').value = v;
+};
+
+star.revert=function() { var n=star.num, v=parseInt($gp_s('starCur'+n).title);
+
+	$gp_S1('starCur'+n).width=Math.round(v*84/100)+'px';
+	$gp_s('starUser'+n).innerHTML=(v>0?Math.round(v)+'%':'');
+	$gp_s('starUser'+n).style.color='#888';
+	
+	document.onmousemove='';
+
+};
+
+star.num=0;
+</script>
+
+<script type="text/javascript">
+jQuery(function(){
+	<?php /*?>jQuery("a[rel='photo']").colorbox();<?php */?>
+	
+	jQuery("#comment-header").click(function (){
+		jQuery("#gphoto-comment").slideToggle();
+		jQuery(this).toggleClass("className");
+	});
+
+	jQuery("#gphoto-write_review-header").click(function (){
+		jQuery("#gphoto-write_review-content").slideToggle();
+		jQuery(this).toggleClass("className");
+	});
+	jQuery("a[rel='history']").click(function(){
+		// 
+		var hash = this.href;
+		hash = hash.replace(/^.*#/, '');
+		// moves to a new page. 
+		// pageload is called at once. 
+		// hash don't contain "#", "?"
+		jQuery.historyLoad(hash);
+		return false;
+	});
+});
+
+<?php /*?>jQuery(document).ready(function(jQuery){
+	jQuery(".cboxElement").colorbox({
+		rel: "photo",
+		slideshow: true,
+		maxWidth: "98%",
+		maxHeight: "98%",
+		photo: true
+	});	
+});<?php */?>
+
+<?php /*?>jQuery(window).resize(function () {
+	jQuery(".cboxElement").colorbox.resize({
+		maxWidth: "98%",
+		maxHeight: "98%"
+	});
+});
+<?php */?>
+jQuery(document).ready(function() {
+/*jQuery('.cboxElement').magnificPopup({
+  type: 'image',
+  mainClass: 'mfp-zoom-in mfp-open mfp-image-loaded mfp-dark', // for animation
+  removalDelay: 300, // for animation
+});
+*/
+
+        jQuery.extend(true, jQuery.magnificPopup.defaults, {
+          tClose: '<?php echo $this->__('Close') ?> (Esc)', 
+          tLoading: '<?php echo $this->__('Loading') ?>...'
+        });
+        
+		
+		jQuery('.cboxElement').magnificPopup({
+
+		  type: 'image',
+		  
+            fixedBgPos: false,
+            closeBtnInside: false,
+            
+            mainClass: 'mfp-zoom-in mfp-image-loaded mfp-dark', // for animation
+            removalDelay: 300, // for animation
+
+        });
+		
+});
+
+</script>
+
+<?php $session = Mage::getSingleton('gallery/session');?>
+<?php if($session->getSuccess()):?>
+<div id="messages">
+	<ul class="messages">
+		<li class="success-msg">
+			<ul><li><?php echo $session->getSuccess(true)?></li></ul>
+		</li>
+	</ul>
+</div>
+<?php endif;?>
+<div id="photo-view-content">
+	<div class="div_sider">
+	<div class="hd1">
+      <h1><?php if(strlen($currentPhoto->getPhotoLink())):?><a href="<?php echo $currentPhoto->getPhotoLink()?>"><?php echo $currentPhoto->getTitle();?></a><?php else: echo $currentPhoto->getTitle(); endif;?></h1>
+      <h5><?php if($this->showPhotoUpdateDate($currentAlbum)):?><?php echo date('M d, Y',strtotime($currentPhoto->getUpdateTime()));?><span class="line_limiter">|</span><?php endif;?><?php echo $this->__('Photo %s of %s', (int) $this->getCurrentLocation() +1, $this->getPhotosOfAlbum($currentAlbum)->getSize())?><span class="line_limiter">|</span></h5><a href='<?php echo trim(trim($this->getUrl(),'/')."/". $this->getUrlRewrite($currentAlbum)); if($this->_getStore()->getCode()!="default") echo '?___store='.$this->_getStore()->getCode();?>'><?php echo $this->__('View All') ?></a>
+    </div>
+
+		<div id="colRight">
+        <div class="photo_bar">
+			<?php /*?><div class="photo_bar_left">
+				<label>
+					<?php echo $this->__('Photo %s of %s', (int) $this->getCurrentLocation() +1, $this->getPhotosOfAlbum($currentAlbum)->getSize())?>	
+				</label>
+                <div class="clear_both"></div>
+				<a href='<?php echo trim(trim($this->getUrl(),'/')."/". $this->getUrlRewrite($currentAlbum)); if($this->_getStore()->getCode()!="default") echo '?___store='.$this->_getStore()->getCode();?>'><?php echo $this->__('View All') ?></a>
+			</div><?php */?>
+			<div class="photo_bar_right">	
+				<a href="<?php echo "#".$this->getUrlRewrite($previousPhoto); if($this->_getStore()->getCode()!="default") echo '?___store='.$this->_getStore()->getCode()?>" rel="history">
+					<img src="<?php echo $this->getSkinUrl('gallery/images/previous.png') ?>" alt="<?php echo $this->__('Previous') ?>" />				
+				</a>
+				<a href="<?php echo "#".$this->getUrlRewrite($nextPhoto); if($this->_getStore()->getCode()!="default") echo '?___store='.$this->_getStore()->getCode()?>" rel="history">
+					<img src="<?php echo $this->getSkinUrl('gallery/images/next.png') ?>" alt="<?php echo $this->__('Next') ?>" />	
+				</a>
+				<a href="<?php echo $slideSrc /*$this->getMediaUrl($currentPhoto->getFilename());*/?>" target="_blank" class="cboxElement">
+					<img src="<?php echo $this->getSkinUrl('gallery/images/fullsize.png') ?>" alt="<?php echo $this->__('See fullsize') ?>" />					
+				</a>
+			</div>
+			<div class="clear_both"><span> </span></div>
+		</div>
+        
+
+
+        
+        </div>
+        
+        <div id="colLeft">
+		<div class="photo_gallery">
+			<div id="image">
+
+				<a href="<?php echo $slideSrc;?>" rel="photo" title="<?php echo $currentPhoto->getTitle()?>" class="cboxElement"><img class="img-responsive-g" src="<?php echo $src?>"></a>
+
+				<?php 
+									//		Chinh sua
+									$statusshowphotodescription = Mage::getStoreConfig('gallery/default_config/show_photo_des');									
+									if ($statusshowphotodescription == 1 && $currentPhoto->getContent() != ""){
+									echo '<p class="des_photo">'.$currentPhoto->getContent().'</p>';
+									}
+									?>
+			</div>
+			
+		</div>
+        
+		<?php if($this->isEnableReview()):?>
+		<div class="star_1">
+			 <ul class="star" title="Rate This!">
+			  	<li class="curr" title="<?php echo ((int)$currentPhoto->getRate()) ?>" style="width: <?php echo ((int)$currentPhoto->getRate()/100 * 84) ?>px;"></li>
+			 </ul>
+			 <span class="totalrate">( <?php echo $this->getTotalRate($currentPhoto)?> <?php echo $this->__('rates') ?> )</span>
+			 <div class="clear_both"></div>
+		</div>
+		<?php endif;?>
+        
+        </div>
+        
+<div id="PhotoAction" class="colRight">
+<button data-ajax="<?php echo $secBaseUrl ?>zubehoer/merchandising/fotoprodukte" title="<?php echo $this->__('Photo as photo Product') ?> &hellip;" type="button" class="btn1 btn1-atp"><span><b class="ico"></b><b><?php echo $this->__('Photo as photo Product') ?> &hellip;</b></span></button>
+<button data-ajax="<?php echo $secBaseUrl ?>fotoprodukte/mein-fotoabzug.html" title="<?php echo $this->__('Photo as photo Photo print') ?> &hellip;" type="button" class="btn1 btn1-atp"><span><b class="ico"></b><b><?php echo $this->__('Photo as photo Photo print') ?> &hellip;</b></span></button>
+<button data-ajax="<?php echo $secBaseUrl ?>mein-foto-download" title="<?php echo $this->__('Photo as photo download') ?> &hellip;" type="button" class="btn1 btn1-atp"><span><b class="ico"></b><b><?php echo $this->__('Photo as photo download') ?> &hellip;</b></span></button>
+</div>
+        
+	</div>
+</div><div class="clear_both"></div>
+
+<?php if($this->isEnableReview()):?>
+<div id="photo-view-comment">
+		<div id="comment-header" class="gphoto-comment-header"><?php echo $this->__('Reviews') ?></div>
+		<div class="gphoto-comment" id="gphoto-comment" <?php if ($this->getReview($currentPhoto) == false) { echo 'style="display:none"'; } ?>>
+		<?php if($reviews = $this->getReview($currentPhoto)):?>
+			<?php
+			$i = 0;
+			$len = count($reviews);
+			foreach($reviews as $review):?>
+				<ul <?php if ($i == 0) { echo 'class="first"'; } else if ($i == $len - 1) { echo 'class="last"'; } ?>>
+					<li>
+						<div class="div_comment_author">
+							<h5><?php echo $review->getName();?><?php /*?><span><?php echo " ".$this->__('wrote').":" ?></span><?php */?></h5>
+							<label><?php echo $this->fDate('d/m/Y H:i',$review->getCreateTime())?></label>
+						</div>
+						<div class="div_comment"><?php echo $review->getContent()?></div>
+					</li>
+				</ul>
+			<?php $i++; endforeach;?>
+		<?php else:?>
+		<ul><li style="text-align:center;"><?php echo $this->__('No review found.') ?></li></ul>
+		<?php endif;?>
+		</div>
+</div>
+<?php $customer = Mage::getSingleton('customer/session')->getCustomer();?>
+<form id="review_form" method="post" action="<?php echo $this->getUrl('gallery/p/savereview')?>">
+<div id="photo-write-content">
+		<div class="gphoto-comment-header" id="gphoto-write_review-header"><?php echo $this->__('Write review') ?></div>
+		<div class="gphoto-comment" id="gphoto-write_review-content">
+			<div class="gphoto-write_review-table-row">
+				<label class="lab_rate"><?php echo $this->__('Rate:') ?></label>
+				<div id="star">
+					 <ul id="star0" class="star" onmousedown="star.update(event,this)" onmousemove="star.mouse(event,this);" title="Rate This!">
+					  <li id="starCur0" class="curr" title="<?php echo ((int)$currentPhoto->getRate()) ?>" style="width: <?php echo ((int)$currentPhoto->getRate()/100 * 84) ?>px;"></li>
+					 </ul>
+					 <div style="color: rgb(136, 136, 136); display: none;" id="starUser0" class="user">0%</div>
+				</div>
+			</div>
+			<div class="gphoto-write_review-table-row"><label><?php echo $this->__('Name:') ?></label><input type="text" name="name" value="<?php if($customer->getId()) echo $customer->getName()?>" class="required-entry txtIn"/></div>
+			<div class="gphoto-write_review-table-row"><label><?php echo $this->__('Email:') ?></label><input type="text" name="email" value="<?php if($customer->getId()) echo $customer->getEmail()?>" class="required-entry validate-email required-entry input-text txtIn"/></div>
+			<div class="gphoto-write_review-table-row"><label><?php echo $this->__('Comment:') ?></label><textarea rows="4" name="content" class="required-entry input-text txtIn"></textarea></div>
+			<div class="gphoto-write_review-table-row"><input class="inp_submit btn2" type="submit" onclick="document.getElementById('url').value = window.location;" value="<?php echo $this->__('Submit')?>"/></div>
+		</div>
+</div>
+<input type="hidden" id="gallery_id" name="gallery_id" value="<?php echo $currentPhoto->getId()?>" />
+<input type="hidden" id="url" name="url" value="" />
+<input type="hidden" value="" name="rate" id="rate"/>
+<input type="hidden" name="review_type" value="<?php if($customer->getId()) echo "2"; else echo "1";?>" />
+</form>
+<script type="text/javascript">
+editForm = new Validation('review_form', '');
+
+
+    (function($) {
+		
+		
+		
+	$(document).ready(function() {
+	
+		  jQuery(".btn1-atp").click(function(){
+			  
+			  
+
+		  var ClickData = $(this).data('ajax');
+		  var wsUrl = '<?php echo $secBaseUrl ?>ajax-call-uploadstream';
+
+				var formData ={
+				  stream: "UploadStream",
+				  img_web: "<?php echo $src?>",
+				  img_print:"<?php echo $this->helper('gallery/image')->init($currentPhoto->getFilename())->keepFrame(false)->resize(3000, 3000);?>",
+				  img_thumb:"<?php echo $this->helper('gallery/image')->init($currentPhoto->getFilename())->keepFrame(false)->resize(300, 300);?>",
+				  img_download:"<?php echo $this->helper('gallery/image')->init($currentPhoto->getFilename())->keepFrame(false)->resize(3000, 3000);?>", //Watermarked
+				  img_name: "<?php echo $newFilename?>",
+				  img_ex: "<?php echo $extension?>",
+				}
+				$.ajax({
+					url: wsUrl,
+					type: "POST",
+					data: formData,
+					success: function (data, status, req) {
+						console.log(data);
+						window.location.href = ClickData;
+					},
+					error: function (data, status, req) {
+						alert(req.responseText + " " + status);
+					},
+				});
+				<?php /*?>.done(function( answer ) {
+					$("body").html(answer);        
+				});<?php */?>
+		  });
+		  
+	  
+	});	
+		
+    })(jQuery);
+
+</script>
+<?php endif;?>
