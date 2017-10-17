@@ -1,0 +1,4 @@
+- /app/code/local/MW/Ddate/controllers/Checkout/OnepageController.php
+- /app/code/local/MW/Ddate/Block/Onepage.php
+- /app/code/local/MW/Ddate/Model/Type/Onepage.php
+- /ddate/js/opcheckout.js

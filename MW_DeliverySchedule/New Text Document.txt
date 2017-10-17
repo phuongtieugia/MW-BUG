@@ -1,0 +1,19 @@
+TS#1017282: current date,
+order create new admin ko co ddate
+
+//full date
+/* new css ptg */
+.delivery{width: 845px;}
+#co-ddate-form ul{list-style-type:unset !important;}
+.deli_date_top ul li{width:70px;}
+.select_one ul li{width:90px;}
+.slideshow-content{width:650px;}
+.select_one ul li a{width:70px;}
+.select_one ul li.disablerow{width:70px;}
+.deli_time h6{height:29px !important;}
+#co-ddate-form textarea {
+    min-height: 60px;
+    width: 100%;
+}
+
+// ddate truoc payment method - up-t0-ddate

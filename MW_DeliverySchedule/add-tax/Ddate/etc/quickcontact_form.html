@@ -1,0 +1,10 @@
+<!--@subject {{var data.contact_type_title}} [{{var data.emailid}}] - {{var data.subject}}@-->
+Name: {{var data.name}}
+E-mail: {{var data.email}}
+{{depend data.phone}}Phone: {{var data.phone}}{{/depend}}
+Comment: {{var data.content}}
+{{depend data.page_title}}
+-----------------------------
+From Page: {{var data.page_title}} 
+Page Url: {{var data.page_link}}
+{{/depend}}

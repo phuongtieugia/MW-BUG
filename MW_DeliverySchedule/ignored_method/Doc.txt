@@ -1,0 +1,6 @@
+/shop/app/code/local/MW/Ddate/Model/Type/Onepage.php
+/shop/app/code/local/MW/Ddate/controllers/Checkout/OnepageController.php
+/shop/app/design/frontend/default/maintheme/template/ddate/checkout/onepage/ddate.phtml
+/shop/app/design/frontend/default/maintheme/template/ddate/checkout/onepage.phtml
+/shop/app/code/local/MW/Ddate/Block/Adminhtml/Ddate/System
+/shop/app/code/local/MW/Ddate/etc/system.xml

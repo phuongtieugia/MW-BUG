@@ -1,0 +1,25 @@
+_myDdateFilter.txt
+
+MW_Ddate_Block_Adminhtml_Ddate_Grid
+
+protected function _myDdateFilter($collection, $column)
+{
+    
+    if (!$value = $column->getFilter()->getValue()) {
+        return $this;
+    }
+    $filters = $column->getFilter()->getValue();
+
+    $from = $filters['orig_from'];
+    $to = $filters['orig_to'];
+	
+	$date_array = explode('/',$from);
+	$from = $date_array[2].'-'.$date_array[1].'-'.$date_array[0];
+	$date_array = explode('/',$to);
+	$to = $date_array[2].'-'.$date_array[1].'-'.$date_array[0];
+	
+    if($from)
+        $this->getCollection()->addFieldToFilter('mwddate.ddate', array('gteq' => $from));
+    if($to)
+        $this->getCollection()->addFieldToFilter('mwddate.ddate', array('lteq' => $to));
+}

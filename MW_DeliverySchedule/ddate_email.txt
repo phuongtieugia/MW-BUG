@@ -1,0 +1,114 @@
+<table cellspacing="0" cellpadding="0" border="0" width="650">
+	<thead>
+	<tr>
+		<th align="left" width="650" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Delivery Date Information:</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td valign="top" style="font-size:12px; padding:7px 9px 9px 9px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+			Delivery Date: {{var order.getDdate().format('html')}}
+			<br/>
+			Delivery Date: {{var order.getDtime().format('html')}}
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="font-size:12px; padding:7px 9px 9px 9px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+			Delivery Comment: {{var order.getDdateComment().format('html')}}
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+items.phtml
+
+<!-- Delivery Date Email Code -->
+
+<table cellspacing="0" cellpadding="0" border="0" width="650">
+	<thead>
+	<tr>
+		<th colspan="2"><?php echo $this->__('Delivery Date Information');?></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php if($_order->getDdate()):?>
+	<tr>
+		<td><?php echo $this->__('Delivery Date');?></td>
+		<td><?php echo $_order->getDdate()?></td>
+	</tr>
+	<?php endif;?>
+	<?php if($_order->getDdate()):?>
+	<tr>
+		<td><?php echo $this->__('Delivery Time');?></td>
+		<td><?php echo $_order->getDtime()?></td>
+	</tr>
+	<?php endif;?>
+	<?php if($_order->getDdate()):?>
+	<tr>
+		<td><?php echo $this->__('Delivery Comment');?></td>
+		<td><?php echo $_order->getDdateComment()?></td>
+	</tr>
+	<?php endif;?>
+	</tbody>
+</table>
+<!-- End Delivery Date Email Code -->
+
+
+
+
+<!-- Delivery Date Email Code -->
+<?php if($_order->getDdate()):?>
+<table cellspacing="0" cellpadding="0" border="0" width="650">
+	<thead>
+	<tr>
+		<th colspan="2"><h6 style="font-family:Verdana,Arial;font-weight:700;font-size:12px;margin-bottom:0px;margin-top:5px;text-transform:uppercase"><?php echo $this->__('Delivery Date Information');?></h6></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php if($_order->getDdate()):?>
+	<tr>
+		<td style="font-family:Verdana,Arial;font-weight:normal;border-collapse:collapse;vertical-align:top;padding:10px 15px 0;margin:0;padding-top:10px;text-align:left"><?php echo $this->__('Delivery Date');?></td>
+		<td style="font-family:Verdana,Arial;font-weight:normal;border-collapse:collapse;vertical-align:top;padding:10px 15px 0;margin:0;padding-top:10px;text-align:left"><?php echo $_order->getDdate()?></td>
+	</tr>
+	<?php endif;?>
+	<?php if($_order->getDtime()):?>
+	<tr>
+		<td style="font-family:Verdana,Arial;font-weight:normal;border-collapse:collapse;vertical-align:top;padding:10px 15px 0;margin:0;padding-top:10px;text-align:left"><?php echo $this->__('Delivery Time');?></td>
+		<td style="font-family:Verdana,Arial;font-weight:normal;border-collapse:collapse;vertical-align:top;padding:10px 15px 0;margin:0;padding-top:10px;text-align:left"><?php echo $_order->getDtime()?></td>
+	</tr>
+	<?php endif;?>
+	<?php if($_order->getDdateComment()):?>
+	<tr>
+		<td style="font-family:Verdana,Arial;font-weight:normal;border-collapse:collapse;vertical-align:top;padding:10px 15px 0;margin:0;padding-top:10px;text-align:left"><?php echo $this->__('Delivery Comment');?></td>
+		<td style="font-family:Verdana,Arial;font-weight:normal;border-collapse:collapse;vertical-align:top;padding:10px 15px 0;margin:0;padding-top:10px;text-align:left"><?php echo $_order->getDdateComment()?></td>
+	</tr>
+	<?php endif;?>
+	</tbody>
+</table>
+<?php endif; ?>
+<!-- End Delivery Date Email Code -->
+
+
+For add "Comment Customer" and "DeliveryDate" into confirm email. You add variables:
+
+<table>
+	<thead>
+	<tr>
+		<th align="left" width="650" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Delivery Date Information:</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td valign="top" style="font-size:12px; padding:7px 9px 9px 9px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+			Delivery Date: {{var order.getDdate().format('html')}}
+			<br/>
+			Delivery Time: {{var order.getDtime().format('html')}}
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="font-size:12px; padding:7px 9px 9px 9px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+			Delivery Comment: {{var order.getDdateComment().format('html')}}
+		</td>
+	</tr>
+	</tbody>
+</table>

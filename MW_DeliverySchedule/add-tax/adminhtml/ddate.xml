@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <ddate_admin_adminhtml_ddate_index>
+        <reference name="content">
+            <block type="ddate/adminhtml_ddate" name="ddate" />
+        </reference>
+    </ddate_admin_adminhtml_ddate_index>
+
+    <ddate_admin_adminhtml_dtime_index>
+        <reference name="content">
+            <block type="ddate/adminhtml_dtime" name="dtime" />
+        </reference>
+    </ddate_admin_adminhtml_dtime_index>
+
+    <ddate_admin_adminhtml_dtime_edit>
+        <reference name="head">
+            <action method="addJs"><script>mw_ddate/mw_ddate_validate.js</script></action>
+        </reference>
+    </ddate_admin_adminhtml_dtime_edit>
+
+    <adminhtml_sales_order_view>
+        <reference name="order_info">
+            <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/deliverydate.phtml"></block>
+        </reference>
+		<reference name="order_totals">
+            <block type="adminhtml/sales_order_totals_item" name="mwfee_amount" template="ddate/sales/order/total.phtml" />
+        </reference>
+    </adminhtml_sales_order_view>
+
+	<adminhtml_sales_order_invoice_new>
+		<reference name="order_info">
+            <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/view_customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/view_deliverydate.phtml"></block>
+        </reference>
+	</adminhtml_sales_order_invoice_new>
+
+	<adminhtml_sales_order_invoice_view>
+		<reference name="order_info">
+           <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/view_customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/view_deliverydate.phtml"></block>
+        </reference>
+	</adminhtml_sales_order_invoice_view>
+
+	<adminhtml_sales_order_shipment_new>
+		<reference name="order_info">
+            <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/view_customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/view_deliverydate.phtml"></block>
+        </reference>
+	</adminhtml_sales_order_shipment_new>
+
+	<adminhtml_sales_order_shipment_view>
+		<reference name="order_info">
+            <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/view_customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/view_deliverydate.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_shipment_view>
+
+	<adminhtml_sales_order_creditmemo_new>
+		<reference name="order_info">
+            <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/view_customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/view_deliverydate.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_creditmemo_new>
+	
+	<adminhtml_sales_order_creditmemo_view>
+		<reference name="order_info">
+            <action method="setTemplate"><template>ddate/sales/order/view/info.phtml</template></action>
+			<block type="adminhtml/sales_order_abstract" name="ddate_customer_messages" template="ddate/sales/order/view/info/view_customermessages.phtml"></block>
+			<block type="adminhtml/sales_order_abstract" name="ddate_deliverydate" template="ddate/sales/order/view/info/view_deliverydate.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_creditmemo_view>
+</layout>

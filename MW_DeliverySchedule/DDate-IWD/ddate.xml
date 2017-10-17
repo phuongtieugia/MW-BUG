@@ -1,0 +1,160 @@
+<layout version="0.1.0">
+    <ddate_checkout_onepage_index>
+        <update handle="checkout_onepage_index"/>
+    </ddate_checkout_onepage_index>
+
+    <ddate_checkout_onepage_success>
+        <update handle="checkout_onepage_success"/>
+    </ddate_checkout_onepage_success> 
+	
+    <ddate_checkout_onepage_progress>
+        <update handle="checkout_onepage_progress"/>
+    </ddate_checkout_onepage_progress>
+	
+	
+    <ddate_checkout_onepage_review>
+        <update handle="checkout_onepage_review"/>
+    </ddate_checkout_onepage_review>
+	
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>calendar/calendar-win2k-1.css</name>
+                <params/>
+                <if/>
+                <condition>can_load_calendar_js</condition>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/calendar.js</name>
+                <params/>
+                <if/>
+                <condition>can_load_calendar_js</condition>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/lang/calendar-en.js</name>
+                <params/>
+                <if/>
+                <condition>can_load_calendar_js</condition>
+            </action>
+            <!-- <action method="addJs">
+                <script>mw_ddate/jquery-1.7.2.min.js</script>
+            </action> -->
+            <action method="addJs">
+                <script>mw_ddate/jquery-noconflict.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>ddate/css/ddate.css</stylesheet>
+            </action>
+        </reference>
+		
+        <reference name="checkout.progress">
+            <action method="setTemplate"><template>ddate/checkout/onepage/progress.phtml</template></action>
+        </reference>
+
+        <reference name="checkout.onepage">
+            <!-- <action method="setTemplate">
+                <template>ddate/checkout/onepage.phtml</template>
+            </action> -->
+			<block type="checkout/onepage_ddate" name="checkout.onepage.ddate" as="ddate" template="ddate/checkout/onepage/ddate.phtml" />
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_ddate>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/onepage_ddate" name="root" output="toHtml" template="ddate/checkout/onepage/ddate.phtml" />
+    </checkout_onepage_ddate>
+	
+    <checkout_onepage_progress>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>ddate/checkout/onepage/progress.phtml</template>
+            </action> 
+        </reference>
+    </checkout_onepage_progress>
+    <paypal_express_review>
+        <reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>calendar/calendar-win2k-1.css</name>
+                <params/>
+                <if/>
+                <condition>can_load_calendar_js</condition>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/calendar.js</name>
+                <params/>
+                <if/>
+                <condition>can_load_calendar_js</condition>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/lang/calendar-en.js</name>
+                <params/>
+                <if/>
+                <condition>can_load_calendar_js</condition>
+            </action>
+            <action method="addJs">
+                <script>mw_ddate/jquery-1.7.2.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>mw_ddate/jquery-noconflict.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>ddate/css/ddate.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="paypal.express.review">
+            <action method="setTemplate">
+                <template>ddate/paypal/express/review.phtml</template>
+            </action>
+        </reference>
+    </paypal_express_review>
+	
+	<checkout_multishipping_shipping> 
+		<reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>calendar/calendar-win2k-1.css</name>
+                <params/>               
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/calendar.js</name>
+                <params/>               
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/lang/calendar-en.js</name>
+                <params/>               
+            </action> 			
+			<action method="addJs">
+                <script>mw_ddate/jquery-1.7.2.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>mw_ddate/jquery-noconflict.js</script>
+            </action>			
+            <action method="addCss">
+                <stylesheet>ddate/css/ddate_multil_shipping.css</stylesheet>
+            </action>
+        </reference>    
+		<reference name="checkout_shipping">
+            <action method="setTemplate">
+                <template>ddate/checkout/multishipping/shipping.phtml</template>
+            </action> 
+        </reference>
+    </checkout_multishipping_shipping>
+	<checkout_multishipping_overview>
+		<reference name="checkout_overview">
+            <action method="setTemplate">
+                <template>ddate/checkout/multishipping/overview.phtml</template>
+            </action> 
+        </reference>
+	
+	</checkout_multishipping_overview>
+</layout>

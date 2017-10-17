@@ -1,0 +1,45 @@
+Copy this function on MW_Ddate_Helper_Data
+Helper:
+
+public function updateDdateOrdered($increment_id){
+		$ddates_store=Mage::getModel('ddate/ddate_store')->getCollection()->addFieldToFilter('ddate_id', $increment_id);
+		// loop for - check exists order - 
+		$order_collection = NULL;
+		$order = NULL;
+		$sql = "";
+		$qty = "";
+		$con2 = "";
+		$i = 0;
+		$resource = Mage::getSingleton('core/resource');
+		foreach($ddates_store as $row){
+			$order_collection = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('increment_id', array('eq' => $row->getIncrementId()));
+			if ($order_collection->getSize() > 0 && $row->getOrderStatus() == "") {
+				$order = $order_collection->getFirstItem();
+				/* update status. */
+				$sql = "UPDATE {$resource->getTableName('ddate/ddate_store')} SET order_status='".strtolower($order->getStatusLabel())."' WHERE ddate_store_id={$row['ddate_store_id']}";
+				$con2 = Mage::getModel('core/resource')->getConnection('core_write');
+    	 		$con2->query($sql);
+				
+			}
+			/* if($order_collection->getSize() > 0){$i+=1;} */
+		}
+		$ddates_store=Mage::getModel('ddate/ddate_store')->getCollection()
+						->addFieldToFilter('ddate_id', $increment_id)
+						->addFieldToFilter('order_status', array('neq' => "",'neq' => "canceled"));
+		foreach($ddates_store as $row){
+			$order_collection = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('increment_id', array('eq' => $row->getIncrementId()));
+			if($order_collection->getSize() > 0){$i+=1;}
+		}
+		//$qty = $ddates_store->getSize();
+		// update ordered on  'mwddate'
+		$sql = "UPDATE {$resource->getTableName('ddate/ddate')} SET ordered='".$i."' WHERE ddate_id={$increment_id}";
+		$con2 = Mage::getModel('core/resource')->getConnection('core_write');
+		$con2->query($sql);
+		
+	}
+
+MW_Ddate_Adminhtml_DdateController
+
+editAction Line 35
+
+		Mage::helper("ddate")->updateDdateOrdered($id);
