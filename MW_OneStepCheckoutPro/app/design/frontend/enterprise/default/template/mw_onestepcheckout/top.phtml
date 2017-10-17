@@ -1,0 +1,68 @@
+<div class="my-package"><input type="hidden" id="my-package" value="<?php echo Mage::getSingleton('core/design_package')->getPackageName(); ?>"/></div>
+<?php
+if(Mage::getStoreConfig('onestepcheckout/config/enable_geoip')):
+    if(Mage::getSingleton('core/session')->getCity())
+        $cityval = Mage::getSingleton('core/session')->getCity();
+    else
+        $cityval = Mage::registry('City');
+
+    if(Mage::getSingleton('core/session')->getRegionId())
+        $regionidval = Mage::getSingleton('core/session')->getRegionId();
+    else
+        $regionidval = Mage::registry("Regionid");
+
+    if(Mage::getSingleton('core/session')->getRegion())
+        $regionval = Mage::getSingleton('core/session')->getRegion();
+    else
+        $regionval = Mage::registry('Regionname');
+
+    if(Mage::getSingleton('core/session')->getPostcode())
+        $postcodeval = Mage::getSingleton('core/session')->getPostcode();
+    else
+        $postcodeval = Mage::registry('Zipcode');
+?>
+
+<script type="text/javascript">
+    isLogged = <?php echo (Mage::getSingleton('customer/session')->isLoggedIn() ? 1 : 0) ?>;
+    var ip = "<?php echo  getenv( "REMOTE_ADDR" )?>"; //this line do error javascript, this code need wrapper in " code.."
+    //geoip for form
+    window.geoip = {};
+    window.geoip.postcode = '<?php echo $postcodeval?>';
+    window.geoip.city = '<?php echo $cityval?>';
+    window.geoip.region = '<?php echo $regionval?>';
+    window.geoip.regionid = '<?php echo $regionidval?>';
+</script>
+<?php endif?>
+<?php if (Mage::getStoreConfig('onestepcheckout/config/enabled')){?>
+
+    <?php
+    $design = Mage::getStoreConfig('onestepcheckout/display_setting/style');
+    $round_corner = Mage::getStoreConfig('onestepcheckout/display_setting/round_corner');
+    $current_theme = Mage::getSingleton('core/design_package')->getPackageName();
+    if($design==2 || $design==3){ ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/'.$current_theme.'/default/mw_onestepcheckout/css/onestepcheckout_flat.css' ?>" />
+        <?php
+            if($design ==3){ ?>
+                <link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/'.$current_theme.'/default/mw_onestepcheckout/css/onestepcheckout_classic.css' ?>" />
+        <?php } ?>
+        <?php
+            $enable_corner = 1;
+            if($round_corner == $enable_corner){ ?>
+                <link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/'.$current_theme.'/default/mw_onestepcheckout/css/onestepcheckout_corner.css' ?>" />
+         <?php } ?>
+    <?php } ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo Mage::helper('onestepcheckout')->configcss(); ?>" media="all">
+    <script type="text/javascript" src="<?php echo Mage::helper('onestepcheckout')->configjs(); ?> "></script>
+    <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>mw_onestepcheckout/head.main.js"></script>
+    <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>mw_onestepcheckout/lib/jquery.plugins.js"></script>
+	<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>mw_onestepcheckout/lib/jquery.corner.js"></script>
+    <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>mw_onestepcheckout/view.js"></script>
+    <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>mw_onestepcheckout/plugins/prototype.authorizenet_directpost.js"></script>
+    <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>mw_onestepcheckout/plugins/prototype.sagePaySuite_Checkout.js"></script>
+<?php } ?>
+    <script type="text/javascript">
+        window.onestepConfig.url.saveOrder            =   '<?php echo Mage::getUrl('checkout/onepage/saveOrder/form_key/'.Mage::getSingleton('core/session')->getFormKey(), $paramHttps);?>';
+        window.onestepConfig.delivery.isNowDay        =   '<?php echo date(Mage::getStoreConfig("onestepcheckout/deliverydate/formatdate", $store_id), Mage::getModel('core/date')->gmtTimestamp())?>';
+        window.onestepConfig.delivery.isNowTime       =   '<?php echo date("G:i", Mage::getModel('core/date')->gmtTimestamp()); ?>';
+        window.onestepConfig.delivery.isNow           =   '<?php echo date('m/d/Y', Mage::getModel('core/date')->gmtTimestamp()); ?>';
+    </script>

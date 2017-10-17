@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_onestepcheckout_onestepcheckout_index>
+        <reference name="content">
+            <block type="onestepcheckout/adminhtml_onestepcheckout" name="onestepcheckout" />
+        </reference>
+    </adminhtml_onestepcheckout_onestepcheckout_index>
+
+	<adminhtml_sales_order_view>
+			<reference name="order_tab_info">
+				<action method="setTemplate"><template>mw_onestepcheckout/sales/order/view/tab/info.phtml</template></action>
+				<block type="onestepcheckout/adminhtml_onestepcheckout_sales_order_view_tab_info_customermessages" name="customer_messages" template="mw_onestepcheckout/sales/order/view/tab/info/customermessages.phtml"></block>
+				<block type="onestepcheckout/adminhtml_onestepcheckout_sales_order_view_tab_info_deliverydate" name="deliverydate" template="mw_onestepcheckout/sales/order/view/tab/info/deliverydate.phtml"></block>
+			</reference>
+
+            <reference name="order_totals">
+                <block type="adminhtml/sales_order_totals_item" name="mw_onestepcheckout_gift_wrap" template="mw_onestepcheckout/sales/order/view/gift_wrap.phtml">
+                    <action method="setAfterCondition"><condition>subtotal</condition></action>
+                </block>
+            </reference>
+	</adminhtml_sales_order_view>
+
+	<adminhtml_system_config_edit>
+			<reference name="head">
+			<action method="addCss"><stylesheet>mw_onestepcheckout/css/colorpicker.css</stylesheet></action>
+    		<action method="addJs"><script>mw_onestepcheckout/lib/jquery.js</script></action>
+    		<action method="addJs"><script>mw_onestepcheckout/lib/colorpicker.js</script></action>
+    		<action method="addJs"><script>mw_onestepcheckout/lib/validate.js</script></action>
+			</reference>
+	</adminhtml_system_config_edit>
+
+    <!-- invoice totals -->
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="onestepcheckout/adminhtml_totals_invoice_discount" name="onestepcheckout.total.discount" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="onestepcheckout/adminhtml_totals_invoice_discount" name="onestepcheckout.total.discount" />
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="onestepcheckout/adminhtml_totals_invoice_discount" name="onestepcheckout.total.discount" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <!-- creditmemo totals-->
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="onestepcheckout/adminhtml_totals_creditmemo_discount" name="onestepcheckout.total.discount"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="onestepcheckout/adminhtml_totals_creditmemo_discount" name="onestepcheckout.total.discount"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="onestepcheckout/adminhtml_totals_creditmemo_discount" name="onestepcheckout.total.discount"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+
+</layout>

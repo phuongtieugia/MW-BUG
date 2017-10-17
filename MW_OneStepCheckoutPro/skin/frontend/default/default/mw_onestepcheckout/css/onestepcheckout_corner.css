@@ -1,0 +1,27 @@
+/*
+*    author  : Manh Nguyen
+*    skype   : themanhss
+*    website : http://kiza.vn/
+*/
+
+div.mw-osc-block-title, .mw-osc-title-login {
+/*    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;*/
+}
+.mw-osc-threecolumns button.btn-checkout span {
+    border-radius: 10px;
+}
+button#button-btn-coupon-id {
+    border-radius: 5px;
+}
+button.button.btn-update-cart {
+    border-radius: 5px;
+}
+div.mw-osc-block-content,.mw-osc-ct-giftmessage {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.mw-osc-giftmessagecontainer .gift-messages h3 {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}

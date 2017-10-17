@@ -1,0 +1,250 @@
+<?php
+$_dob = $this->getLayout()->createBlock('customer/widget_dob');
+$_gender = $this->getLayout()->createBlock('customer/widget_gender');
+$_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat');
+
+$name = '';
+$company = '';
+$email = '';
+$street = '';
+$city = '';
+$state = '';
+$zipcode = '';
+$country = '';
+$telephone = '';
+$fax = '';
+$dob = '';
+$gender = '';
+$taxvat = '';
+
+if ($_dob->isEnabled())
+    $dob = $_dob->setDate($this->getQuote()->getCustomerDob())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml();
+if ($_gender->isEnabled())
+    $gender = '<div class="field">' . $_gender->setGender($this->getQuote()->getCustomerGender())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() . '</div>';
+if ($_taxvat->isEnabled())
+    $taxvat = '<div class="field" id="mw_osc_taxvat">' . $_taxvat->setTaxvat($this->getQuote()->getCustomerTaxvat())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() . '</div>';
+$name = $this->getLayout()->createBlock('customer/widget_name')->setTemplate('mw_onestepcheckout/name.phtml')->setObject($this->getAddress())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml();
+
+$company = '<div class="field">
+									<label for="billing:company"><em>' . $this->isstar('company') . '</em>' . $this->__('Company') . '</label>
+										<div class="input-box">
+											<input type="text" id="billing:company" name="billing[company]" value="' . $this->htmlEscape($this->getAddress()->getCompany()) . '" title="' . $this->__('Company') . '" class="input-text inputtext ' . $this->isrequired('company') . '" />
+										</div>
+							</div>';
+//$email="";
+
+$email = '<div class="field">
+							<label for="billing:email" class=""><em>*</em>' . $this->__('Email Address') . '</label>
+								<div class="input-box">
+									<input type="text" name="billing[email]" id="billing:email" value="' . $this->htmlEscape(Mage::getSingleton('customer/session')->getCustomer()->getEmail()) . '" title="' . $this->__('Email Address') . '" ' . ($this->isCustomerLoggedIn() == true ? "readonly = \'true\'" : "") . ' class="input-text inputtext validate-email required-entry" />
+								</div>
+							</div>';
+
+$val_street_1 = $this->getAddress()->getStreet(1);
+    if($val_street_1=='n/a') $val_street_1 = '';
+$street = '<div class="field">
+								<ul>
+										<li class="wide">
+											<label for="billing:street1" class=""><em>' . $this->isstar('street') . '</em>' . $this->__('Address') . '</label>
+											<div class="input-box">
+												<input type="text" title="' . $this->__('Street Address') . '" name="billing[street][]" id="billing:street1" value="' . $this->htmlEscape($val_street_1) . '" class="input-text inputtext  ' . $this->isrequired('street') . '" />
+											</div>
+										</li>';
+for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++) {
+    $temp_address = $this->getAddress()->getStreet($_i);
+    if($temp_address =='n/a')$temp_address = '';
+    $street = $street . '<li class="wide">
+											<div class="input-box">
+												<input type="text" title="' . $this->__('Street Address %s', $_i) . '" name="billing[street][]" id="billing:street' . $_i . '" value="' . $this->htmlEscape($temp_address) . '" class="input-text inputtext" />
+											</div>
+										</li>';
+}
+$street = $street . '</ul></div>';
+/** */
+if (Mage::getSingleton('core/session')->getCity())
+    {
+     $cityval = Mage::getSingleton('core/session')->getCity();
+    }
+else{
+    $cityval = $this->getAddress()->getCity();
+    if($cityval == 'n/a') $cityval = '';
+}
+$vat_id = '';
+/** VAT ID in EU support only on Magento 1.6 or newer */
+if(version_compare(Mage::getVersion(), '1.7.0.0', '>='))
+    if ($this->helper('customer/address')->isVatAttributeVisible()){
+        $vat_id = '
+        <li class="wide" id="osc_shipping_vat_id">
+            <label for="billing:vat_id">'.$this->__('VAT Number').'</label>
+            <div class="input-box">
+                <input type="text" id="billing:vat_id" name="billing[vat_id]" value="'.$this->escapeHtml($this->getAddress()->getVatId()).'" title="'.$this->__('VAT Number').'" class="input-text '.$this->helper('customer/address')->getAttributeValidationClass('vat_id').'" />
+            </div>
+        </li>
+        ';
+    }
+
+
+$city = '<div class="field">
+			<label for="billing:city" class=""><em>' . $this->isstar('city') . '</em>' . $this->__('City') . '</label>
+			<div class="input-box">
+				<input type="text" title="' . $this->__('City') . '" name="billing[city]" value="' . $this->htmlEscape($cityval) . '" class="input-text inputtext  ' . $this->isrequired('city') . '" id="billing:city" />
+			</div>
+		</div>';
+
+if (Mage::getSingleton('core/session')->getRegionId())
+    $regionidval = Mage::getSingleton('core/session')->getRegionId();
+else
+    $regionidval = $this->getAddress()->getRegionId();
+
+if (Mage::getSingleton('core/session')->getRegion())
+    $regionval = Mage::getSingleton('core/session')->getRegion();
+else
+    $regionval = $this->getAddress()->getRegion();
+
+$state = '<div class="field">
+			<label for="billing:region_id"><em>' . $this->isstar('state') . '</em>' . $this->__('State/Province') . '</label>
+			<div class="input-box billing_region_class">
+				<select id="billing:region_id" name="billing[region_id]" title="' . $this->__('State/Province') . '" ' . ((Mage::getStoreConfig("onestepcheckout/addfield/state") == 1) ? 'class=\""validate-select\""' : " ") . 'style="display:none;">
+					<option value="">' . $this->__('Please select region, state or province') . '</option>
+				</select>
+				<script type="text/javascript">
+				//<![CDATA[
+					$("billing:region_id").setAttribute("defaultValue",  "' . $regionidval . '");
+				//]]>
+				</script>
+				<input type="text" id="billing:region" name="billing[region]" value="' . $this->htmlEscape($regionval) . '"  title="' . $this->__('State/Province') . '" class="input-text inputtext  ' . $this->isrequired('state') . '" style="display:none;" />
+			</div>
+		</div>';
+
+if (Mage::getSingleton('core/session')->getPostcode())
+    $postcodeval = Mage::getSingleton('core/session')->getPostcode();
+else
+    $postcodeval = $this->getAddress()->getPostcode();
+
+if($postcodeval == '.')  $postcodeval  = '';
+$zipcode = '<div class="field" id="field_zipcode">
+				<label for="billing:postcode" class=""><em>' . $this->isstar('zip') . '</em>' . $this->__('Zip/Postal Code') . '</label>
+				<div class="input-box">
+					<input type="text" title="' . $this->__('Zip/Postal Code') . '" name="billing[postcode]" id="billing:postcode" value="' . $this->htmlEscape($postcodeval) . '" class="input-text inputtext validate-zip-international  ' . $this->isrequired('zip') . '" />
+				</div>
+			</div>';
+
+
+$country = '<div class="field" id="field_country"' . ((Mage::getStoreConfig("onestepcheckout/addfield/country") == 0) ? "style=\"display:none\"" : "") . '>
+									<label for="billing:country_id" class=""><em>' . $this->isstar('country') . '</em>' . $this->__('Country') . '</label>
+									<div class="input-box">
+										' . $this->getCountryHtmlSelect('billing') . '
+									</div>
+								</div>	';
+
+$telephone = '<div class="field">
+									<label for="billing:telephone" class=""><em>' . $this->isstar('telephone') . '</em>' . $this->__('Telephone') . '</label>
+									<div class="input-box">
+										<input style="width: 100%;" type="text" name="billing[telephone]" value="' . $this->htmlEscape($this->getAddress()->getTelephone()) . '" title="' . $this->__('Telephone') . '" class="input-text inputtext  ' . $this->isrequired('telephone') . '" id="billing:telephone" />
+									</div>
+								</div>';
+$fax = '<div class="field">
+									<label for="billing:fax" class=""><em>' . $this->isstar('fax') . '</em>' . $this->__('Fax') . '</label>
+									<div class="input-box">
+										<input type="text" name="billing[fax]" value="' . $this->htmlEscape($this->getAddress()->getFax()) . '" title="' . $this->__('Fax') . '" class="input-text inputtext  ' . $this->isrequired('fax') . '" id="billing:fax" />
+									</div>
+							</div>';
+
+$type_address = array('company', 'email', 'street', 'city', 'state', 'zip', 'country', 'telephone', 'fax', 'dob', 'gender', 'taxvat', 'vat_id');
+
+$block = array("", "", "", "", "", "", "", "", "", "", "", "");
+
+$temp = array();
+$notdisable = array();
+$filter = array();
+foreach ($type_address as $nametype) {
+    if ($nametype == 'email')
+        $notdisable[] = 'email';
+    else {
+        if (!$this->isdisable($nametype))
+            $notdisable[] = $nametype;
+    }
+}
+foreach ($notdisable as $namevalid) {
+    if(version_compare(Mage::getVersion(), '1.7.0.0', '>=')){
+        $filter[] = ($namevalid == 'vat_id') ? Mage::getStoreConfig('onestepcheckout/options_sort/sort_city') + 1 : Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $namevalid);
+    }else{
+        $filter[] = Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $namevalid);
+    }
+}
+for ($i = 0; $i < count($filter); $i++) {
+    for ($j = $i + 1; $j < count($filter); $j++) {
+        if ($filter[$i] == $filter[$j]) {
+            $temp[] = $filter[$i];
+            break;
+        }
+    }
+}
+$temp[] = Mage::getStoreConfig('onestepcheckout/options_sort/sort_name');
+
+$nameinputs = array(
+    'company' => $company,
+    'email' => $email,
+    'street' => $street,
+    'city' => $city,
+    'state' => $state,
+    'zip' => $zipcode,
+    'country' => $country,
+    'telephone' => $telephone,
+    'fax' => $fax,
+    'dob' => $dob,
+    'gender' => $gender,
+    'taxvat' => $taxvat,
+    'vat_id' => $vat_id
+);
+foreach ($nameinputs as $nameadd => $blockitem) {
+    if (!in_array($nameadd, $notdisable)) {
+        continue;
+    }
+    if (!in_array(Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd), $temp)) {
+        if ($nameadd == 'dob') {
+            $block[Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd)] = $block[Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd)] . $blockitem;
+        } else {
+            /*if (isset($blockitem) && $blockitem!="")*/
+            $block[Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd)] = '<div class="widthfull">' . $block[Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd)] . $blockitem . '</div>';
+        }
+    }else if($nameadd == 'vat_id'){
+        if(version_compare(Mage::getVersion(), '1.7.0.0', '>='))
+            $block[1] = $blockitem;
+    } else {
+        $block[Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd)] = $block[Mage::getStoreConfig('onestepcheckout/options_sort/sort_' . $nameadd)] . $blockitem;
+    }
+}
+
+$str = '<div class="clear"></div><li class="fields">' . $name . '</li>';
+foreach ($block as $blockitem) {
+    if ($blockitem == "") {
+        continue;
+    }
+    if (version_compare(Mage::getVersion(), '1.4.0.1', '>=')) {
+        if ($blockitem == 'dob') {
+            $str = $str . '<div class="clear"></div><li class="fields"><div class="field">' . $blockitem . '</div></li>';
+        } else
+            $str = $str . '<div class="clear"></div><li class="fields">' . $blockitem . '</li>';
+    } else {
+        $str = $str . '<li>' . $blockitem . '</li>';
+    }
+}
+//add country but hidden when disable contry
+if (!Mage::getStoreConfig("onestepcheckout/addfield/country"))
+    $str = $str . '<div class="clear"></div><li class="fields">' . $country . '</li>';
+
+if ($this->isdisable('state'))
+    $str = $str . '<div style="display:none;"><select id="billing:region_id" name="billing[region_id]" ></select>
+	<input type="text" id="billing:region" name="billing[region]"  style="display:none;" /></div>
+	';
+
+$str = $str . '<script type="text/javascript">
+//<![CDATA[
+	var billing = new Billing("co-billing-form","' . $this->getUrl('checkout/onepage/getAddress') . 'address/", "' . $this->getUrl('checkout/onepage/saveBilling') . '");
+ 	var billingForm = new VarienForm("co-billing-form");
+    var billingRegionUpdater = new RegionUpdater("billing:country_id", "billing:region", "billing:region_id", countryRegions, undefined, "billing:postcode");
+//]]>
+
+</script>';
+echo $str;

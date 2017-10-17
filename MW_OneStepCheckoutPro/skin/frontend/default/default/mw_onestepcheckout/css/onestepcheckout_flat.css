@@ -1,0 +1,184 @@
+#onestepcheckout_place_order_button *,#onestepcheckout_place_order_button *:before,#onestepcheckout_place_order_button *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+#loginbox {
+    padding-left: 0px;
+}
+
+div.mw-osc-block-title {
+    border-radius: 0px;
+}
+div.mw-osc-block-content {
+    border-radius: 0px;
+}
+.mw-osc-threecolumns #checkout-review-table  button.button span {
+    height: 30px;
+    border-radius: 0px;
+}
+.mw-osc-threecolumns #checkout-review-table button.button span {
+    padding: 0px 13px;
+    line-height: 30px;
+    text-transform: none;
+    font-size: 14px;
+}
+.mw-osc-threecolumns button.btn-checkout span {
+    background: #ea7608;
+    text-transform: none;
+    padding: 0px 50px;
+    font-size: 24px;
+}
+#onestepcheckout_place_order_button {
+    /*width: 230px;*/
+}
+div#review-buttons-container {
+    float: right;
+}
+.onestepcheckout-enable-terms {
+    float: none;
+    margin-bottom: 12px;
+    margin-top: 0px;
+}
+table#checkout-review-table tbody tr td {
+    border-right: 1px solid #E2E2E2;
+}
+
+#checkout-review-submit .buttons-set button.button{
+    float: none;
+}
+#onestepcheckout_place_order_button {
+    float: none;
+    width: auto;
+    text-align: left;
+}
+
+#checkout-review-submit .block-subtitle {
+    font-weight: normal;
+    margin-top: 5px;
+}
+#review-buttons-container select {
+    /*padding: 10px;*/
+}
+input#id_accept_terms {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px;
+}
+.onestepcheckout-enable-terms label{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#review-buttons-container .os-subcribe-newsletter {
+    text-align: left;
+	width : 300px;
+}
+.os-clear {
+    clear: both;
+}
+#onestepcheckout_place_order_button .buttons-set button.button {
+    margin-left: 0px;
+}
+.buttons-set button.button {
+    margin-left: 0px !important;
+}
+table#checkout-review-table tbody tr td:first-child a.btn-remove2 {
+    background: url("images/icon-remove.png");
+    width: 12px;
+    height: 10px;
+    display: block;
+    background-size: cover;
+}
+#discount-coupon-form .discount-form .buttons-set {
+    border-top: none;
+}
+span.discount-input-text {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.mw-osc-block-content.mw-ost-review-ct {
+    margin-bottom: 5px;
+}
+.review p.a-right {
+    text-align: left !important;
+}
+.review p.a-right a{
+    text-decoration: underline;
+}
+a#onestepcheckout-toc-link {
+    text-decoration: underline;
+}
+.onestepcheckout-gift-wrap {
+    right: 0px;
+    left: auto;
+}
+.mw-osc-giftmessagecontainer .gift-messages h3 {
+    border-radius: 0px;
+}
+.mw-osc-ct-giftmessage {
+    border-radius: 0px;
+}
+.onestepcheckout-enable-terms {
+    clear: both;
+    float: left;
+    text-align: left;
+    margin-top: 0px;
+}
+.os-subcribe-newsletter {
+    float: left;
+}
+div.mw-osc-block-title, .mw-osc-title-login {
+    border-radius: 0px;
+}
+.mw-osc-fancybox-wrap {
+    border-radius: 0px !important;
+}
+.mw-osc-threecolumns button.button span span {
+    font-size: 14px;
+}
+.mw-osc-threecolumns button.button span#onestepcheckout_place_btn_id span {
+    font-size: 19px;
+}
+p.onestepcheckout-numbers {
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 17px;
+    font-weight: normal;
+    padding-left: 40px;
+    padding-top: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    background-position: 10px 10px;
+    height: 40px;
+    line-height: 40px;
+}
+table#checkout-review-table tbody tr td:first-child a.btn-remove2 {
+    background: url("images/icon-remove.png");
+    width: 12px;
+    height: 10px;
+    display: block;
+    background-size: cover;
+}
+.mw-osc-threecolumns input[type=text] , .mw-osc-threecolumns input[type=email] ,.mw-osc-threecolumns input[type=search],
+.mw-osc-threecolumns input[type=password] ,.mw-osc-threecolumns input[type=tel]
+{
+    height: 30px !important;
+    padding: 0 8px;
+}
+.mw-osc-threecolumns select {
+    height: 30px !important;
+    margin-top: 0px !important;
+}
+#checkout-review-table tfoot td, #checkout-review-table tfoot th {
+    padding: 5px;
+}
+#onestepcheckout_place_btn_id {
+}
+.form-list .control .radio, .form-list .control .checkbox {
+    margin-right: 6px;
+    margin-left: 0px !important;
+    margin-right: 6px !important;
+    margin-top: 4px !important;
+}

@@ -1,0 +1,104 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * One page checkout payment methods
+ *
+ * @see Mage_Checkout_Block_Onepage_Payment_Methods
+ */
+
+$quote = $this->getQuote();
+
+/**
+ * Because, some payment modules, display only data entry form in Step Review, so be custom and displayed just below the payment method as the other modules.
+*/
+$listPayment = array(
+    'authorizenet_directpost' => array(
+        'name'      =>  'payment.form.directpost' /* How to get this? Open (design) layout of this method, at section "checkout_onepage_review" and reference name is "checkout.onepage.review.info.items.after" */,
+        'template'  =>  'mw_onestepcheckout/payment/authorizenet/directpost/form.phtml'
+    )
+);
+?>
+
+<dl class="sp-methods" id="checkout-payment-method-load">
+<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+    <?php ;?>
+    <dt>
+
+    <?php if( sizeof($this->getMethods()) > 1 ): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio payment_method_handle" />
+    <?php else: ?>
+        <!--<span class="no-display"><input id="p_method_<?php /*echo $_code */?>" value="<?php /*echo $_code */?>" type="radio" name="payment[method]" checked="checked" class="radio payment_method_handle" /></span>-->
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio payment_method_handle" />
+    <?php endif; ?>
+
+        <label for="p_method_<?php echo $_code ?>"><?php echo $_method->getTitle() ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+    </dt>
+
+	<?php if(version_compare(Mage::getVersion(),'1.4.0.1','>=')):?>
+        <?php if(array_key_exists($_code, $listPayment)):?>
+            <dd>
+                <div id="payment_form_<?php echo $_code?>">
+                    <?php try{ ?>
+                    <?php echo Mage::helper('onestepcheckout')->renderOnepageItemAfter($listPayment[$_code]['name'], $listPayment[$_code]['template']);?>
+                    <?php }catch(Exception $e){?>
+                        <?php echo $e->getMessage()?>
+                    <?php }?>
+                </div>
+            </dd>
+        <?php else:?>
+            <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+                <dd>
+                    <?php echo $html; ?>
+                </dd>
+            <?php endif; ?>
+        <?php endif;?>
+	<?php else:?>
+        <?php if(array_key_exists($_code, $listPayment)):?>
+            <dd>
+                <div id="payment_form_<?php echo $_code?>">
+                    <?php echo Mage::helper('onestepcheckout')->renderOnepageItemAfter($listPayment[$_code]['name'], $listPayment[$_code]['template'])?>
+                </div>
+            </dd>
+        <?php else:?>
+            <?php if($html = $this->getChildHtml('payment.method.'.$_code)): //mage1.3?>
+                <dd>
+                    <?php echo $html; ?>
+                </dd>
+            <?php endif; ?>
+        <?php endif;?>
+	<?php endif;?>
+<?php endforeach; ?>
+</dl>
+<?php if(!$this->getAjax()):?>
+<script type="text/javascript">
+//<![CDATA[
+<?php echo $this->getChildChildHtml('scripts'); ?>
+payment.init();
+//]]>
+</script>
+<?php endif;?>

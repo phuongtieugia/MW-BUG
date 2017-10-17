@@ -1,0 +1,415 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MW_Onestepcheckout>
+            <version>3.4.3</version>
+        </MW_Onestepcheckout>
+    </modules>
+    <frontend>	
+        <secure_url>
+            <onestepcheckout>/onestepcheckout/</onestepcheckout>
+        </secure_url>
+        <routers>
+            <onestepcheckout>
+                <use>standard</use>
+                <args>
+                    <module>MW_Onestepcheckout</module>
+                    <frontName>onestepcheckout</frontName>
+                </args>
+            </onestepcheckout>
+        </routers>
+        <layout>
+            <updates>
+                <onestepcheckout>
+                    <file>mw_onestepcheckout.xml</file>
+                </onestepcheckout>
+            </updates>
+        </layout>
+        <translate>
+			<modules>
+				<MW_Onestepcheckout>
+					<files>
+						<default>MW_Onestepcheckout.csv</default>
+					</files>
+				</MW_Onestepcheckout>
+			</modules>
+		</translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <onestepcheckout before="Mage_Adminhtml">MW_Onestepcheckout_Adminhtml</onestepcheckout>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+		<!--
+		<menu>
+			<onestepcheckout module="onestepcheckout">
+				<title>Onestepcheckout</title>
+				<sort_order>701</sort_order>               
+				<children>
+					<items module="onestepcheckout">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>onestepcheckout/adminhtml_onestepcheckout</action>
+					</items>
+				</children>
+			</onestepcheckout>
+		</menu>
+		-->
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<MW_Onestepcheckout>
+							<title>Onestepcheckout Module</title>
+							<sort_order>10</sort_order>
+						</MW_Onestepcheckout>
+					
+					    <system>
+                            <children>
+                                <config>
+                                    <children>										
+                                        <onestepcheckout translate="title" module="onestepcheckout">											
+                                            <title>onestepcheckout</title>
+                                        </onestepcheckout>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<onestepcheckout>
+					<file>mw_onestepcheckout.xml</file>
+				</onestepcheckout>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<MW_Onestepcheckout>
+					<files>
+						<default>MW_Onestepcheckoutbe.csv</default>
+					</files>
+				</MW_Onestepcheckout>
+			</modules>
+		</translate>
+    </adminhtml>   
+    <global>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <base_giftwrap_discount>
+                    <to_order>*</to_order>
+                </base_giftwrap_discount>
+                <giftwrap_discount>
+                    <to_order>*</to_order>
+                </giftwrap_discount>
+            </sales_convert_quote_address>
+        </fieldsets>
+        <sales>
+            <quote>
+                <totals>
+                    <giftwrap>
+                        <class>onestepcheckout/total_address_giftwrap</class>
+                        <after>weee,discount,tax,tax_subtotal,grand_total</after>
+                        <before>tax</before>
+                    </giftwrap>
+                </totals>
+            </quote>
+        </sales>
+		<rewrite>
+			<mw_onestepcheckout_index>
+				<from><![CDATA[#^/checkout/onepage/#]]></from>
+				<to>/onestepcheckout/index/</to>
+			</mw_onestepcheckout_index>
+            <mw_onestepcheckout_index_save>
+                <from><![CDATA[#^/onestepcheckout/index/save_([-\A-Za-z0-9.]+)#]]></from>
+                <to>/onestepcheckout/index/save/</to>
+            </mw_onestepcheckout_index_save>
+			<mw_onestepcheckout_persistent>
+				<from><![CDATA[#^/persistent/index/#]]></from>
+				<to>/onestepcheckout/persistent/</to>
+			</mw_onestepcheckout_persistent>
+		</rewrite>
+				
+        <models>
+            <onestepcheckout>
+                <class>MW_Onestepcheckout_Model</class>
+                <resourceModel>onestepcheckout_mysql4</resourceModel>
+            </onestepcheckout>
+            
+            <onestepcheckout_mysql4>
+                <class>MW_Onestepcheckout_Model_Mysql4</class>
+                <entities>
+                    <onestepcheckout>
+                        <table>mw_onestepcheckout</table>
+                    </onestepcheckout>
+                </entities>
+            </onestepcheckout_mysql4>
+            
+			<sales><!--override function valid() cho phep valid cac field address theo config trong onestepcheckout-->
+              <rewrite>  
+              	 <quote_address>MW_Onestepcheckout_Model_Sales_Quote_Address</quote_address>
+                   
+                  <!--Problem to DDate-->  
+              	  <order>MW_Onestepcheckout_Model_Sales_Order</order>  
+                                          
+              </rewrite>
+			</sales>
+			
+			<customer><!--override function valid() cho phep valid cac field address theo config trong onestepcheckout-->
+              <rewrite>
+                  <customer>MW_Onestepcheckout_Model_Customer_Customer</customer>
+              </rewrite>			
+			</customer>
+			
+			<newsletter><!--newsletter-->
+              <rewrite>             	 
+              	  <subscriber>MW_Onestepcheckout_Model_Subscriber</subscriber>                        
+              </rewrite>			
+			</newsletter>
+			
+        </models>
+        <resources>
+            <onestepcheckout_setup>
+                <setup>
+                    <module>MW_Onestepcheckout</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </onestepcheckout_setup>
+            <onestepcheckout_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </onestepcheckout_write>
+            <onestepcheckout_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </onestepcheckout_read>
+        </resources>
+        <blocks>
+            <onestepcheckout>
+                <class>MW_Onestepcheckout_Block</class>
+            </onestepcheckout>
+            <adminhtml>
+				<!--override sales/order/grid them cac field message, date, time-->
+                <rewrite>
+                    <sales_order_grid>MW_Onestepcheckout_Block_Adminhtml_Onestepcheckout_Sales_Order_Grid</sales_order_grid>
+                </rewrite>
+                
+                <rewrite><!--override regexception thanh add range time trong configuration-->
+                    <system_config_form_field_regexception>MW_Onestepcheckout_Block_Adminhtml_Onestepcheckout_System_Config_Form_Field_Addtimerange</system_config_form_field_regexception>
+                </rewrite>
+            </adminhtml>
+            <paypal>
+                <rewrite>
+                    <iframe>MW_Onestepcheckout_Block_Iframe</iframe>
+                </rewrite>
+            </paypal>
+        </blocks>
+        <helpers>
+            <onestepcheckout>
+                <class>MW_Onestepcheckout_Helper</class>
+            </onestepcheckout>
+        </helpers>
+
+        <events>
+            <core_config_data_save_before>
+            <observers>
+                <onstepcheckout_core_config_data_save_before>
+                    <type>singleton</type>
+                    <class>onestepcheckout/observer</class>
+                    <method>model_config_data_save_before</method>
+                </onstepcheckout_core_config_data_save_before>
+            </observers>
+           </core_config_data_save_before>
+
+           <checkout_cart_add_product_complete>
+           		<observers>
+                <onstepcheckout_checkout_cart_add_product_complete>
+                    <type>singleton</type>
+                    <class>onestepcheckout/observer</class>
+                    <method>checkout_cart_add_product_complete</method>
+                </onstepcheckout_checkout_cart_add_product_complete>
+            </observers>
+           </checkout_cart_add_product_complete>
+
+            <sales_order_save_after>
+                <observers>
+                    <onestepcheckout_sales_order_save_after>
+                        <class>onestepcheckout/observer</class>
+                        <method>saveAfter</method>
+                    </onestepcheckout_sales_order_save_after>
+                </observers>
+            </sales_order_save_after>
+
+			<controller_front_init_before>
+            	<observers>
+                    <onestepcheckout_controller_front_init_before>
+                        <type>singleton</type>
+                        <class>onestepcheckout/observer</class>
+                        <method>checkLicense</method>
+                    </onestepcheckout_controller_front_init_before>
+                </observers>
+			</controller_front_init_before>
+
+            <controller_action_layout_load_before>
+                <observers>
+                    <onestepcheckout_controller_action_layout_before>
+                        <class>onestepcheckout/observer_layout</class>
+                        <method>controllerLayoutBefore</method>
+                    </onestepcheckout_controller_action_layout_before>
+                </observers>
+            </controller_action_layout_load_before>
+            
+            <clean_media_cache_after>
+                <observers>
+                    <onestepcheckout_clean_media_cache_after>
+                        <type>singleton</type>
+                        <class>onestepcheckout/observer</class>
+                        <method>cleanCacheMedia</method>
+                    </onestepcheckout_clean_media_cache_after>
+                </observers>
+            </clean_media_cache_after>
+            
+    </events>
+    </global>
+
+	<default>
+		<onestepcheckout>
+			<config>
+				<enabled>1</enabled>
+				<default_country></default_country>
+				<default_shippingmethod></default_shippingmethod>
+				<default_paymentmethod></default_paymentmethod>
+				<page_title>One Step Checkout Pro</page_title>
+				<page_content>Please input information into the form below!</page_content>
+				<page_layout>3</page_layout>
+                <style>2</style>
+                <height_bar>2</height_bar>
+                <checkout_button_color>ea7608</checkout_button_color>
+                <style_color>337BAA</style_color>
+				<disable_os>0</disable_os>
+				<allowshippingotheraddress>1</allowshippingotheraddress>
+				<allowguestcheckout>1</allowguestcheckout>
+				<allowregister>1</allowregister>
+				<!-- enable_giftmessage>0</enable_giftmessage-->
+				<!-- enable_messagetosystem>0</enable_messagetosystem-->
+				<enable_quicklogin>1</enable_quicklogin>				
+				<enable_geoip>0</enable_geoip>
+				<disable_shop_cart>0</disable_shop_cart>
+				<create_account>0</create_account>
+                <updateqtyproduct>0</updateqtyproduct>
+                <allowremoveproduct>0</allowremoveproduct>
+				<valid_vat>0</valid_vat>
+				<save_into_account>0</save_into_account>
+				<show_poll>0</show_poll>
+				<enable_osc_js>1</enable_osc_js>
+                <height_bar>2</height_bar>
+                <round_corner>1</round_corner>
+			</config>
+			<options_sort>
+				<!-- sort_name>1</sort_name-->
+				<sort_company>2</sort_company>
+				<sort_email>2</sort_email>
+				<sort_street>3</sort_street>
+				<sort_city>4</sort_city>
+				<sort_state>4</sort_state>
+				<sort_zip>5</sort_zip>
+				<sort_country>5</sort_country>
+				<sort_telephone>6</sort_telephone>
+				<sort_fax>6</sort_fax>
+				<sort_dob>7</sort_dob>
+				<sort_gender>8</sort_gender>
+				<sort_taxvat>8</sort_taxvat>
+			</options_sort>	
+					
+			<allow_ajax>
+				<ajax_shippingmethod>1</ajax_shippingmethod>
+				<ajax_paymentmethod>0</ajax_paymentmethod>
+				<ajax_country>1</ajax_country>
+				<ajax_zipcode>0</ajax_zipcode>
+				<ajax_city>0</ajax_city>
+				<ajax_region>0</ajax_region>
+				
+				<ajax_shipping>1</ajax_shipping>
+				<ajax_payment>0</ajax_payment>
+				
+				<ajax_updatepro_shipping>0</ajax_updatepro_shipping>					
+				<ajax_shipping_payment>0</ajax_shipping_payment>	
+				
+				<ajax_email>0</ajax_email>
+															
+			</allow_ajax>			
+						
+			<addfield>
+				<!-- name>1</name>
+				<email>2</email-->
+				<street_lines>2</street_lines>
+				<prefix_show>0</prefix_show>
+				<middlename_show>0</middlename_show>
+				<suffix_show>0</suffix_show>
+				<dob_show>0</dob_show>
+				<taxvat_show>0</taxvat_show>
+				<gender_show>0</gender_show>
+				
+				<addressbook>1</addressbook>				
+				<company>1</company>
+				<street>2</street>
+				<country>2</country>
+				<city>1</city>
+				<state>1</state>
+				<zip>1</zip>				
+				<telephone>1</telephone>				
+				<fax>0</fax>			
+				<editcartlink>1</editcartlink>
+				<allowsubscribenewsletter>1</allowsubscribenewsletter>
+				
+				<!-- change from config to here -->
+				<enable_messagetosystem>1</enable_messagetosystem>
+				<allowcoupon>0</allowcoupon>				
+				<showimageproduct>0</showimageproduct>
+                <img_product_size>128x128</img_product_size>
+				<enable_giftmessage>0</enable_giftmessage>
+				<!-- end change -->
+                <price_gift_wrap>5</price_gift_wrap>
+                <app_fb_id></app_fb_id>
+			</addfield>
+			
+			<deliverydate>
+				<formatdate>m/d/Y</formatdate>
+				<allow_options>0</allow_options>
+				<timerange>0</timerange>
+				<asa_option>0</asa_option>
+				<test>bien static</test>
+                <weekend></weekend>
+                <disableday></disableday>
+                <enableday></enableday>
+                <timerange>0</timerange>
+                <rangeday></rangeday>
+			</deliverydate>
+			
+			<termcondition>
+				<allow_options>1</allow_options>
+                <select_term_conditions>0</select_term_conditions>
+				<content_options>term and conditions and more...</content_options>
+				<boxwidth>420px</boxwidth>
+				<boxheight>250px</boxheight>
+			</termcondition>
+		</onestepcheckout>
+	</default>
+</config>

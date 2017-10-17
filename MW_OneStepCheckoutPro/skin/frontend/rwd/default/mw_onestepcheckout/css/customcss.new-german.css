@@ -1,0 +1,42 @@
+div.mw-osc-block-title,
+.mw-osc-title-login{
+    background-color: #616161;
+    background-color: #616161;
+    background-image: linear-gradient(to bottom, #717171, #919191);
+    background-image: -webkit-linear-gradient(to bottom, #717171, #919191);
+    background-image:    -moz-linear-gradient(to bottom, #717171, #919191);
+    background-image:    -ms-linear-gradient(to bottom, #717171, #919191);
+    background-image:      -o-linear-gradient(to bottom, #717171, #919191);
+}
+div#fancybox-wrap #form-validate .fieldset .form-list li .input-box input#email_address:hover,
+div#fancybox-wrap .col2-set .col-2 #mw-login-form fieldset .fieldset .form-list li #mw-login-password:hover,
+div#fancybox-wrap .col2-set .col-2 #mw-login-form fieldset .fieldset .form-list li #mw-login-email:hover,
+.mw-osc-block input.input-text:hover,
+.mw-osc-block select:hover,
+.mw-osc-block textarea:hover {border-color: #919191; box-shadow: 0 0 3px 0 #b1b1b1;}
+
+div#fancybox-wrap #form-validate .fieldset .form-list li .input-box input#email_address:focus,
+div#fancybox-wrap .col2-set .col-2 #mw-login-form fieldset .fieldset .form-list li #mw-login-password:focus,
+div#fancybox-wrap .col2-set .col-2 #mw-login-form fieldset .fieldset .form-list li #mw-login-email:focus,
+.mw-osc-block input.input-text:focus,
+.mw-osc-block select:focus,
+.mw-osc-block textarea:focus { background-color: #f0f0f0; box-shadow: 0 0 3px 0 #b1b1b1; border-color: #919191;}
+
+.mw-osc-block .data-table thead th,
+.mw-osc-block .data-table tfoot td{/*background-color: #d0d0d0*/}
+.mw-osc-threecolumns button.button span{background: #616161; border: 1px solid #616161;}
+.cart .discount h2{color: #616161;}
+div#fancybox-wrap .col2-set .col-2 #mw-login-form fieldset .col-2 .buttons-set button span,
+div#fancybox-wrap .col2-set .col-2 #login-form fieldset .col-2 .buttons-set button span,
+div#fancybox-wrap #form-validate div.buttons-set #btforgotpass span{background: #616161; border: 1px solid #616161;}
+.mw-osc-fancybox-wrap button.button span{background: #616161; border: 1px solid #616161;}
+.mw-osc-giftmessagecontainer .gift-messages h3{background-color: #616161;}
+.mw-osc-giftmessagecontainer .gift-messages-form h4{color: #616161;}
+div.mw-osc-column-middle{{COL_MIDDLE_PAGE_LAYOUT}}
+div.mw-osc-column-right{{COL_RIGHT_PAGE_LAYOUT}}
+@media screen and (max-width: 420px){
+    #inline2{width: 300px !important;}
+}
+@media screen and (max-width:320px){
+    #inline2{width: 100% !important;}
+}

@@ -1,0 +1,18 @@
+<?php
+$_order  = $this->getOrder();
+$_source = $this->getSource();
+$this->setPriceDataObject($_source);
+
+$store_id = Mage::getModel('sales/order')->load($_order->getId())->getStoreId();
+$current_order = Mage::getModel('sales/order')->load($_order->getId());
+
+$price_wrap = (int)$current_order->getGiftwrapDiscount();
+if ($price_wrap){ ?>
+    <tr>
+        <td class="label">
+            <?php echo $this->__('Gift Wrap'); ?>
+        </td>
+        <td><?php echo Mage::helper('core')->currency($price_wrap,$store_id) ?></td>
+    </tr>
+<?php };
+?>

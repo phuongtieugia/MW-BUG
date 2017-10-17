@@ -1,0 +1,169 @@
+<?php $islogin = (Mage::getSingleton('customer/session')->isLoggedIn()) ? 1 : 0; ?>
+<hidden value="Welcome to One Step Checkout Pro"></hidden>
+    <hidden value="Please enter your details below to complete your purchase."></hidden>
+    <?php $temp_session = Mage::helper('onestepcheckout')->checkSession(); ?>
+    <input type="hidden" value="<?php echo $temp_session ?>" id="check_session"/>
+    <h1 class="mw-osc-page-tittle"><?php echo $this->__(Mage::getStoreConfig('onestepcheckout/config/page_title'))?></h1>
+    <p class="mw-osc-page-content"><?php echo $this->__(Mage::getStoreConfig('onestepcheckout/config/page_content'))?></p>
+    <div id="message-box">
+        <?php if(Mage::getSingleton('core/session')->getErrorpayment()!=""):?>
+        <div class="error-msg" style="magin-bottom:10px;">
+            <?php echo Mage::getSingleton('core/session')->getErrorpayment();?>
+        </div>
+        <?php endif;?>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml()?>
+    </div>
+    <?php if(!$islogin):?>
+        <?php if(Mage::getStoreConfig('onestepcheckout/config/enable_quicklogin')):?>
+        <a id="loginbox" href="#inline1" title=""><?php echo $this->__('Already registered? Click here to login.');?></a>
+        <?php endif?>
+    <?php endif?>
+
+    <div class="mw-osc-threecolumns mw-osc-checkoutcontainer mw-osc-skin-generic">
+        <form data-key="<?php echo Mage::getSingleton('core/session')->getFormKey();?>" id="onestep_form" action="<?php echo $this->getUrl('onestepcheckout/index/updateordermethod')?>" method="POST">
+
+            <div class="mw-osc-column mw-osc-column-left">
+                <div class="mw-osc-block">
+                    <div class="mw-osc-block-title">
+                        <p class="onestepcheckout-numbers onestepcheckout-numbers-1">
+                            <?php echo $this->__('Billing address');?>
+                        </p>
+                    </div>
+                    <div class="mw-osc-block-content">
+                        <div>
+                            <?php echo $this->getChildHtml('billing');?>
+                        </div>
+                    </div>
+
+                    <?php if(!Mage::helper('onestepcheckout')->onlyProductDownloadable()):?>
+                    <?php if(Mage::getStoreConfig('onestepcheckout/config/allowshippingotheraddress')):?>
+                    <div style="display:none;" id="shipping_show">
+                        <div class="mw-osc-block-title">
+                            <p class="onestepcheckout-numbers onestepcheckout-numbers-2" >
+                                <?php echo $this->__('Shipping address');?>
+                            </p>
+                        </div>
+                        <div class="mw-osc-block-content">
+                            <div>
+                                <?php echo $this->getChildHtml('shipping');?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif;?>
+                    <?php endif;?>
+                </div>
+            </div>
+            <!-- end .mw-osc-column-left -->
+            <div class="mw-osc-column-2">
+                <div id="mw-osc-column-container">
+                <?php if(!Mage::helper('onestepcheckout')->onlyProductDownloadable()):?>
+                    <div class="mw-osc-column mw-osc-column-middle">
+                        <div class="mw-osc-block">
+                            <div class="mw-osc-block-title">
+                                <p class="onestepcheckout-numbers onestepcheckout-numbers-2" id="mw-osc-p2">
+                                    <?php echo $this->__('Shipping method');?>
+                                </p>
+                            </div>
+                            <?php echo $this->getChildHtml('shipping_method');?>
+                        </div>
+                    </div>
+                <?php endif?>
+                    <div class="mw-osc-column  mw-osc-column-right" >
+                        <div class="section allow mw-osc-block" id="opc-payment">
+                            <div class="mw-osc-block-title" >
+                                <p <?php if(Mage::helper('onestepcheckout')->onlyProductDownloadable())
+                                          echo "class='onestepcheckout-numbers onestepcheckout-numbers-2' id='mw-osc-p2'";
+                                          else
+                                          {
+                                          if(Mage::getStoreConfig("onestepcheckout/deliverydate/allow_options"))
+                                          echo "class='onestepcheckout-numbers onestepcheckout-numbers-4' id='mw-osc-p4'";
+                                          else echo "class='onestepcheckout-numbers onestepcheckout-numbers-3' id='mw-osc-p3'";
+                                          }?>>
+                                          <?php echo $this->__('Payment method');?>
+                                </p>
+                            </div>
+                                <div class="mw-osc-block-content" >
+                                    <div id="checkout-step-payment" class="step a-item" >
+                                    <?php echo $this->getChildHtml('payment');?>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="clear_both">&nbsp;</div>
+                </div>
+            </div>
+
+            <?php if (Mage::helper('onestepcheckout')->isDDateRunning())
+                {?>
+                    <div class="review">
+                        <div class="mw-osc-block">
+                            <div class="mw-osc-block-title">
+                                <p class="onestepcheckout-numbers onestepcheckout-numbers-4">
+                                    <?php echo $this->__('Delivery Time');?>
+                                </p>
+                            </div>
+                            <?php echo $this->getChildHtml('ddate');?>
+                        </div>
+                    </div>
+            <?php } ?>
+            <!-- end.mw-osc-column-2 -->
+            <div class="review">
+                <div class="mw-osc-block">
+                    <div class="mw-osc-block-title">
+                        <p class="onestepcheckout-numbers onestepcheckout-numbers-6">
+                            <?php echo $this->__('Review your order');?>
+                        </p>
+                    </div>
+                    <?php echo $this->getChildHtml('review');?>
+                </div>
+            </div>
+            <!-- end.review -->
+            <div class="clear_both">&nbsp;</div>
+        </form>
+
+        <?php if(version_compare(Mage::getVersion(),'1.4.0.1','>='))://fix cho magento >= 1.4?>
+                <div style="display: none;">
+<!--                        <div id="inline1" style="height:250px;overflow:auto;">-->
+                    <div id="inline1" style="height:240px;">
+                        <?php echo $this->getChildHtml('login');?>
+                    </div>
+                    <div id="inline3" style="height:210px;overflow:auto;">
+                        <?php echo $this->getChildHtml('forgotpassword');?>
+                    </div>
+                    <div id="inline2" style="width:<?php echo Mage::getStoreConfig('onestepcheckout/termcondition/boxwidth')?>;height:<?php echo Mage::getStoreConfig('onestepcheckout/termcondition/boxheight')?>;overflow:auto;">
+                        <div class="mw-osc-title-login">
+                            <h1><?php echo $this->__('Terms and Conditions');?> </h1>
+                        </div>
+                        <div class="mw-osc-ct-term" style="height: <?php echo (Mage::getStoreConfig('onestepcheckout/termcondition/boxheight')-90).'px';?>">
+                            <?php $condition = $this->__(Mage::getStoreConfig('onestepcheckout/termcondition/select_term_conditions'));
+                            if($condition!=0){
+                                    $temp = Mage::getModel('onestepcheckout/system_config_source_term')->getTermById($condition);
+                                echo $temp;
+                            }else{
+                                echo $this->__(Mage::getStoreConfig('onestepcheckout/termcondition/content_options'));
+                            }
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
+        <?php else:?>
+                <div style="display: none;">
+                    <div id="inline1">
+                        <?php echo $this->getChildHtml('login');?>
+                    </div>
+                    <div id="inline3" style="height:205px;overflow:auto;">
+                        <?php echo $this->getChildHtml('forgotpassword');?>
+                    </div>
+                    <div id="inline2" style="width:<?php echo Mage::getStoreConfig('onestepcheckout/termcondition/boxwidth')?>;height:<?php echo Mage::getStoreConfig('onestepcheckout/termcondition/boxheight')?>;overflow:auto;">
+                        <h1><?php echo $this->__('Terms and Conditions');?> </h1>
+                        <br />
+                        <?php echo $this->__(Mage::getStoreConfig('onestepcheckout/termcondition/content_options'));?>
+                    </div>
+                </div>
+        <?php endif;?>
+        </div>
+    <div class="clear_both">&nbsp;</div>
+    <div style="left: 0px; min-height: 710px; display: none; top:0px;" id="loading-mask">
+        <p id="loading_mask_loader" class="loader"><img alt="Loading..." src="<?php echo $this->getSkinUrl('mw_onestepcheckout/images/ajax-loader-tr.gif')?>"></p>
+    </div>

@@ -1,0 +1,69 @@
+<script type="text/javascript">
+    function check(){
+        if(!window.confirm("<?php echo Mage::helper('onestepcheckout')->__('Are you sure that you want to reset config to default ?') ?>")) {
+            return false;
+        }
+        var url = "<?php echo $this->getAjaxCheckUrl() ?>";
+        new Ajax.Request(url,{
+            method : 'post',
+            onSuccess:function(transport){
+                var results = JSON.parse(transport.responseText);
+                resetConfig(results['onestepcheckout']);
+            }
+        });
+    };
+    function resetConfig(results){
+        Object.keys(results).forEach(function(key_1) {
+            var prefix_1 = key_1;
+            var temp_1 = results[key_1];
+            customFunc(temp_1,prefix_1);
+        });
+        configForm.submit();
+    };
+
+    function customFunc(temp_1,prefix_1){
+        Object.keys(temp_1).forEach(function(key_2){
+            var prefix_2 = key_2;
+            var temp_2 = temp_1[key_2];
+            var length_temp2 = temp_2.length;
+            var value_config;
+            if(prefix_2 == 'boxheight' || prefix_2 == 'boxwidth' || prefix_2 == 'content_options'
+                || prefix_2 == 'page_title' || prefix_2 == 'page_content' || prefix_2 =='img_product_size' || prefix_2 == 'formatdate'
+                || prefix_2 == 'style_color' || prefix_2 == 'checkout_button_color'
+                ){
+                value_config = temp_2;
+            }else{
+                if(length_temp2 ==1){
+                    value_config = temp_2;
+                }else{
+                    value_config = '';
+                }
+            }
+
+            if(prefix_2 == 'page_layout' || prefix_2 == "style_color" || prefix_2 =='checkout_button_color' || prefix_2 == 'height_bar' || prefix_2 == 'style'){
+                prefix_1 = 'display_setting';
+            }
+
+            if(prefix_2 == 'create_account' || prefix_2 =='enable_quicklogin' || prefix_2 =='valid_vat' || prefix_2 =='disable_os' || prefix_2=='updateqtyproduct') {
+                prefix_1 = 'config';
+            }
+            var other = $("onestepcheckout_"+prefix_1+"_"+prefix_2);
+
+            if(prefix_2 == 'prefix_show' || prefix_2 == 'suffix_show' || prefix_2 == 'dob_show' || prefix_2 == 'taxvat_show' || prefix_2 == 'gender_show'){
+                value_config = '';
+            }
+//            console.log(prefix_2,prefix_1,value_config);
+            if(other!=null){
+                other.value = value_config;
+
+            }
+        });
+    };
+</script>
+<style type="text/css">
+    button#onestepcheckout_button {
+        margin-top: 10px;
+    }
+</style>
+
+<?php echo $this->getButtonHtml(); ?>

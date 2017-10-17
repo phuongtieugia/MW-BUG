@@ -1,0 +1,100 @@
+//One step checkout Module,
+//font end,
+Already registered? Click here to login.,Already registered? Click here to login.
+Billing address,Billing address
+Shipping address,Shipping address
+Shipping method,Shipping method
+Payment method,Payment method
+Review your order,Review your order
+Create an account for later use,Create an account for later use
+Ship to same address,Ship to same address
+Are you sure you would like to remove this item from the shopping cart?,Are you sure you would like to remove this item from the shopping cart?
+Comments,Comments
+Input your email and password here,Input your email and password here
+Please login with your email address and password..,Please login with your email address and password..
+Loading...,Loading...
+Invalid email or password!,Invalid email or password!
+Invalid email!,Invalid email!
+Forgotten your password?,Forgotten your password?
+Enter your email below and we'll send you a new password by email.,Enter your email below and we'll send you a new password by email.
+We have now sent you a new password to your email address. Click the link below to return to login.,We have now sent you a new password to your email address. Click the link below to return to login.
+Back to Login,Back to Login
+Please select a shipping method for your order!,Please select a shipping method for your order!
+Please select a payment method for your order!,Please select a payment method for your order!
+Delivery Time,Delivery Time
+As soon as possible,As soon as possible
+Later,Later
+Date:,Date:
+Time:,Time:
+Time Range,Time Range
+I accept the,I accept the
+Terms and Conditions,Terms and Conditions
+Update Shopping Cart,Update Shopping Cart
+Update Cart,Update Cart
+
+//product view,
+"Add Time Range with the format 24h (h:m), ex. 7:30","Add Time Range with the format 24h (h:m), ex. 7:30"
+"Updating information, please wait...","Updating information, please wait..."
+Update account information,Update account information
+Close,Close
+Update Cart,Update Cart
+Select a billing address from your address book or enter a new address.,Select a billing address from your address book or enter a new address.
+New Address, New Address
+Prefix, Prefix
+First Name, First Name
+M.I, M.I
+Last Name, Last Name
+Company, Company
+Email Address, Email Address
+Address, Address
+City, City
+State/Province, State/Province
+Zip/Postal Code, Zip/Postal Code
+Country, Country
+Telephone, Telephone
+Fax, Fax
+Date of Birth, Date of Birth
+MM/DD/YYY, MM/DD/YYY
+MM /DD/YYY, MM /DD/YYY
+Gender, Gender
+Male, Male
+Female, Female
+Tax/VAT number, Tax/VAT number
+Save in address book, Save in address book
+Password, Password
+Confirm Password, Confirm Password
+Select preferred time, Select preferred time
+Product Name, Product Name
+Price, Price
+Qty, Qty
+Subtotal, Subtotal
+Shipping & Handling, Shipping & Handling
+Grand Total, Grand Total
+DISCOUNT CODES, DISCOUNT CODES
+Apply Coupon, Apply Coupon
+Forgot an Item?,Forgot an Item?
+Edit Your Cart, Edit Your Cart
+Cancel Coupon, Cancel Coupon
+Coupon code was applied.,"Coupon code was applied."
+Do you have any gift items in your order?,"Do you have any gift items in your order?"
+What is your favorite Magento feature?,"What is your favorite Magento feature?"
+Do you have any gift items in your order?,"Do you have any gift items in your order?"
+Place Order, Place Order
+Subscribe newsletter, Subscribe newsletter
+Add gift options.,Add gift options.
+Login, Login,
+"If you have an account with us, please log in.","If you have an account with us,please log in."
+Forgot your password?,"Forgot your password?",
+Required Fields,"Required Fields",
+Please enter your email address below. You will receive a link to reset your password.,Please enter your email address below. You will receive a link to reset your password.,
+Please enter a valid year (1900-2013).,Please enter a valid year (1900-2013).,
+This is a required field.,"This is a required field."
+Remove item, Remove item,
+Please select, Please select,
+Male, Male,
+Famale, Famale,
+Enter your email below and we'll send you a new password by email.,"Enter your email below and we'll send you a new password by email."
+We have now sent you a new password to your email address. Click the link below to return to login.,"We have now sent you a new password to your email address. Click the link below to return to login."
+"Your order cannot be completed at this time as there is no shipping methods available for it. Please make necessary changes in your shipping address.","Your order cannot be completed at this time as there is no shipping methods available for it. Please make necessary changes in your shipping address."
+"There is already a customer registered using this email address. Please login using this email address or enter a different email address.","There is already a customer registered using this email address. Please login using this email address or enter a different email address."
+"Gift Wrap","Gift Wrap"

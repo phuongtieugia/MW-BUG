@@ -1,0 +1,93 @@
+<div class="shipping-option">
+	<div class="mw-osc-block-title">
+		<p class="onestepcheckout-numbers onestepcheckout-numbers-3" id='mw-osc-p3'>
+			<?php echo $this->__('Delivery Time');?>
+		</p>		
+	</div>
+	<div class="mw-osc-block-content">
+        <div id="delivery_date_load">
+            <ul>
+                <?php
+                if(Mage::getStoreConfig('onestepcheckout/deliverydate/asa_option'))
+                {
+                    ?>
+                    <li style="margin-bottom:10px;">
+                        <label>
+                            <input type="radio" name="deliverydate" value="now" checked style="margin-right:5px;"><span><?php echo $this->__('As soon as possible');?></span>
+                        </label>
+                    </li>
+                <?php
+                }
+                ?>
+                <li>
+                    <label style="margin-right:5px;"><!--float:left;-->
+                        <?php
+                        if(Mage::getStoreConfig('onestepcheckout/deliverydate/asa_option'))
+                        {
+                            ?>
+                            <input type="radio" name="deliverydate" value="late" style="margin-right:5px;">
+                        <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <input type="hidden" name="deliverydate" value="late">
+                        <?php
+                        }
+                        ?>
+                        <span><?php echo $this->__('Select preferred time');?></span>
+                    </label>
+                    <div id="deliveryshow"> <!--  background-color:rgb(181,182,154);">-->
+                        <div id="datex">
+                            <div class="blockdate">
+                                <span><?php echo $this->__('Date:');?> </span>
+
+							<span id="date" style="text-align:left;">
+								<?php
+                                $mytime=date('h:i a', Mage::getModel('core/date')->timestamp(time()));
+                                ?>
+							</span>
+                            </div>
+                            <input type="hidden" name="onestepcheckout_date" id="onestepcheckout_date" value=""/>
+                            <input type="hidden" name="onestepcheckout_offset" id="onestepcheckout_offset" value=""/>
+                        </div>
+                        <div id="timex">
+
+                            <div id="changedate">
+                                <div class="blockdate">
+                                    <span><?php echo $this->__('Time:');?> </span>
+                                    <span id="clock" ><?php echo $mytime?></span>
+                                </div>
+                                <input type="hidden" name="onestepcheckout_time" id="onestepcheckout_time" value="<?php echo $mytime ?>"/>
+                            </div>
+                            <?php if(Mage::getStoreConfig("onestepcheckout/deliverydate/timerange")):?>
+                                <?php
+                                $time=Mage::getStoreConfig('onestepcheckout/deliverydate/addtimerange');	//kq:  string(85) "a:1:{s:18:"_1289468104191_191";a:2:{s:6:"regexp";s:4:"6:20";s:5:"value";s:4:"8:20";}}"
+                                if($time){
+                                    $arraytime=unserialize($time);
+                                    $slotime = array();
+                                    foreach($arraytime as $time=>$timerange){
+                                        $slotime[] = implode("-",$timerange);
+                                    }
+                                }
+
+                                ?>
+                                <div class="mwost-deltime">
+                                    <select id="delivery-timerange" size="1" name="delivery-timerange" >
+                                        <option value=""><?php echo $this->__('Time Range');?></option>
+                                        <?php foreach($slotime as $slot):?>
+                                            <?php if($slot):?>
+                                                <option value="<?php echo $slot?>"><?php echo $slot?></option>
+                                            <?php endif?>
+                                        <?php endforeach?>
+                                    </select>
+                                </div>
+                            <?php endif?>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+	</div>
+</div>

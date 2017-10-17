@@ -1,0 +1,60 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+		<div id="co-shipping-form">
+			<ul class="form-list">
+			<?php if ($this->customerHasAddresses() && Mage::helper('onestepcheckout')->showAddressBook() ): ?>
+			   <li class="wide">
+				   <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
+				   <div class="input-box">
+					   <?php echo $this->getAddressesHtmlSelect('shipping') ?>
+				   </div>
+			   </li>
+			<?php endif ?>			
+				<li id="shipping-new-address-form" >
+                    <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
+                    <ul>
+                    <div id="mw_onstepcheckout_shipping_form">
+                            <?php echo $this->getChildHtml('sortshipping');?>
+                    </div>
+                    <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses() && Mage::helper('onestepcheckout')->showAddressBook()):?>
+                        <li class="control">
+                            <input type="checkbox" style="_float:left;" name="shipping[save_in_address_book]" value="0" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" onchange="shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="shipping:save_in_address_book" style="_width:150px;"><?php echo $this->__('Save in address book') ?></label></li>
+                    <?php elseif ($this->isCustomerLoggedIn() && $this->customerHasAddresses() && !Mage::helper('onestepcheckout')->showAddressBook()):?>
+                        <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="0" /></li>
+                    <?php else:?>
+                        <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
+                    <?php endif;?>
+
+                    </ul>
+                    <div class="clear"></div>
+                    <li class="control samebilling" >
+                        <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Use Billing Address') ?>" onclick="shipping.setSameAsBilling(this.checked);" class="checkbox" /><label for="shipping:same_as_billing" style="float:none;"><?php echo $this->__('Use Billing Address') ?></label>
+                    </li>
+				</li>
+			</ul>		
+		</div>

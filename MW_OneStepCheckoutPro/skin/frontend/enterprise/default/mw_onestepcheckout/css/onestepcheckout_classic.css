@@ -1,0 +1,14 @@
+/*
+    style for classic
+*/
+
+.mw-osc-threecolumns input[type=text] , .mw-osc-threecolumns input[type=email] ,.mw-osc-threecolumns input[type=search],
+.mw-osc-threecolumns input[type=password] ,.mw-osc-threecolumns input[type=tel]
+{
+    height: 27px !important;
+    padding: 0 8px;
+}
+.mw-osc-threecolumns select {
+    height: 27px !important;
+    margin-top: 0px !important;
+}

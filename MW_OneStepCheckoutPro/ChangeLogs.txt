@@ -1,0 +1,202 @@
+ONE STEP CHECKOUT PRO - CHANGELOGS
+
+Legend
++ New feature
+* Fix bugs
+
+v3.4.2 (Nov 10, 2014)
++ Support flat design (responsive layout)
++ Allow to login via facbook
++ Allow to charge gift wrap fee
++ Allow to restore default setting
++ Allow to choose Terms and Conditions (managed in Sales / Terms and Conditions)
+* Fix n/a value display bug and small CSS issues
+
+
+V3.4.1.1 (July 29,2014)
++ Compatible with CE 1.9.X and EE 1.14.X
+* Fix bug miss file js 
+* Fix bug delivery: can't re-select current day.
+* Support site https
+
+v3.4.1(June 06, 2014)
+* Fix bugs: ajax, jquery
+* Fix bug subscribe newsletter is inactive
+* Fix bug appear the blank popup when place order
+* Fix bug can't change Stype color
+* Fix bug can't disable module by admin
+* Fix bug choose the billing address from book address  
+* Fix bug Auto detect user country using GeoIP
+
+v3.4.0(June 02, 2014)
+* Fix bug compatible with the latest REWARD POITN PRO of Mage-World.com 
+* Fix bug of payment methods: eway, braintree, sagepay, authorize.net direct post
+* Fix bugs: valid VAT EU, VAT Group
+
+v3.3.0(April 14,2014)
+Optimize ajax code
+
+v3.2.0 (Dec 06, 2013 )
+* Fix the shipping charge doesn't update to order after place
+
+v3.1.9 (Nov 25, 2013 )
+* Fix bug loading mask
+* Fix persistent shopping cart
+* Fix not show order grid when Onestepcheckout was expried.
+
+v3.1.8 (Oct 31, 2013 )
+* Fixed bug occurs when installing.
+
+v3.1.7 (Oct 3, 2013)
+* Show error under product item when it has some error when update product quantity 
+* Fix mistake with city, postcode, state, country when have sperate shipping, billing.
+* Fix mistake city when change address
+
+v3.1.6 (July 18st, 2013)
+* Fix null email affect by filter data function
+* Fix comment(nl2br)
+* Fix n/a in customer's address
+* Update review when there is no shipping method after change customer address
+* Fix shipping address is not display when "Ship to same address" is checked and state field is not display
+* Fix it can't place order when there are any giftcard products in a cart
+* Fix subcriber newsletter
+
+
+v3.1.5 (June 21st, 2013)
+* Fix error cart empty when cancel payment
+* Fix checkout success when loading jquery
+
+v3.1.3 (June 1st, 2013)
++ Support responsive layout. Works on ALL devices
++ Reorganize configuration tab
++ Update text/labels
++ Update license activation
++ Update VAT/TAX number verification method
+* Fix css for Place Order button
+
+v2.1.9 (April 18,2013)
++ Intergrate enterprise reward points
++ Integrate Matrix_rate
++ Checkout with paypal paypal advanced, paypal payflow link, 
+* Fix fancybox, jquery
+* Update backend configuration
+
+v2.1.6 (March 22,2013)
++ Checkout with paypal pro hosted solution
++ Update shipping method when update product quaty or remove product if enable ajax update shipping type
++ Save address when customer logined but not show address book.
+* Translate some text
+* Update backend text
+
+v2.1.5 (February 20,2013)
++ Apply Referral code for extension affiliate
++ Update item number on my cart when add, remove product
+* Show email when create email in backend
+* Checkout as guest not depend default magento
+* Change auto disable on smart phone 
+* Disable default term and codition in onestepcheckout
+
+v2.1.4 (February 17,2013)
++ Processing Persistent shopping cart 
++ Remember estimated shipping rate in shopping cart
++ Update product according to url
++ Don't allowed subcribe new letter with the same email when checkout as guest
++ Fix change layout in Magento Enterprise
+* Alert error if it has error when place order
+* Update some text in backend
+* Remove disable onestepcheckout on ipad in config.xml
+
+v2.1.0 (December 7, 2012)
++ Fix "Allow checkout as guest"
++ Fix "Delivery time"
++ Show list poll in "Show poll" features so that manager can chosen poll to show.
+* Fix Error in IE
+* Fix white page when checkout by sagepay server payment method.
+
+v2.0.6 (November 23, 2012)
++ Add feature allow add operations system is disabled onestepcheckout.
++ Show user comment in their email when place order.
++ Change position of poll.
+* Fix error when click "use billing address" with shipping and billing is new address.
+* Fix issue with virtual product
+
+v2.0.4 (November 17, 2012)
++ VAT/TAX number verification for Europe Union countries
++ Allow votting poll on check out page
++ Auto-disable One Step Checkout on mobile phone
++ Optimize checkout for Ipad and tablet
+
+v2.0.3 (November 10, 2012)
++ Change sort billing-shipping, disable sort billing-shipping.
++ remove . in zipcode in order
++ Intergrate Sage pay form, sage pay direct.
++ Save address infomation.
++ Show or not show user comment, delivery date, delivery time in admin Grid
++ Show user comment, delivery date, delivery time in email order.
+* Fixed bug not save address street line 3 and address street line 4
+
+
+Version 2.0 (Oct 29th 2012)
++ Allow changing layout in backend (Support 3 columns/2 columns layout)
++ Show address form with address book
++ Improve many features
++ Optimize Ajax/Javascript
++ Reorganize backend configuration
++ All new design, allow change style color in backend
+* Fix place order error of optional fields
+
+
+Version 1.4.2.2
+* Fixed "Sales order grid" and order details issue in backend.
+* Fixed "Place order button is disabled" on IE.
+
+Version 1.4.2.1
+*Fixed "Table rate" shipping method does not update shipping type when active prefix and date of birth of customers.
+
+Version 1.4.2
++ Upgrade for Magento Enterprise
+* Fixed double address for new customer
+
+Version 1.4.1
+* Remove blanket "[]" at review form
+
+Version 1.4.0
+* Update shipping method
++ Upgrade for magento 1.6.x
+
+Version 1.3.7
+* Fixed viewing customer in admin
+
+Version 1.3.6
+* Fixed IE 9 while invalid, still Submit -> change type of button from submit to button, allow to click but not submit 
+
+Version 1.3.5
+* Fixing payment method doesn't update discount
+
+Version 1.3.4
+* Fixed N/A in order
+
+Version 1.3.2
++ Date format change added for delivery date (mm/dd/yy, dd/mm/yy) 
++ Auto-reload payment method when customer change country, city. postcode, ...
+
+Version 1.3.1
++ Allow showing  product image in checkout cart
+
+Version 1.3.0
++ Allow inputing discount coupon code
++ If product is type of download-able or virtual >> disable shipping address, disable shipping method
++ Validate email by ajax
++ Disable notification of valid email
++ Turn off load effect in case of customer logged in
+
+* Inserting coupon at Magento version 1.5
+* Order disappear when customer view order in my account (in case of disable one_step_check_out and default checkout)
+* Save new information when customer insert new form or change form
+* Table prefix(add file sql 1.1.3-require of creating new table prefix when install magento)
+* Not display gift message in my account or sale/order/view (add code 713 controller)
+
+Version 1.2.9.3
++ Compatible with Magento 1.5.x
++ Allow customer to subscribe newsletter
+* Downloadable product related problem, search sale order by status at backend

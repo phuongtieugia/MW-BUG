@@ -1,0 +1,18 @@
+<!--addition -->
+<?php if(Mage::helper('onestepcheckout')->enableGiftMessage()):?>			
+<div class="mw-osc-giftmessagecontainer mw-osc-giftmessage">
+	<div class="onestepcheckout-giftmessages">
+		<div id="onepage-checkout-shipping-method-additional-load">
+			<?php echo $this->getChildHtml('additional') ?>
+		</div>
+	</div>			
+</div>
+<?php endif?>		
+
+<?php if(Mage::helper('onestepcheckout')->showComment()):?>	
+<div class="onestepcheckout-comments">
+		<label for="id_comments"><?php echo $this->__('Comments');?></label><br/>
+		<textarea id="id_comments" name="onestepcheckout_comments" cols="40" rows="4"><?php  if(Mage::getSingleton('checkout/session')->getLicenseComment()) echo Mage::getSingleton('checkout/session')->getLicenseComment(); ?></textarea>
+</div>
+<?php endif;?>
+

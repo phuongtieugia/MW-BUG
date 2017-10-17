@@ -1,0 +1,53 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$pollId = Mage::getStoreConfig('onestepcheckout/config/show_poll');
+$poll = Mage::getModel('poll/poll')->load($pollId);
+if($poll->getId() && !$poll->getClosed() && !$poll->isVoted()):?>
+<?php 
+	$pollInf = $this->getPollData($pollId);
+	 if($pollInf) :?>   
+		<?php 
+		$poll = $pollInf['poll'];
+		$poll_answers = $pollInf['poll_answers'];?>
+        <div style="margin:8px 0;clear:both; float:left;" class="onestepcheckout-enable-terms">
+            <div class="block-subtitle" style="float:left; "><?php echo $this->htmlEscape($poll->getPollTitle()); ?></div>
+            <?php if( $poll_answers ): ?>
+            <div style="float:left; margin-left:10px; "><select name="vote" id="poll-answers">
+            	<option value=""><?php echo $this->__('Please select');?></option>
+                <?php foreach( $poll_answers as $answer ): ?>
+                <option value="<?php echo $answer->getAnswerId() ?>">                    
+                    <?php echo $this->htmlEscape($answer->getAnswerTitle())?>
+                </option>
+                <?php endforeach; ?>
+            </select> 
+            <input type="hidden" name="poll_id" value="<?php echo $pollId;?>"/> 
+            </div>                     
+            <?php endif; ?>
+            
+        </div>
+   
+		<?php endif; ?>
+<?php endif; ?>

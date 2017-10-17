@@ -1,0 +1,20 @@
+<?php
+$_order = Mage::registry('current_order');
+$orderid=$_order->getId();
+$orders=Mage::getModel('onestepcheckout/onestepcheckout')->getCollection()->addFieldToFilter('sales_order_id',$orderid);
+$class_orders=get_class($orders);	
+$o ='';
+
+foreach($orders as $order)	
+{
+	$o = $order; break;		
+}
+?>
+
+<div class="col2-set generic-box">
+	<div class="">
+        <h4><?php echo $this->__('Delivery Date') ?></h4>
+        delivery date: <span style="font-weight:bold;"><?php if($o):?><?php echo $o->getMwDeliverydateDate(); ?><?php endif?></span><br>
+		delivery time: <span style="font-weight:bold;"><?php if($o):?><?php echo $o->getMwDeliverydateTime(); ?><?php endif?></span><br>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+    $registerParam = $this->getRequest()->getParam('register');
+    if ($registerParam || $registerParam === ''):
+?>
+    <script type="text/javascript">
+    //<![CDATA[
+        document.observe("dom:loaded", function() {                        
+            if($('login:register')) {
+                $('login:register').checked = true;
+                checkout.setMethod();
+            }
+        })
+    //]]>
+    </script>
+<?php endif; ?>
+<?php if(Mage::getStoreConfig('onestepcheckout/config/valid_vat')==1):?>
+<?php endif ?>
+<?php if(version_compare(Mage::getVersion(),'1.4.0.1','>='))://fix for magento >=1.4?>
+		<div id="co-billing-form">
+			<ul class="form-list">
+			<?php 
+				if ($this->customerHasAddresses() && Mage::helper('onestepcheckout')->showAddressBook()): ?>
+					<li class="wide" >
+						<label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
+						<div class="input-box">
+							<?php echo $this->getAddressesHtmlSelect('billing') ?>
+						</div>
+					</li>
+				<?php endif;
+			 ?>
+		<li id="billing-new-address-form" > <!--   //if ($this->customerHasAddresses() &&  Mage::helper('onestepcheckout')->showAddressBook()):  //endif; -->
+			<fieldset>
+					<input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
+					<ul>
+					<div id="mw_onstepcheckout_billing_form">
+							<?php echo $this->getChildHtml('sortbilling');?>					
+					</div>
+					<div style="clear:both;margin-top:5px;"></div>							
+					
+				 <?php if(!$this->isCustomerLoggedIn()): ?>
+					<?php if(Mage::helper('onestepcheckout')->haveProductDownloadable() || ( !Mage::getStoreConfig('onestepcheckout/config/allowguestcheckout') || !Mage::getStoreConfig('checkout/options/guest_checkout') || Mage::helper('persistent/session')->isPersistent())  || ($registerParam || $registerParam === '')):?>
+						<?php
+						  if(Mage::helper('persistent/session')->isPersistent()  ||  ($registerParam || $registerParam === '')):
+						?>
+						  <input type="hidden" name="checkout_method" id="login:register" value="register"/>
+						 <?php endif;?>
+						<li class="fields" id="register-customer-password">
+							<div class="field">
+								<label for="billing:customer_password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+								<div class="input-box">
+									<input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo $this->__('Password') ?>" class="input-text inputtext required-entry validate-password" />
+								</div>
+							</div>
+							<div class="field">
+								<label for="billing:confirm_password" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+								<div class="input-box">
+									<input type="password" name="billing[confirm_password]" title="<?php echo $this->__('Confirm Password') ?>" id="billing:confirm_password" class="input-text inputtext required-entry validate-cpassword" />
+								</div>
+							</div>
+						</li>
+					<?php elseif(Mage::getStoreConfig('onestepcheckout/config/allowregister')):?>
+						<div style="clear:both;"></div>
+						<li>
+						    <input type="checkbox" name="register_new_account"  <?php if(Mage::getStoreConfig('onestepcheckout/config/create_account') == "1") { echo " checked = 'checked' value = '1' "; }else {echo  "value='0'";}?> title="<?php echo $this->__('register new account') ?>" id="register_new_account" class="checkbox"> <label for="register_new_account" style="float:none;"><?php echo $this->__('Create an account for later use') ?></label>
+						</li>
+						<li class="fields" id="register-customer-password" <?php if(Mage::getStoreConfig('onestepcheckout/config/create_account') == "1") echo "  style='display:block;'"; else echo  "style='display:none;'"?>>
+							<div class="field">
+								<label for="billing:customer_password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+								<div class="input-box">
+									<input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo $this->__('Password') ?>" class="input-text inputtext required-entry validate-password" />
+								</div>
+							</div>
+							<div class="field">
+								<label for="billing:confirm_password" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+								<div class="input-box">
+									<input type="password" name="billing[confirm_password]" title="<?php echo $this->__('Confirm Password') ?>" id="billing:confirm_password" class="input-text inputtext required-entry validate-cpassword" />
+								</div>
+							</div>
+						</li>
+				<?php endif?>
+		<?php endif ?>	
+						<?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses() && Mage::helper('onestepcheckout')->showAddressBook()):?>
+							<li class="control">
+								<input type="checkbox" style="_float:left; z-index: 99" name="billing[save_in_address_book]" value="0" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" />
+								<label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
+							</li>
+							<?php if(Mage::getStoreConfig('onestepcheckout/config/save_into_account')): ?>
+							<li>
+								<input type="checkbox" style="_float:left;" name="billing[save_into_account]" value="0" title="<?php echo $this->__('Save as account information') ?>" id="billing:save_into_account"  class="checkbox" />
+								<label for="billing:save_in_account"><?php  echo $this->__('Update account information') ?></label>
+							</li>
+							<?php endif?>
+						<?php elseif ($this->isCustomerLoggedIn() && $this->customerHasAddresses() && !Mage::helper('onestepcheckout')->showAddressBook()):?>
+							<li class="control">
+								<input type="checkbox" style="_float:left; z-index: 99" name="billing[save_in_address_book]" value="0" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" />
+								<label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
+							</li>
+							<?php if(Mage::getStoreConfig('onestepcheckout/config/save_into_account')): ?>
+								<li >
+									<input type="checkbox" style="_float:left;" name="billing[save_into_account]"  value="0"  title="<?php echo $this->__('Save as account information') ?>" id="billing:save_into_account"  class="checkbox" />
+									<label for="billing:save_in_account"><?php echo $this->__('Update account information') ?></label>
+								</li>
+							<?php endif ?>												
+							<?php else :?>
+							<li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
+							
+						<?php endif; ?>
+					</ul>
+			</fieldset>
+				
+			</li>			
+			
+		<li style="margin-top:-7px;">
+		<?php if(Mage::getStoreConfig('onestepcheckout/config/allowshippingotheraddress')):?>
+			<?php if(!Mage::helper('onestepcheckout')->onlyProductDownloadable()):?>
+				<input type="checkbox" name="ship_to_same_address"  value="1" title="<?php echo $this->__('ship to same address') ?>" id="ship_to_same_address" class="checkbox" checked="checked"> <label for="ship_to_same_address" style="float:none;"><?php echo $this->__('Ship to same address') ?></label>
+			<?php else:?>
+				<input type="hidden" name="ship_to_same_address"  value="1" title="<?php echo $this->__('ship to same address') ?>">
+			<?php endif?>
+		<?php else:?>
+		<input type="hidden" name="ship_to_same_address"  value="1" title="<?php echo $this->__('ship to same address') ?>">
+		<?php endif?>
+		</li>
+		
+		</ul>
+		</div>
+				
+<?php endif;?>
+
